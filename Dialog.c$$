@@ -1,0 +1,67 @@
+/******************************************************************************
+** (C) Chris Oldwood
+**
+** MODULE:		$FILE$.CPP
+** COMPONENT:	$COMPONENT$
+** DESCRIPTION:	$CLASS$ class definition.
+**
+*******************************************************************************
+*/
+
+#include "$INCLUDE$"
+#include "$CLASS$.hpp"
+
+/******************************************************************************
+** Method:		Default constructor.
+**
+** Description:	.
+**
+** Parameters:	None.
+**
+** Returns:		Nothing.
+**
+*******************************************************************************
+*/
+
+$CLASS$::$CLASS$()
+	: CDialog(IDD_)
+{
+	DEFINE_CTRL_TABLE
+	END_CTRL_TABLE
+
+	DEFINE_CTRLMSG_TABLE
+	END_CTRLMSG_TABLE
+}
+
+/******************************************************************************
+** Method:		OnInitDialog()
+**
+** Description:	Initialise the dialog.
+**
+** Parameters:	None.
+**
+** Returns:		Nothing.
+**
+*******************************************************************************
+*/
+
+void $CLASS$::OnInitDialog()
+{
+}
+
+/******************************************************************************
+** Method:		OnOk()
+**
+** Description:	The OK button was pressed.
+**
+** Parameters:	None.
+**
+** Returns:		true or false.
+**
+*******************************************************************************
+*/
+
+bool $CLASS$::OnOk()
+{
+	return true;
+}
