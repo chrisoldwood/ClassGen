@@ -9,7 +9,7 @@
 */
 
 #include "$INCLUDE$"
-#include "$CLASS$.hpp"
+#include "$FILE$.hpp"
 
 /******************************************************************************
 ** Method:		Default constructor.
