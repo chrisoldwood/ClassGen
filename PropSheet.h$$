@@ -1,0 +1,46 @@
+/******************************************************************************
+** (C) Chris Oldwood
+**
+** MODULE:		$FILE$.HPP
+** COMPONENT:	$COMPONENT$
+** DESCRIPTION:	The $CLASS$ class declaration.
+**
+*******************************************************************************
+*/
+
+// Check for previous inclusion
+#ifndef $FILE$_HPP
+#define $FILE$_HPP
+
+//#include "Page.hpp"
+
+/******************************************************************************
+** 
+** .
+**
+*******************************************************************************
+*/
+
+class $CLASS$ : public CPropertySheet
+{
+public:
+	//
+	// Constructors/Destructor.
+	//
+	$CLASS$();
+	
+protected:
+	//
+	// Pages.
+	//
+//	CPage	m_oPage;
+};
+
+/******************************************************************************
+**
+** Implementation of inline functions.
+**
+*******************************************************************************
+*/
+
+#endif // $FILE$_HPP

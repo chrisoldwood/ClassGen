@@ -1,0 +1,72 @@
+/******************************************************************************
+** (C) Chris Oldwood
+**
+** MODULE:		$FILE$.CPP
+** COMPONENT:	$COMPONENT$
+** DESCRIPTION:	$CLASS$ class definition.
+**
+*******************************************************************************
+*/
+
+#include "$INCLUDE$"
+#include "$File$.hpp"
+
+#ifdef _DEBUG
+// For memory leak detection.
+#define new DBGCRT_NEW
+#endif
+
+/******************************************************************************
+** Method:		Default constructor.
+**
+** Description:	.
+**
+** Parameters:	None.
+**
+** Returns:		Nothing.
+**
+*******************************************************************************
+*/
+
+$CLASS$::$CLASS$()
+	: CPropertyPage(IDD_)
+{
+	DEFINE_CTRL_TABLE
+	END_CTRL_TABLE
+
+	DEFINE_CTRLMSG_TABLE
+	END_CTRLMSG_TABLE
+}
+
+/******************************************************************************
+** Method:		OnInitDialog()
+**
+** Description:	Initialise the dialog.
+**
+** Parameters:	None.
+**
+** Returns:		Nothing.
+**
+*******************************************************************************
+*/
+
+void $CLASS$::OnInitDialog()
+{
+}
+
+/******************************************************************************
+** Method:		OnValidate()
+**
+** Description:	Validate the settings.
+**
+** Parameters:	None.
+**
+** Returns:		true or false.
+**
+*******************************************************************************
+*/
+
+bool $CLASS$::OnValidate()
+{
+	return true;
+}
