@@ -216,6 +216,30 @@ SOURCE=".\Inline.h$$"
 
 SOURCE=".\Interface.h$$"
 # End Source File
+# Begin Source File
+
+SOURCE=".\PropPage.c$$"
+# End Source File
+# Begin Source File
+
+SOURCE=".\PropPage.h$$"
+# End Source File
+# Begin Source File
+
+SOURCE=".\PropSheet.c$$"
+# End Source File
+# Begin Source File
+
+SOURCE=".\PropSheet.h$$"
+# End Source File
+# Begin Source File
+
+SOURCE=".\Table.c$$"
+# End Source File
+# Begin Source File
+
+SOURCE=".\Table.h$$"
+# End Source File
 # End Group
 # Begin Source File
 
