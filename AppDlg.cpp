@@ -333,6 +333,7 @@ void CAppDlg::OnGenerate()
 	// Generate HPP file, if required.
 	if (oTemplate.m_strHPPFile != "")
 	{
+		oParams.Set("File", strHPPFile.FileTitle());
 		oParams.Set("FILE", strHPPFile.FileTitle().ToUpper());
 
 		if (!GenerateFile(CPath(oTemplate.m_strHPPFile), CPath(strFolder, strHPPFile), oParams))
@@ -342,6 +343,7 @@ void CAppDlg::OnGenerate()
 	// Generate CPP file, if required.
 	if (oTemplate.m_strCPPFile != "")
 	{
+		oParams.Set("File", strHPPFile.FileTitle());
 		oParams.Set("FILE", strCPPFile.FileTitle().ToUpper());
 
 		if (!GenerateFile(CPath(oTemplate.m_strCPPFile), CPath(strFolder, strCPPFile), oParams))
