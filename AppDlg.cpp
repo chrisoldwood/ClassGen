@@ -61,14 +61,14 @@ void CAppDlg::OnInitDialog()
 	if (App.m_aoTemplates.Size() == 0)
 	{
 		AlertMsg("There are no templates defined.");
-		EndDialog();
+		App.m_AppWnd.Close();
 		return;
 	}
 
 	if (App.m_aoComponents.Size() == 0)
 	{
 		AlertMsg("There are no components defined.");
-		EndDialog();
+		App.m_AppWnd.Close();
 		return;
 	}
 
@@ -348,6 +348,10 @@ void CAppDlg::OnGenerate()
 			return;
 	}
 
+	// Add folder to MRU list.
+	if (App.m_astrFolders.Find(strFolder, true) == -1)
+		App.m_astrFolders.Add(strFolder);
+
 	NotifyMsg("%s class generated.", strClassName);
 }
 
@@ -365,12 +369,19 @@ void CAppDlg::OnGenerate()
 *******************************************************************************
 */
 
-bool CAppDlg::GenerateFile(CPath& strTemplateFile, CPath& strTargetFile, CParams& oParams)
+bool CAppDlg::GenerateFile(const CPath& strTemplateFile, const CPath& strTargetFile, const CParams& oParams)
 {
 	// Check template file exists.
 	if (!strTemplateFile.Exists())
 	{
 		AlertMsg("The template file is missing:\n\n%s", strTemplateFile);
+		return false;
+	}
+
+	// Check template file is writable.
+	if (strTemplateFile.ReadOnly())
+	{
+		AlertMsg("The template file is write-protected:\n\n%s", strTemplateFile);
 		return false;
 	}
 
