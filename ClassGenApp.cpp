@@ -229,6 +229,18 @@ void CClassGenApp::SaveConfig()
 	// Write the file version.
 	m_oIniFile.WriteString("Version", "Version", INI_FILE_VER);
 
+	// Write the list of folders used.
+	m_oIniFile.WriteInt("Folders", "Count", m_astrFolders.Size());
+
+	for (int i = 0; i < m_astrFolders.Size(); ++i)
+	{
+		CString strSection;
+
+		strSection.Format("Folder[%d]", i);
+
+		m_oIniFile.WriteString("Folders", strSection, m_astrFolders[i]);
+	}
+
 	// Write the last use settings.
 	m_oIniFile.WriteString("Main", "LastFolder", m_strLastFolder);
 }
