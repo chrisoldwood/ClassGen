@@ -1,0 +1,1 @@
+- Add SDI doc/view templates.
