@@ -28,9 +28,9 @@ CClassGenApp App;
 */
 
 #ifdef _DEBUG
-const char* CClassGenApp::VERSION      = "v1.0 [Debug]";
+const char* CClassGenApp::VERSION      = "v1.1 [Debug]";
 #else
-const char* CClassGenApp::VERSION      = "v1.0";
+const char* CClassGenApp::VERSION      = "v1.1";
 #endif
 const char* CClassGenApp::INI_FILE_VER = "1.0";
 
