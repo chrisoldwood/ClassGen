@@ -94,10 +94,6 @@ SOURCE=.\AboutDlg.cpp
 # End Source File
 # Begin Source File
 
-SOURCE=.\App.rc
-# End Source File
-# Begin Source File
-
 SOURCE=.\AppCmds.cpp
 # End Source File
 # Begin Source File
@@ -111,6 +107,10 @@ SOURCE=.\AppToolBar.cpp
 # Begin Source File
 
 SOURCE=.\AppWnd.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\ClassGen.rc
 # End Source File
 # Begin Source File
 
