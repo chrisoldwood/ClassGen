@@ -1,0 +1,71 @@
+/******************************************************************************
+** (C) Chris Oldwood
+**
+** MODULE:		$FILE$.CPP
+** COMPONENT:	$COMPONENT$
+** DESCRIPTION:	$CLASS$ class definition.
+**
+*******************************************************************************
+*/
+
+#include "$INCLUDE$"
+
+#ifdef _DEBUG
+// For memory leak detection.
+#define new DBGCRT_NEW
+#endif
+
+/******************************************************************************
+** Method:		Constructor.
+**
+** Description:	.
+**
+** Parameters:	None.
+**
+** Returns:		Nothing.
+**
+*******************************************************************************
+*/
+
+$CLASS$::$CLASS$(CMDB& oDB)
+	: CTable(oDB, "")
+{
+	// Create the table schema.
+}
+
+/******************************************************************************
+** Method:		Destructor.
+**
+** Description:	.
+**
+** Parameters:	None.
+**
+** Returns:		Nothing.
+**
+*******************************************************************************
+*/
+
+$CLASS$::~$CLASS$()
+{
+}
+
+/******************************************************************************
+** Method:		CreateRow()
+**
+** Description:	Creates a new row and initialises it.
+**
+** Parameters:	None.
+**
+** Returns:		The new row.
+**
+*******************************************************************************
+*/
+
+CRow& $CLASS$::CreateRow()
+{
+	CRow& oRow = CTable::CreateRow();
+
+//	oRow[ID] = ;
+	
+	return oRow;
+}

@@ -1,0 +1,41 @@
+/******************************************************************************
+** (C) Chris Oldwood
+**
+** MODULE:		$FILE$.CPP
+** COMPONENT:	$COMPONENT$
+** DESCRIPTION:	$CLASS$ class definition.
+**
+*******************************************************************************
+*/
+
+#include "$INCLUDE$"
+#include "$File$.hpp"
+
+#ifdef _DEBUG
+// For memory leak detection.
+#define new DBGCRT_NEW
+#endif
+
+/******************************************************************************
+** Method:		Default constructor.
+**
+** Description:	.
+**
+** Parameters:	None.
+**
+** Returns:		Nothing.
+**
+*******************************************************************************
+*/
+
+$CLASS$::$CLASS$()
+	: CPropertySheet()
+//	, m_oPage()
+{
+	// Set the title.
+	m_strTitle = "Property Sheet";
+
+	DEFINE_PAGE_TABLE
+//		PAGE(&m_oPage,  "Page")
+	END_PAGE_TABLE
+}
