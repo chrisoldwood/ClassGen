@@ -210,6 +210,10 @@ SOURCE=".\Generic.h$$"
 # End Source File
 # Begin Source File
 
+SOURCE=".\Inline.h$$"
+# End Source File
+# Begin Source File
+
 SOURCE=".\Interface.h$$"
 # End Source File
 # End Group
