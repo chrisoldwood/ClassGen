@@ -172,7 +172,7 @@ void CClassGenApp::LoadConfig()
 	// Read the component names.
 	int nComponents = m_oIniFile.ReadInt("Components", "Count", 0);
 
-	for (i = 0; i < nComponents; ++i)
+	for (int i = 0; i < nComponents; ++i)
 	{
 		CString strSection;
 
@@ -196,7 +196,7 @@ void CClassGenApp::LoadConfig()
 	// Read the list of folders used.
 	int nFolders = m_oIniFile.ReadInt("Folders", "Count", 0);
 
-	for (i = 0; i < nFolders; ++i)
+	for (int i = 0; i < nFolders; ++i)
 	{
 		CString strSection;
 

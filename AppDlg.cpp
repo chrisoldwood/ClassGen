@@ -82,14 +82,14 @@ void CAppDlg::OnInitDialog()
 	OnSelectTemplate();
 
 	// Load component names combo.
-	for (i = 0; i < App.m_aoComponents.Size(); ++i)
+	for (int i = 0; i < App.m_aoComponents.Size(); ++i)
 		m_cbComponent.Add(App.m_aoComponents[i].m_strName, i);
 
 	// Select 1st component by default.
 	m_cbComponent.CurSel(m_cbComponent.FindExact(App.m_aoComponents[0].m_strName));
 
 	// Load last used folders combo.
-	for (i = 0; i < App.m_astrFolders.Size(); ++i)
+	for (int i = 0; i < App.m_astrFolders.Size(); ++i)
 		AddFolderName(App.m_astrFolders[i], false);
 
 	// Initialise with last settings.
