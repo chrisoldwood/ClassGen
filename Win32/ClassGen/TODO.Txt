@@ -1,2 +1,1 @@
-- Small icon
 - MRU folder list not updating.
