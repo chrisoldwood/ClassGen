@@ -204,7 +204,7 @@ void CClassGenApp::LoadConfig()
 
 		CString strFolder = m_oIniFile.ReadString("Folders", strSection, "");
 
-		if (!strFolder.Empty())
+		if ( (!strFolder.Empty()) && (m_astrFolders.Find(strFolder, true) == -1) )
 			m_astrFolders.Add(strFolder);
 	}
 
