@@ -58,7 +58,7 @@ protected:
 	// Internal methods.
 	//
 	void AddFolderName(const CString& strName, bool bSelect);
-	bool GenerateFile(CPath& strTemplateFile, CPath& strTargetFile, CParams& oParams);
+	bool GenerateFile(const CPath& strTemplateFile, const CPath& strTargetFile, const CParams& oParams);
 };
 
 /******************************************************************************
