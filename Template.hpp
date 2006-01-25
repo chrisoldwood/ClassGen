@@ -25,10 +25,14 @@ public:
 	//
 	// Members.
 	//
-	CString	m_strName;
-	CString	m_strHPPFile;
-	CString	m_strCPPFile;
+	CString	m_strName;			// The template name.
+	bool	m_bNeedsClass;		// Is a class template?
+	CString	m_strHPPFile;		// The template .HPP file.
+	CString	m_strCPPFile;		// The template .CPP file.
 };
+
+// Smart pointer type.
+typedef Core::SharedPtr<CTemplate> CTemplatePtr;
 
 /******************************************************************************
 **
