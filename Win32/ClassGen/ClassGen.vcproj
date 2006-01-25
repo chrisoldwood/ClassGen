@@ -24,7 +24,7 @@
 				Name="VCCLCompilerTool"
 				Optimization="2"
 				InlineFunctionExpansion="1"
-				AdditionalIncludeDirectories="..\wcl"
+				AdditionalIncludeDirectories="..\Lib;..\wcl"
 				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS"
 				StringPooling="TRUE"
 				RuntimeLibrary="0"
@@ -92,7 +92,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="..\wcl"
+				AdditionalIncludeDirectories="..\Lib;..\wcl"
 				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS"
 				MinimalRebuild="TRUE"
 				BasicRuntimeChecks="3"
@@ -381,45 +381,48 @@
 			Name="Templates"
 			Filter="h$$;c$$">
 			<File
-				RelativePath="ClassGen.ini">
+				RelativePath=".\Templates\Dialog.c$$">
 			</File>
 			<File
-				RelativePath="Dialog.c$$">
+				RelativePath=".\Templates\Dialog.h$$">
 			</File>
 			<File
-				RelativePath="Dialog.h$$">
+				RelativePath=".\Templates\Generic.c$$">
 			</File>
 			<File
-				RelativePath="Generic.c$$">
+				RelativePath=".\Templates\Generic.h$$">
 			</File>
 			<File
-				RelativePath="Generic.h$$">
+				RelativePath=".\Templates\Inline.h$$">
 			</File>
 			<File
-				RelativePath="Inline.h$$">
+				RelativePath=".\Templates\Interface.h$$">
 			</File>
 			<File
-				RelativePath="Interface.h$$">
+				RelativePath=".\Templates\PropPage.c$$">
 			</File>
 			<File
-				RelativePath="PropPage.c$$">
+				RelativePath=".\Templates\PropPage.h$$">
 			</File>
 			<File
-				RelativePath="PropPage.h$$">
+				RelativePath=".\Templates\PropSheet.c$$">
 			</File>
 			<File
-				RelativePath="PropSheet.c$$">
+				RelativePath=".\Templates\PropSheet.h$$">
 			</File>
 			<File
-				RelativePath="PropSheet.h$$">
+				RelativePath=".\Templates\Table.c$$">
 			</File>
 			<File
-				RelativePath="Table.c$$">
+				RelativePath=".\Templates\Table.h$$">
 			</File>
 			<File
-				RelativePath="Table.h$$">
+				RelativePath=".\Templates\Utility.h$$">
 			</File>
 		</Filter>
+		<File
+			RelativePath="ClassGen.ini">
+		</File>
 		<File
 			RelativePath="ReadMe.txt">
 		</File>
