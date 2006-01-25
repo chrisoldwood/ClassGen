@@ -48,6 +48,7 @@ const char* CClassGenApp::INI_FILE_VER = "1.0";
 
 CClassGenApp::CClassGenApp()
 	: CApp(m_AppWnd, m_AppCmds)
+	, m_strTmplFolder(".")
 {
 
 }
@@ -66,9 +67,6 @@ CClassGenApp::CClassGenApp()
 
 CClassGenApp::~CClassGenApp()
 {
-	// Free up collections.
-	m_aoTemplates.DeleteAll();
-	m_aoComponents.DeleteAll();
 }
 
 /******************************************************************************
@@ -145,6 +143,9 @@ void CClassGenApp::LoadConfig()
 	// Read the file version.
 	CString strVer = m_oIniFile.ReadString("Version", "Version", INI_FILE_VER);
 
+	// Read the templates folder.
+	m_strTmplFolder = m_oIniFile.ReadString("Templates", "Path", m_strTmplFolder);
+
 	// Read the template names.
 	int nTemplates = m_oIniFile.ReadInt("Templates", "Count", 0);
 
@@ -159,13 +160,14 @@ void CClassGenApp::LoadConfig()
 		// Valid template name?
 		if (!strTemplate.Empty())
 		{
-			CTemplate* pTemplate = new CTemplate;
+			CTemplatePtr pTemplate = new CTemplate;
 
-			pTemplate->m_strName    = strTemplate;
-			pTemplate->m_strHPPFile = m_oIniFile.ReadString(strTemplate + " Template", "HPP", "");
-			pTemplate->m_strCPPFile = m_oIniFile.ReadString(strTemplate + " Template", "CPP", "");
+			pTemplate->m_strName     = strTemplate;
+			pTemplate->m_bNeedsClass = m_oIniFile.ReadBool  (strTemplate + " Template", "Class", true);
+			pTemplate->m_strHPPFile  = m_oIniFile.ReadString(strTemplate + " Template", "HPP",   "");
+			pTemplate->m_strCPPFile  = m_oIniFile.ReadString(strTemplate + " Template", "CPP",   "");
 
-			m_aoTemplates.Add(pTemplate);
+			m_aoTemplates.push_back(pTemplate);
 		}
 	}
 
@@ -183,13 +185,14 @@ void CClassGenApp::LoadConfig()
 		// Valid component name?
 		if (!strComponent.Empty())
 		{
-			CComponent* pComponent = new CComponent;
+			CComponentPtr pComponent = new CComponent;
 
-			pComponent->m_strName    = strComponent;
-			pComponent->m_strInclude = m_oIniFile.ReadString(strComponent + " Component", "Include", "");
-			pComponent->m_strComment = m_oIniFile.ReadString(strComponent + " Component", "Comment", "");
+			pComponent->m_strName      = strComponent;
+			pComponent->m_strInclude   = m_oIniFile.ReadString(strComponent + " Component", "Include",   "");
+			pComponent->m_strComment   = m_oIniFile.ReadString(strComponent + " Component", "Comment",   "");
+			pComponent->m_strNamespace = m_oIniFile.ReadString(strComponent + " Component", "Namespace", "");
 
-			m_aoComponents.Add(pComponent);
+			m_aoComponents.push_back(pComponent);
 		}
 	}
 

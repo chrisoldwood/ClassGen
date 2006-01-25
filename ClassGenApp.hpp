@@ -13,8 +13,8 @@
 #define CLASSGENAPP_HPP
 
 // Template shorthands.
-typedef TRefArray<CTemplate>  CTemplates;
-typedef TRefArray<CComponent> CComponents;
+typedef std::vector<CTemplatePtr>  CTemplates;
+typedef std::vector<CComponentPtr> CComponents;
 
 /******************************************************************************
 ** 
@@ -38,6 +38,7 @@ public:
 	CAppWnd		m_AppWnd;			// Main window.
 	CAppCmds	m_AppCmds;			// Command handler.
 
+	CPath		m_strTmplFolder;	// Templates folder.
 	CTemplates	m_aoTemplates;		// Templates collection.
 	CComponents m_aoComponents;		// Components collection.
 	CStrArray	m_astrFolders;		// List of folders used.
