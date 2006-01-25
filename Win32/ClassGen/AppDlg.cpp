@@ -58,14 +58,14 @@ CAppDlg::CAppDlg()
 
 void CAppDlg::OnInitDialog()
 {
-	if (App.m_aoTemplates.Size() == 0)
+	if (App.m_aoTemplates.empty())
 	{
 		AlertMsg("There are no templates defined.");
 		App.m_AppWnd.Close();
 		return;
 	}
 
-	if (App.m_aoComponents.Size() == 0)
+	if (App.m_aoComponents.empty())
 	{
 		AlertMsg("There are no components defined.");
 		App.m_AppWnd.Close();
@@ -73,20 +73,20 @@ void CAppDlg::OnInitDialog()
 	}
 
 	// Load template names combo.
-	for (int i = 0; i < App.m_aoTemplates.Size(); ++i)
-		m_cbTemplate.Add(App.m_aoTemplates[i].m_strName, i);
+	for (uint i = 0; i < App.m_aoTemplates.size(); ++i)
+		m_cbTemplate.Add(App.m_aoTemplates[i]->m_strName, i);
 
 	// Select 1st template by default.
-	m_cbTemplate.CurSel(m_cbTemplate.FindExact(App.m_aoTemplates[0].m_strName));
+	m_cbTemplate.CurSel(m_cbTemplate.FindExact(App.m_aoTemplates[0]->m_strName));
 
 	OnSelectTemplate();
 
 	// Load component names combo.
-	for (int i = 0; i < App.m_aoComponents.Size(); ++i)
-		m_cbComponent.Add(App.m_aoComponents[i].m_strName, i);
+	for (uint i = 0; i < App.m_aoComponents.size(); ++i)
+		m_cbComponent.Add(App.m_aoComponents[i]->m_strName, i);
 
 	// Select 1st component by default.
-	m_cbComponent.CurSel(m_cbComponent.FindExact(App.m_aoComponents[0].m_strName));
+	m_cbComponent.CurSel(m_cbComponent.FindExact(App.m_aoComponents[0]->m_strName));
 
 	// Load last used folders combo.
 	for (int i = 0; i < App.m_astrFolders.Size(); ++i)
@@ -149,13 +149,19 @@ void CAppDlg::OnSelectTemplate()
 	int nSel  = m_cbTemplate.CurSel();
 	int nItem = m_cbTemplate.ItemData(nSel);
 
-	CTemplate& oTemplate = App.m_aoTemplates[nItem];
+	CTemplatePtr pTemplate = App.m_aoTemplates[nItem];
 
-	// Query files used.
-	bool bHasHPP = (oTemplate.m_strHPPFile != "");
-	bool bHasCPP = (oTemplate.m_strCPPFile != "");
+	// Get fields expected.
+	bool bIsClass = pTemplate->m_bNeedsClass;
+	bool bHasHPP  = (pTemplate->m_strHPPFile != "");
+	bool bHasCPP  = (pTemplate->m_strCPPFile != "");
 
 	// Update controls.
+	m_ebClassName.Enable(bIsClass);
+
+	if (!bIsClass)
+		m_ebClassName.Text("");
+
 	m_ebHPPFile.Enable(bHasHPP);
 
 	if (!bHasHPP)
@@ -272,22 +278,23 @@ void CAppDlg::OnGenerate()
 	int nTemplSel  = m_cbTemplate.CurSel();
 	int nTemplItem = m_cbTemplate.ItemData(nTemplSel);
 
-	CTemplate& oTemplate = App.m_aoTemplates[nTemplItem];
+	CTemplatePtr pTemplate = App.m_aoTemplates[nTemplItem];
 
 	// Get the selected template.
 	int nComptSel  = m_cbComponent.CurSel();
 	int nComptItem = m_cbComponent.ItemData(nComptSel);
 
-	CComponent& oComponent = App.m_aoComponents[nComptItem];
+	CComponentPtr pComponent = App.m_aoComponents[nComptItem];
 
-	// Query expected files.
-	bool bHasHPP = (oTemplate.m_strHPPFile != "");
-	bool bHasCPP = (oTemplate.m_strCPPFile != "");
+	// Get expected fields.
+	bool bIsClass = pTemplate->m_bNeedsClass;
+	bool bHasHPP  = (pTemplate->m_strHPPFile != "");
+	bool bHasCPP  = (pTemplate->m_strCPPFile != "");
 
 	// Validate class name.
 	CString strClassName = m_ebClassName.Text();
 
-	if (strClassName == "")
+	if (bIsClass && strClassName.Empty())
 	{
 		AlertMsg("You must supply a name for the class.");
 		m_ebClassName.Focus();
@@ -327,26 +334,31 @@ void CAppDlg::OnGenerate()
 	CParams oParams;
 
 	oParams.Set("CLASS",     strClassName);
-	oParams.Set("INCLUDE",   oComponent.m_strInclude);
-	oParams.Set("COMPONENT", oComponent.m_strComment);
+	oParams.Set("INCLUDE",   pComponent->m_strInclude);
+	oParams.Set("COMPONENT", pComponent->m_strComment);
+	oParams.Set("NAMESPACE", pComponent->m_strNamespace);
 
 	// Generate HPP file, if required.
-	if (oTemplate.m_strHPPFile != "")
+	if (pTemplate->m_strHPPFile != "")
 	{
+		CPath strTemplateFile = CPath(App.m_strTmplFolder, pTemplate->m_strHPPFile);
+
 		oParams.Set("File", strHPPFile.FileTitle());
 		oParams.Set("FILE", strHPPFile.FileTitle().ToUpper());
 
-		if (!GenerateFile(CPath(oTemplate.m_strHPPFile), CPath(strFolder, strHPPFile), oParams))
+		if (!GenerateFile(strTemplateFile, CPath(strFolder, strHPPFile), oParams))
 			return;
 	}
 
 	// Generate CPP file, if required.
-	if (oTemplate.m_strCPPFile != "")
+	if (pTemplate->m_strCPPFile != "")
 	{
+		CPath strTemplateFile = CPath(App.m_strTmplFolder, pTemplate->m_strCPPFile);
+
 		oParams.Set("File", strHPPFile.FileTitle());
 		oParams.Set("FILE", strCPPFile.FileTitle().ToUpper());
 
-		if (!GenerateFile(CPath(oTemplate.m_strCPPFile), CPath(strFolder, strCPPFile), oParams))
+		if (!GenerateFile(strTemplateFile, CPath(strFolder, strCPPFile), oParams))
 			return;
 	}
 
@@ -354,7 +366,10 @@ void CAppDlg::OnGenerate()
 	if (App.m_astrFolders.Find(strFolder, true) == -1)
 		App.m_astrFolders.Add(strFolder);
 
-	NotifyMsg("%s class generated.", strClassName);
+	if (!strClassName.Empty())
+		NotifyMsg("%s class generated.", strClassName);
+	else
+		NotifyMsg("%s file generated.", strHPPFile);
 }
 
 /******************************************************************************
@@ -390,12 +405,12 @@ bool CAppDlg::GenerateFile(const CPath& strTemplateFile, const CPath& strTargetF
 	// Check target file doesn't exist.
 	if (strTargetFile.Exists())
 	{
-		AlertMsg("The target file already exists:\n\n%s", strTargetFile);
-		return false;
+		if (QueryMsg("The target file already exists:\n\n%s\n\nDo you want to overwrite it?", strTargetFile) != IDYES)
+			return false;
 	}
 
 	// Copy template to target file.
-	if (!CFile::Copy(strTemplateFile, strTargetFile))
+	if (!CFile::Copy(strTemplateFile, strTargetFile, true))
 	{
 		AlertMsg("Failed to create target file:\n\n%s", strTargetFile);
 		return false;
