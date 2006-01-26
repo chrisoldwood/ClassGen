@@ -1,33 +1,29 @@
-/******************************************************************************
-** (C) Chris Oldwood
-**
-** MODULE:		$FILE$.HPP
-** COMPONENT:	$COMPONENT$
-** DESCRIPTION:	The $CLASS$ class declaration.
-**
-*******************************************************************************
-*/
+////////////////////////////////////////////////////////////////////////////////
+//! \author Chris Oldwood
+//! \file   $FILE$.HPP
+//! \brief  The $CLASS$ class declaration.
 
 // Check for previous inclusion
 #ifndef $FILE$_HPP
 #define $FILE$_HPP
 
-/******************************************************************************
-** 
-** .
-**
-*******************************************************************************
-*/
+////////////////////////////////////////////////////////////////////////////////
+//!
 
 class $CLASS$ : public CPropertyPage
 {
 public:
-	//
-	// Constructors/Destructor.
-	//
+	//! Default constructor.
 	$CLASS$();
+
+	//! Destructor.
+	~$CLASS$();
 	
-protected:
+	//
+	// Members.
+	//
+	
+private:
 	//
 	// Members.
 	//
@@ -39,15 +35,12 @@ protected:
 	//
 	// Message handlers.
 	//
+
+	//! Page initialisation handler.
 	virtual void OnInitDialog();
+
+	//! Page validation handler.
 	virtual bool OnValidate();
 };
-
-/******************************************************************************
-**
-** Implementation of inline functions.
-**
-*******************************************************************************
-*/
 
 #endif // $FILE$_HPP

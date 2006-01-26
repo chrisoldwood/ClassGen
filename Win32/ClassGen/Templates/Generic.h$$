@@ -1,12 +1,7 @@
-/******************************************************************************
-** (C) Chris Oldwood
-**
-** MODULE:		$FILE$.HPP
-** COMPONENT:	$COMPONENT$
-** DESCRIPTION:	The $CLASS$ class declaration.
-**
-*******************************************************************************
-*/
+////////////////////////////////////////////////////////////////////////////////
+//! \author Chris Oldwood
+//! \file   $FILE$.HPP
+//! \brief  The $CLASS$ class declaration.
 
 // Check for previous inclusion
 #ifndef $FILE$_HPP
@@ -15,23 +10,19 @@
 namespace $NAMESPACE$
 {
 
-/******************************************************************************
-** 
-** .
-**
-*******************************************************************************
-*/
+////////////////////////////////////////////////////////////////////////////////
+//!
 
 class $CLASS$
 {
 public:
-	//
-	// Constructors/Destructor.
-	//
+	//! Default constructor.
 	$CLASS$();
+
+	//! Destructor.
 	~$CLASS$();
 	
-protected:
+private:
 	//
 	// Members.
 	//

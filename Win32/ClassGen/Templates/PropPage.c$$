@@ -1,12 +1,7 @@
-/******************************************************************************
-** (C) Chris Oldwood
-**
-** MODULE:		$FILE$.CPP
-** COMPONENT:	$COMPONENT$
-** DESCRIPTION:	$CLASS$ class definition.
-**
-*******************************************************************************
-*/
+////////////////////////////////////////////////////////////////////////////////
+//! \author Chris Oldwood
+//! \file   $FILE$.CPP
+//! \brief  The $CLASS$ class definition.
 
 #include "$INCLUDE$"
 #include "$File$.hpp"
@@ -16,17 +11,8 @@
 #define new DBGCRT_NEW
 #endif
 
-/******************************************************************************
-** Method:		Default constructor.
-**
-** Description:	.
-**
-** Parameters:	None.
-**
-** Returns:		Nothing.
-**
-*******************************************************************************
-*/
+////////////////////////////////////////////////////////////////////////////////
+//! Default constructor.
 
 $CLASS$::$CLASS$()
 	: CPropertyPage(IDD_)
@@ -38,33 +24,15 @@ $CLASS$::$CLASS$()
 	END_CTRLMSG_TABLE
 }
 
-/******************************************************************************
-** Method:		OnInitDialog()
-**
-** Description:	Initialise the dialog.
-**
-** Parameters:	None.
-**
-** Returns:		Nothing.
-**
-*******************************************************************************
-*/
+////////////////////////////////////////////////////////////////////////////////
+//! Page initialisation handler.
 
 void $CLASS$::OnInitDialog()
 {
 }
 
-/******************************************************************************
-** Method:		OnValidate()
-**
-** Description:	Validate the settings.
-**
-** Parameters:	None.
-**
-** Returns:		true or false.
-**
-*******************************************************************************
-*/
+////////////////////////////////////////////////////////////////////////////////
+//! Page validation handler.
 
 bool $CLASS$::OnValidate()
 {
