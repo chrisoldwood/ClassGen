@@ -1,31 +1,22 @@
-/******************************************************************************
-** (C) Chris Oldwood
-**
-** MODULE:		$FILE$.HPP
-** COMPONENT:	$COMPONENT$
-** DESCRIPTION:	The $CLASS$ class declaration.
-**
-*******************************************************************************
-*/
+////////////////////////////////////////////////////////////////////////////////
+//! \author Chris Oldwood
+//! \file   $FILE$.HPP
+//! \brief  The $CLASS$ class declaration.
 
 // Check for previous inclusion
 #ifndef $FILE$_HPP
 #define $FILE$_HPP
 
-/******************************************************************************
-** 
-** .
-**
-*******************************************************************************
-*/
+////////////////////////////////////////////////////////////////////////////////
+//!
 
 class $CLASS$ : public CTable
 {
 public:
-	//
-	// Constructors/Destructor.
-	//
+	//! Constructor for a specific database.
 	$CLASS$(CMDB& oDB);
+
+	//! Destructor.
 	~$CLASS$();
 	
 	//
@@ -46,16 +37,11 @@ public:
 	};
 
 	//
-	// Methods (overriden).
+	// Methods.
 	//
+
+	//! Create a row for the table.
 	virtual CRow& CreateRow();
 };
-
-/******************************************************************************
-**
-** Implementation of inline functions.
-**
-*******************************************************************************
-*/
 
 #endif // $FILE$_HPP

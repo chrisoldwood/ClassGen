@@ -1,12 +1,7 @@
-/******************************************************************************
-** (C) Chris Oldwood
-**
-** MODULE:		$FILE$.HPP
-** COMPONENT:	$COMPONENT$
-** DESCRIPTION:	The $CLASS$ interface declaration.
-**
-*******************************************************************************
-*/
+////////////////////////////////////////////////////////////////////////////////
+//! \author Chris Oldwood
+//! \file   $FILE$.HPP
+//! \brief  The $CLASS$ interface declaration.
 
 // Check for previous inclusion
 #ifndef $FILE$_HPP
@@ -15,19 +10,15 @@
 namespace $NAMESPACE$
 {
 
-/******************************************************************************
-** 
-** .
-**
-*******************************************************************************
-*/
+////////////////////////////////////////////////////////////////////////////////
+//!
 
 class $CLASS$
 {
 public:
 	
 protected:
-	// Make interface.
+	//! Protected destructor.
 	virtual ~$CLASS$() = 0 {}; 
 };
 

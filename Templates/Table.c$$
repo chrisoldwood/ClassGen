@@ -1,12 +1,7 @@
-/******************************************************************************
-** (C) Chris Oldwood
-**
-** MODULE:		$FILE$.CPP
-** COMPONENT:	$COMPONENT$
-** DESCRIPTION:	$CLASS$ class definition.
-**
-*******************************************************************************
-*/
+////////////////////////////////////////////////////////////////////////////////
+//! \author Chris Oldwood
+//! \file   $FILE$.CPP
+//! \brief  The $CLASS$ class definition.
 
 #include "$INCLUDE$"
 
@@ -15,17 +10,9 @@
 #define new DBGCRT_NEW
 #endif
 
-/******************************************************************************
-** Method:		Constructor.
-**
-** Description:	.
-**
-** Parameters:	None.
-**
-** Returns:		Nothing.
-**
-*******************************************************************************
-*/
+////////////////////////////////////////////////////////////////////////////////
+//! Constructor for a specific database. Create the table ready for inclusion
+//! in the memory database provided.
 
 $CLASS$::$CLASS$(CMDB& oDB)
 	: CTable(oDB, "")
@@ -33,33 +20,16 @@ $CLASS$::$CLASS$(CMDB& oDB)
 	// Create the table schema.
 }
 
-/******************************************************************************
-** Method:		Destructor.
-**
-** Description:	.
-**
-** Parameters:	None.
-**
-** Returns:		Nothing.
-**
-*******************************************************************************
-*/
+////////////////////////////////////////////////////////////////////////////////
+//! Destructor.
 
 $CLASS$::~$CLASS$()
 {
 }
 
-/******************************************************************************
-** Method:		CreateRow()
-**
-** Description:	Creates a new row and initialises it.
-**
-** Parameters:	None.
-**
-** Returns:		The new row.
-**
-*******************************************************************************
-*/
+////////////////////////////////////////////////////////////////////////////////
+//! Create a row for the table. Allocates a row and initialises any fields with
+//! default values.
 
 CRow& $CLASS$::CreateRow()
 {
