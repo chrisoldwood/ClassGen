@@ -53,6 +53,7 @@ protected:
 	void OnBrowse();
 	void OnEditClassName();
 	void OnGenerate();
+	void OnAbout();
 
 	//
 	// Internal methods.
