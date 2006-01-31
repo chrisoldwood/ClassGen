@@ -1,4 +1,4 @@
-Class Generator v1.1
+Class Generator v1.2
 ====================
 
 1) Installation.
@@ -22,4 +22,4 @@ Web:   http://www.cix.co.uk/~gort
 Chris Oldwood 
 (gort@cix.co.uk)
 
-19th June 2003
+31st January 2006
