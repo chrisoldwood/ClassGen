@@ -28,11 +28,11 @@ CClassGenApp App;
 */
 
 #ifdef _DEBUG
-const char* CClassGenApp::VERSION      = "v1.1 [Debug]";
+const char* CClassGenApp::VERSION      = "v1.2 [Debug]";
 #else
-const char* CClassGenApp::VERSION      = "v1.1";
+const char* CClassGenApp::VERSION      = "v1.2";
 #endif
-const char* CClassGenApp::INI_FILE_VER = "1.0";
+const char* CClassGenApp::INI_FILE_VER = "1.2";
 
 /******************************************************************************
 ** Method:		Constructor
