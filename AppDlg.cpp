@@ -9,6 +9,7 @@
 */
 
 #include "AppHeaders.hpp"
+#include "AboutDlg.hpp"
 
 /******************************************************************************
 ** Method:		Default constructor.
@@ -41,6 +42,7 @@ CAppDlg::CAppDlg()
 		CMD_CTRLMSG(IDC_BROWSE,		BN_CLICKED,		OnBrowse)
 		CMD_CTRLMSG(IDC_CLASS_NAME,	EN_CHANGE,		OnEditClassName)
 		CMD_CTRLMSG(IDC_GENERATE,	BN_CLICKED,		OnGenerate)
+		CMD_CTRLMSG(IDC_ABOUT,		BN_CLICKED,		OnAbout)
 	END_CTRLMSG_TABLE
 }
 
@@ -488,4 +490,23 @@ bool CAppDlg::GenerateFile(const CPath& strTemplateFile, const CPath& strTargetF
 	}
 
 	return true;
+}
+
+/******************************************************************************
+** Method:		OnAbout()
+**
+** Description:	Show the About box.
+**
+** Parameters:	None.
+**
+** Returns:		Nothing.
+**
+*******************************************************************************
+*/
+
+void CAppDlg::OnAbout()
+{
+	CAboutDlg Dlg;
+
+	Dlg.RunModal(*this);
 }
