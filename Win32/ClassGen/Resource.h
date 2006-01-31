@@ -1,6 +1,6 @@
 //{{NO_DEPENDENCIES}}
-// Microsoft Developer Studio generated include file.
-// Used by App.rc
+// Microsoft Visual C++ generated include file.
+// Used by ClassGen.rc
 //
 #define IDR_APPICON                     2
 #define IDR_APPMENU                     3
@@ -10,7 +10,6 @@
 #define ID_HELP_POPUP                   900
 #define ID_HELP_CONTENTS                901
 #define ID_HELP_ABOUT                   902
-#define IDC_GRID                        1060
 #define IDC_WEBSITE                     1083
 #define IDC_EMAIL                       1084
 #define IDC_VERSION                     1085
@@ -23,6 +22,7 @@
 #define IDC_TEMPLATE                    1093
 #define IDC_FOLDER                      1094
 #define IDC_COMPONENT                   1095
+#define IDC_ABOUT                       1096
 #define IDD_MAIN                        5000
 #define IDD_ABOUT                       5001
 #define IDC_STATIC                      -1

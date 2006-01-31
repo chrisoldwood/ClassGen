@@ -1,4 +1,4 @@
-//Microsoft Developer Studio generated resource script.
+// Microsoft Visual C++ generated resource script.
 //
 #include "Resource.h"
 
@@ -30,12 +30,12 @@ LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_UK
 // TEXTINCLUDE
 //
 
-1 TEXTINCLUDE DISCARDABLE 
+1 TEXTINCLUDE 
 BEGIN
     "Resource.h\0"
 END
 
-2 TEXTINCLUDE DISCARDABLE 
+2 TEXTINCLUDE 
 BEGIN
     "#define APSTUDIO_HIDDEN_SYMBOLS\r\n"
     "#include ""windows.h""\r\n"
@@ -44,7 +44,7 @@ BEGIN
     "\0"
 END
 
-3 TEXTINCLUDE DISCARDABLE 
+3 TEXTINCLUDE 
 BEGIN
     "\r\n"
     "#include ""App.rcv""\r\n"
@@ -61,14 +61,14 @@ END
 
 // Icon with lowest ID value placed first to ensure application icon
 // remains consistent on all systems.
-IDR_APPICON             ICON    DISCARDABLE     "App.ico"
+IDR_APPICON             ICON                    "App.ico"
 
 /////////////////////////////////////////////////////////////////////////////
 //
 // Menu
 //
 
-IDR_APPMENU MENU DISCARDABLE 
+IDR_APPMENU MENU 
 BEGIN
     POPUP "&File"
     BEGIN
@@ -87,41 +87,43 @@ END
 // Dialog
 //
 
-IDD_MAIN DIALOG DISCARDABLE  0, 0, 221, 156
-STYLE WS_CHILD | WS_VISIBLE | WS_CLIPSIBLINGS | WS_CLIPCHILDREN
-FONT 8, "MS Sans Serif"
+IDD_MAIN DIALOGEX 0, 0, 221, 156
+STYLE DS_SETFONT | WS_CHILD | WS_VISIBLE | WS_CLIPSIBLINGS | WS_CLIPCHILDREN
+FONT 8, "MS Sans Serif", 0, 0, 0x0
 BEGIN
-    LTEXT           "Template:",IDC_STATIC,10,12,45,8
+    LTEXT           "&Template:",IDC_STATIC,10,12,45,8
     COMBOBOX        IDC_TEMPLATE,60,10,150,75,CBS_DROPDOWNLIST | CBS_SORT | 
                     WS_VSCROLL | WS_TABSTOP
-    LTEXT           "Component:",IDC_STATIC,10,33,45,8
+    LTEXT           "&Component:",IDC_STATIC,10,33,45,8
     COMBOBOX        IDC_COMPONENT,60,30,150,75,CBS_DROPDOWNLIST | CBS_SORT | 
                     WS_VSCROLL | WS_TABSTOP
-    LTEXT           "Class Name:",IDC_STATIC,10,53,45,8
-    EDITTEXT        IDC_CLASS_NAME,60,50,150,14,ES_AUTOHSCROLL
-    LTEXT           "Folder:",IDC_STATIC,10,74,45,8
+    LTEXT           "Class &Name:",IDC_STATIC,10,53,45,8
+    EDITTEXT        IDC_CLASS_NAME,60,50,150,12,ES_AUTOHSCROLL
+    LTEXT           "&Folder:",IDC_STATIC,10,74,45,8
     COMBOBOX        IDC_FOLDER,60,70,135,75,CBS_DROPDOWN | CBS_SORT | 
                     WS_VSCROLL | WS_TABSTOP
-    PUSHBUTTON      "...",IDC_BROWSE,195,70,15,14
-    LTEXT           "HPP File:",IDC_STATIC,10,93,45,8
-    EDITTEXT        IDC_HPP_FILE,60,90,150,14,ES_AUTOHSCROLL
-    LTEXT           "CPP File:",IDC_STATIC,10,114,45,8
-    EDITTEXT        IDC_CPP_FILE,60,110,150,14,ES_AUTOHSCROLL
-    PUSHBUTTON      "Generate",IDC_GENERATE,60,135,50,14
-    DEFPUSHBUTTON   "Close",IDC_CLOSE,115,135,50,14
+    PUSHBUTTON      "...",IDC_BROWSE,195,70,15,12
+    LTEXT           "&HPP File:",IDC_STATIC,10,93,45,8
+    EDITTEXT        IDC_HPP_FILE,60,90,150,12,ES_AUTOHSCROLL
+    LTEXT           "C&PP File:",IDC_STATIC,10,114,45,8
+    EDITTEXT        IDC_CPP_FILE,60,110,150,12,ES_AUTOHSCROLL
+    PUSHBUTTON      "&Generate",IDC_GENERATE,105,135,50,14
+    DEFPUSHBUTTON   "Close",IDC_CLOSE,160,135,50,14
+    PUSHBUTTON      "&About",IDC_ABOUT,10,135,50,14
 END
 
-IDD_ABOUT DIALOG DISCARDABLE  0, 0, 122, 126
-STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+IDD_ABOUT DIALOGEX 0, 0, 122, 126
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | 
+    WS_SYSMENU
 CAPTION "About Class Generator"
-FONT 8, "MS Sans Serif"
+FONT 8, "MS Sans Serif", 0, 0, 0x0
 BEGIN
     ICON            IDR_APPICON,IDC_STATIC,10,15,20,20
     CTEXT           "Class Generator",IDC_STATIC,40,10,70,10,SS_CENTERIMAGE
-    CTEXT           "v1.0 Beta",IDC_VERSION,40,20,70,8,SS_CENTERIMAGE
+    CTEXT           "%s",IDC_VERSION,40,20,70,8,SS_CENTERIMAGE
     CTEXT           "Freeware",IDC_STATIC,40,30,70,8,SS_CENTERIMAGE
     CONTROL         "",IDC_STATIC,"Static",SS_ETCHEDHORZ,10,50,99,1
-    CTEXT           "(C) Chris Oldwood 2002-2003",IDC_STATIC,10,60,100,10,
+    CTEXT           "(C) Chris Oldwood 2002-2006",IDC_STATIC,10,60,100,10,
                     SS_CENTERIMAGE
     CTEXT           "gort@cix.co.uk",IDC_EMAIL,10,70,100,10,SS_NOTIFY | 
                     SS_CENTERIMAGE
@@ -136,14 +138,14 @@ END
 // Bitmap
 //
 
-IDR_APPTOOLBAR          BITMAP  DISCARDABLE     "Toolbar.bmp"
+IDR_APPTOOLBAR          BITMAP                  "Toolbar.bmp"
 
 /////////////////////////////////////////////////////////////////////////////
 //
 // Accelerator
 //
 
-IDR_APPACCEL ACCELERATORS DISCARDABLE 
+IDR_APPACCEL ACCELERATORS 
 BEGIN
     VK_F1,          ID_HELP_CONTENTS,       VIRTKEY, NOINVERT
 END
@@ -155,7 +157,7 @@ END
 //
 
 #ifdef APSTUDIO_INVOKED
-GUIDELINES DESIGNINFO DISCARDABLE 
+GUIDELINES DESIGNINFO 
 BEGIN
     IDD_MAIN, DIALOG
     BEGIN
@@ -175,42 +177,42 @@ END
 // String Table
 //
 
-STRINGTABLE DISCARDABLE 
+STRINGTABLE 
 BEGIN
     IDS_SYS_RESTORE         "Restore the window size and position."
 END
 
-STRINGTABLE DISCARDABLE 
+STRINGTABLE 
 BEGIN
     IDS_SYS_MOVE            "Move the window"
 END
 
-STRINGTABLE DISCARDABLE 
+STRINGTABLE 
 BEGIN
     IDS_SYS_SIZE            "Resize the window"
 END
 
-STRINGTABLE DISCARDABLE 
+STRINGTABLE 
 BEGIN
     IDS_SYS_MINIMIZE        "Minimize the window"
 END
 
-STRINGTABLE DISCARDABLE 
+STRINGTABLE 
 BEGIN
     IDS_SYS_MAXIMIZE        "Maximize the window"
 END
 
-STRINGTABLE DISCARDABLE 
+STRINGTABLE 
 BEGIN
     IDS_SYS_CLOSE           "Close the window"
 END
 
-STRINGTABLE DISCARDABLE 
+STRINGTABLE 
 BEGIN
     IDS_SYS_SWITCH          "Switch to another application"
 END
 
-STRINGTABLE DISCARDABLE 
+STRINGTABLE 
 BEGIN
     ID_HELP_POPUP           "Help options"
     ID_HELP_CONTENTS        "Displays the help contents page\nHelp"
