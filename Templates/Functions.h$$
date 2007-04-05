@@ -1,0 +1,23 @@
+////////////////////////////////////////////////////////////////////////////////
+//! \author Chris Oldwood
+//! \file   $File$.hpp
+//! \brief  .
+
+// Check for previous inclusion
+#ifndef $FILE$_HPP
+#define $FILE$_HPP
+
+#if _MSC_VER > 1000
+#pragma once
+#endif
+
+namespace $NAMESPACE$
+{
+
+////////////////////////////////////////////////////////////////////////////////
+//!
+
+//namespace $NAMESPACE$
+}
+
+#endif // $FILE$_HPP
