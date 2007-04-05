@@ -1,11 +1,15 @@
 ////////////////////////////////////////////////////////////////////////////////
 //! \author Chris Oldwood
-//! \file   $FILE$.HPP
+//! \file   $File$.hpp
 //! \brief  The $CLASS$ class declaration.
 
 // Check for previous inclusion
 #ifndef $FILE$_HPP
 #define $FILE$_HPP
+
+#if _MSC_VER > 1000
+#pragma once
+#endif
 
 namespace $NAMESPACE$
 {
