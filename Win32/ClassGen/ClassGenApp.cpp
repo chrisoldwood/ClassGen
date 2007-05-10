@@ -160,7 +160,7 @@ void CClassGenApp::LoadConfig()
 		// Valid template name?
 		if (!strTemplate.Empty())
 		{
-			CTemplatePtr pTemplate = new CTemplate;
+			CTemplatePtr pTemplate(new CTemplate);
 
 			pTemplate->m_strName     = strTemplate;
 			pTemplate->m_bNeedsClass = m_oIniFile.ReadBool  (strTemplate + " Template", "Class", true);
@@ -185,7 +185,7 @@ void CClassGenApp::LoadConfig()
 		// Valid component name?
 		if (!strComponent.Empty())
 		{
-			CComponentPtr pComponent = new CComponent;
+			CComponentPtr pComponent(new CComponent);
 
 			pComponent->m_strName      = strComponent;
 			pComponent->m_strInclude   = m_oIniFile.ReadString(strComponent + " Component", "Include",   "");
