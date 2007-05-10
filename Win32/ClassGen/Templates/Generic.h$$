@@ -1,11 +1,11 @@
 ////////////////////////////////////////////////////////////////////////////////
-//! \author Chris Oldwood
 //! \file   $File$.hpp
 //! \brief  The $CLASS$ class declaration.
+//! \author Chris Oldwood
 
 // Check for previous inclusion
-#ifndef $FILE$_HPP
-#define $FILE$_HPP
+#ifndef $LIBPREFIX$$FILE$_HPP
+#define $LIBPREFIX$$FILE$_HPP
 
 #if _MSC_VER > 1000
 #pragma once
@@ -32,14 +32,7 @@ private:
 	//
 };
 
-/******************************************************************************
-**
-** Implementation of inline functions.
-**
-*******************************************************************************
-*/
-
 //namespace $NAMESPACE$
 }
 
-#endif // $FILE$_HPP
+#endif // $LIBPREFIX$$FILE$_HPP
