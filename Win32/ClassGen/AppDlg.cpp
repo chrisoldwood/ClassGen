@@ -339,6 +339,7 @@ void CAppDlg::OnGenerate()
 	oParams.Set("INCLUDE",   pComponent->m_strInclude);
 	oParams.Set("COMPONENT", pComponent->m_strComment);
 	oParams.Set("NAMESPACE", pComponent->m_strNamespace);
+	oParams.Set("LIBPREFIX", CString(pComponent->m_strNamespace + "_").ToUpper());
 
 	// Generate HPP file, if required.
 	if (pTemplate->m_strHPPFile != "")
