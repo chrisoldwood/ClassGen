@@ -1,7 +1,7 @@
 ////////////////////////////////////////////////////////////////////////////////
-//! \author Chris Oldwood
 //! \file   $File$.cpp
 //! \brief  The $CLASS$ class definition.
+//! \author Chris Oldwood
 
 #include "$INCLUDE$"
 #include "$File$.hpp"
