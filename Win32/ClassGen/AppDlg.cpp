@@ -191,10 +191,6 @@ void CAppDlg::OnEditClassName()
 {
 	CString strClassName = m_ebClassName.Text();
 
-	// Strip 'C' prefix, if present.
-	if ( (strClassName.Length() > 0) && (strClassName[0] == 'C') )
-		strClassName.Delete(0);
-
 	// Set the filenames.
 	if (m_ebHPPFile.IsEnabled())
 		m_ebHPPFile.Text(strClassName + ".hpp");
@@ -339,7 +335,9 @@ void CAppDlg::OnGenerate()
 	oParams.Set("INCLUDE",   pComponent->m_strInclude);
 	oParams.Set("COMPONENT", pComponent->m_strComment);
 	oParams.Set("NAMESPACE", pComponent->m_strNamespace);
-	oParams.Set("LIBPREFIX", CString(pComponent->m_strNamespace + "_").ToUpper());
+
+	if (!pComponent->m_strNamespace.Empty())
+		oParams.Set("LIB_", CString(pComponent->m_strNamespace + "_").ToUpper());
 
 	// Generate HPP file, if required.
 	if (pTemplate->m_strHPPFile != "")
