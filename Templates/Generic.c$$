@@ -4,6 +4,7 @@
 //! \author Chris Oldwood
 
 #include "$INCLUDE$"
+#include "$File$.hpp"
 
 #ifdef _DEBUG
 // For memory leak detection.
