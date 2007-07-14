@@ -1,11 +1,11 @@
 ////////////////////////////////////////////////////////////////////////////////
 //! \file   $File$.hpp
 //! \brief  The $CLASS$ interface declaration.
-//! \aut$hor Chris Oldwood
+//! \author Chris Oldwood
 
 // Check for previous inclusion
-#ifndef $LIBPREFIX$$FILE$_HPP
-#define $LIBPREFIX$$FILE$_HPP
+#ifndef $LIB_$$FILE$_HPP
+#define $LIB_$$FILE$_HPP
 
 #if _MSC_VER > 1000
 #pragma once
@@ -29,4 +29,4 @@ protected:
 //namespace $NAMESPACE$
 }
 
-#endif // $LIBPREFIX$$FILE$_HPP
+#endif // $LIB_$$FILE$_HPP
