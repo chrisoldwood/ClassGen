@@ -12,6 +12,18 @@
 #ifndef CLASSGENAPP_HPP
 #define CLASSGENAPP_HPP
 
+#if _MSC_VER > 1000
+#pragma once
+#endif
+
+#include <WCL/App.hpp>
+#include <WCL/IniFile.hpp>
+#include <WCL/StrArray.hpp>
+#include "Template.hpp"
+#include "Component.hpp"
+#include "AppWnd.hpp"
+#include "AppCmds.hpp"
+
 // Template shorthands.
 typedef std::vector<CTemplatePtr>  CTemplates;
 typedef std::vector<CComponentPtr> CComponents;

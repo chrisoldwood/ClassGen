@@ -8,8 +8,9 @@
 *******************************************************************************
 */
 
-#include "AppHeaders.hpp"
+#include "Common.hpp"
 #include "AboutDlg.hpp"
+#include "ClassGenApp.hpp"
 
 /******************************************************************************
 ** Method:		Default constructor.

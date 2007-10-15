@@ -12,6 +12,8 @@
 #ifndef APPCMDS_HPP
 #define APPCMDS_HPP
 
+#include <WCL/CmdCtrl.hpp>
+
 /******************************************************************************
 ** 
 ** Application command controller.
