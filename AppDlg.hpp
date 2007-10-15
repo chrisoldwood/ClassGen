@@ -12,6 +12,18 @@
 #ifndef APPDLG_HPP
 #define APPDLG_HPP
 
+#if _MSC_VER > 1000
+#pragma once
+#endif
+
+#include <WCL/MainDlg.hpp>
+#include <WCL/ComboBox.hpp>
+#include <WCL/EditBox.hpp>
+#include <WCL/Path.hpp>
+
+// Forward declarations.
+class CParams;
+
 /******************************************************************************
 ** 
 ** This is the main application dialog.

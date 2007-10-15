@@ -12,6 +12,8 @@
 #ifndef PARAMS_HPP
 #define PARAMS_HPP
 
+#include <WCL/StrArray.hpp>
+
 /******************************************************************************
 ** 
 ** Collection class used to hold the string substitution table.

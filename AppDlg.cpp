@@ -8,8 +8,13 @@
 *******************************************************************************
 */
 
-#include "AppHeaders.hpp"
+#include "Common.hpp"
+#include "AppDlg.hpp"
 #include "AboutDlg.hpp"
+#include <WCL/File.hpp>
+#include <WCL/FileException.hpp>
+#include "ClassGenApp.hpp"
+#include "Params.hpp"
 
 /******************************************************************************
 ** Method:		Default constructor.

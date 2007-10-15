@@ -12,6 +12,13 @@
 #ifndef APPWND_HPP
 #define APPWND_HPP
 
+#if _MSC_VER > 1000
+#pragma once
+#endif
+
+#include <WCL/DlgFrame.hpp>
+#include "AppDlg.hpp"
+
 /******************************************************************************
 **
 ** This is the the applications main window.
