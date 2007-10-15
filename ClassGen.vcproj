@@ -3,7 +3,7 @@
 	ProjectType="Visual C++"
 	Version="7.10"
 	Name="ClassGen"
-	ProjectGUID="{4B691B40-25C4-46f3-BA0C-8954D2FBF9A9}"
+	ProjectGUID="{4B691B40-25C4-46F3-BA0C-8954D2FBF9A9}"
 	SccProjectName="SAK"
 	SccAuxPath="SAK"
 	SccLocalPath="SAK"
@@ -24,16 +24,16 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="2"
-				InlineFunctionExpansion="1"
+				InlineFunctionExpansion="0"
 				AdditionalIncludeDirectories="../Lib"
 				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS"
 				StringPooling="TRUE"
 				RuntimeLibrary="0"
-				EnableFunctionLevelLinking="TRUE"
+				EnableFunctionLevelLinking="FALSE"
 				ForceConformanceInForLoopScope="TRUE"
 				RuntimeTypeInfo="TRUE"
-				UsePrecompiledHeader="2"
-				PrecompiledHeaderThrough="AppHeaders.hpp"
+				UsePrecompiledHeader="3"
+				PrecompiledHeaderThrough="Common.hpp"
 				PrecompiledHeaderFile=".\Release/ClassGen.pch"
 				AssemblerListingLocation=".\Release/"
 				ObjectFile=".\Release/"
@@ -41,6 +41,7 @@
 				WarningLevel="4"
 				WarnAsError="TRUE"
 				SuppressStartupBanner="TRUE"
+				DebugInformationFormat="3"
 				CompileAs="0"/>
 			<Tool
 				Name="VCCustomBuildTool"/>
@@ -100,11 +101,11 @@
 				SmallerTypeCheck="TRUE"
 				RuntimeLibrary="1"
 				BufferSecurityCheck="TRUE"
-				EnableFunctionLevelLinking="TRUE"
+				EnableFunctionLevelLinking="FALSE"
 				ForceConformanceInForLoopScope="TRUE"
 				RuntimeTypeInfo="TRUE"
-				UsePrecompiledHeader="2"
-				PrecompiledHeaderThrough="AppHeaders.hpp"
+				UsePrecompiledHeader="3"
+				PrecompiledHeaderThrough="Common.hpp"
 				PrecompiledHeaderFile=".\Debug/ClassGen.pch"
 				AssemblerListingLocation=".\Debug/"
 				ObjectFile=".\Debug/"
@@ -113,7 +114,7 @@
 				WarningLevel="4"
 				WarnAsError="TRUE"
 				SuppressStartupBanner="TRUE"
-				DebugInformationFormat="4"
+				DebugInformationFormat="3"
 				CompileAs="0"/>
 			<Tool
 				Name="VCCustomBuildTool"/>
@@ -158,6 +159,12 @@
 		</Configuration>
 	</Configurations>
 	<References>
+		<ProjectReference
+			ReferencedProjectIdentifier="{790BC113-52FB-4565-8968-79B8B011C520}"
+			Name="Core"/>
+		<ProjectReference
+			ReferencedProjectIdentifier="{9B0335B6-93BE-4604-8497-27431874D758}"
+			Name="Wcl"/>
 	</References>
 	<Files>
 		<Filter
@@ -173,19 +180,28 @@
 				RelativePath="AppDlg.cpp">
 			</File>
 			<File
-				RelativePath="AppToolBar.cpp">
-			</File>
-			<File
 				RelativePath="AppWnd.cpp">
-			</File>
-			<File
-				RelativePath="ClassGen.rc">
 			</File>
 			<File
 				RelativePath="ClassGenApp.cpp">
 			</File>
 			<File
 				RelativePath="Params.cpp">
+			</File>
+			<File
+				RelativePath=".\pch.cpp">
+				<FileConfiguration
+					Name="Release|Win32">
+					<Tool
+						Name="VCCLCompilerTool"
+						UsePrecompiledHeader="1"/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Debug|Win32">
+					<Tool
+						Name="VCCLCompilerTool"
+						UsePrecompiledHeader="1"/>
+				</FileConfiguration>
 			</File>
 		</Filter>
 		<Filter
@@ -201,25 +217,19 @@
 				RelativePath="AppDlg.hpp">
 			</File>
 			<File
-				RelativePath="AppHeaders.hpp">
-			</File>
-			<File
-				RelativePath="AppToolBar.hpp">
-			</File>
-			<File
 				RelativePath="AppWnd.hpp">
 			</File>
 			<File
 				RelativePath="ClassGenApp.hpp">
 			</File>
 			<File
+				RelativePath=".\Common.hpp">
+			</File>
+			<File
 				RelativePath="Component.hpp">
 			</File>
 			<File
 				RelativePath="Params.hpp">
-			</File>
-			<File
-				RelativePath="Resource.h">
 			</File>
 			<File
 				RelativePath="Template.hpp">
@@ -235,7 +245,10 @@
 				RelativePath="App.rcv">
 			</File>
 			<File
-				RelativePath="Toolbar.bmp">
+				RelativePath="ClassGen.rc">
+			</File>
+			<File
+				RelativePath="Resource.h">
 			</File>
 		</Filter>
 		<Filter
