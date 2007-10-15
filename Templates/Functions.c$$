@@ -3,13 +3,8 @@
 //! \brief  .
 //! \author Chris Oldwood
 
-#include "$INCLUDE$"
+#include "Common.hpp"
 #include "$File$.hpp"
-
-#ifdef _DEBUG
-// For memory leak detection.
-#define new DBGCRT_NEW
-#endif
 
 namespace $NAMESPACE$
 {
