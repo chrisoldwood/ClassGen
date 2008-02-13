@@ -33,9 +33,9 @@ public:
 	//
 	// Methods.
 	//
-	void    Set(const char* pszKey, const char* pszValue);
+	void    Set(const tchar* pszKey, const tchar* pszValue);
 
-	CString Find(const char* pszKey) const;
+	CString Find(const tchar* pszKey) const;
 
 protected:
 	//
@@ -47,7 +47,7 @@ protected:
 	//
 	// Internal methods.
 	//
-	int IndexOf(const char* pszKey) const;
+	int IndexOf(const tchar* pszKey) const;
 };
 
 /******************************************************************************

@@ -56,7 +56,7 @@ CParams::~CParams()
 *******************************************************************************
 */
 
-void CParams::Set(const char* pszKey, const char* pszValue)
+void CParams::Set(const tchar* pszKey, const tchar* pszValue)
 {
 	int i = IndexOf(pszKey);
 
@@ -84,11 +84,11 @@ void CParams::Set(const char* pszKey, const char* pszValue)
 *******************************************************************************
 */
 
-CString CParams::Find(const char* pszKey) const
+CString CParams::Find(const tchar* pszKey) const
 {
 	int i = IndexOf(pszKey);
 
-	return (i != -1) ? m_astrValues[i] : "";
+	return (i != -1) ? m_astrValues[i] : TXT("");
 }
 
 /******************************************************************************
@@ -103,12 +103,12 @@ CString CParams::Find(const char* pszKey) const
 *******************************************************************************
 */
 
-int CParams::IndexOf(const char* pszKey) const
+int CParams::IndexOf(const tchar* pszKey) const
 {
 	ASSERT(m_astrKeys.Size() == m_astrValues.Size());
 
 	// For all keys...
-	for (int i = 0; i < m_astrKeys.Size(); ++i)
+	for (size_t i = 0; i < m_astrKeys.Size(); ++i)
 	{
 		if (m_astrKeys[i] == pszKey)
 			return i;
