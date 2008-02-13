@@ -15,6 +15,7 @@
 #include <WCL/FileException.hpp>
 #include "ClassGenApp.hpp"
 #include "Params.hpp"
+#include <Core/AnsiWide.hpp>
 
 /******************************************************************************
 ** Method:		Default constructor.
@@ -67,14 +68,14 @@ void CAppDlg::OnInitDialog()
 {
 	if (App.m_aoTemplates.empty())
 	{
-		AlertMsg("There are no templates defined.");
+		AlertMsg(TXT("There are no templates defined."));
 		App.m_AppWnd.Close();
 		return;
 	}
 
 	if (App.m_aoComponents.empty())
 	{
-		AlertMsg("There are no components defined.");
+		AlertMsg(TXT("There are no components defined."));
 		App.m_AppWnd.Close();
 		return;
 	}
@@ -96,7 +97,7 @@ void CAppDlg::OnInitDialog()
 	m_cbComponent.CurSel(m_cbComponent.FindExact(App.m_aoComponents[0]->m_strName));
 
 	// Load last used folders combo.
-	for (int i = 0; i < App.m_astrFolders.Size(); ++i)
+	for (size_t i = 0; i < App.m_astrFolders.Size(); ++i)
 		AddFolderName(App.m_astrFolders[i], false);
 
 	// Initialise with last settings.
@@ -160,24 +161,24 @@ void CAppDlg::OnSelectTemplate()
 
 	// Get fields expected.
 	bool bIsClass = pTemplate->m_bNeedsClass;
-	bool bHasHPP  = (pTemplate->m_strHPPFile != "");
-	bool bHasCPP  = (pTemplate->m_strCPPFile != "");
+	bool bHasHPP  = (pTemplate->m_strHPPFile != TXT(""));
+	bool bHasCPP  = (pTemplate->m_strCPPFile != TXT(""));
 
 	// Update controls.
 	m_ebClassName.Enable(bIsClass);
 
 	if (!bIsClass)
-		m_ebClassName.Text("");
+		m_ebClassName.Text(TXT(""));
 
 	m_ebHPPFile.Enable(bHasHPP);
 
 	if (!bHasHPP)
-		m_ebHPPFile.Text("");
+		m_ebHPPFile.Text(TXT(""));
 
 	m_ebCPPFile.Enable(bHasCPP);
 
 	if (!bHasCPP)
-		m_ebCPPFile.Text("");
+		m_ebCPPFile.Text(TXT(""));
 }
 
 /******************************************************************************
@@ -198,10 +199,10 @@ void CAppDlg::OnEditClassName()
 
 	// Set the filenames.
 	if (m_ebHPPFile.IsEnabled())
-		m_ebHPPFile.Text(strClassName + ".hpp");
+		m_ebHPPFile.Text(strClassName + TXT(".hpp"));
 
 	if (m_ebCPPFile.IsEnabled())
-		m_ebCPPFile.Text(strClassName + ".cpp");
+		m_ebCPPFile.Text(strClassName + TXT(".cpp"));
 }
 
 /******************************************************************************
@@ -221,11 +222,11 @@ void CAppDlg::OnBrowse()
 	CPath strFolder = m_cbFolder.Text();
 
 	// If folder name empty start from last path.
-	if (strFolder == "")
+	if (strFolder == TXT(""))
 		strFolder = App.m_strLastFolder;
 
 	// Select the folder.
-	if (!strFolder.SelectDir(*this, "Select The Destination Folder", strFolder))
+	if (!strFolder.SelectDir(*this, TXT("Select The Destination Folder"), strFolder))
 		return;
 
 	// Display path.
@@ -291,15 +292,15 @@ void CAppDlg::OnGenerate()
 
 	// Get expected fields.
 	bool bIsClass = pTemplate->m_bNeedsClass;
-	bool bHasHPP  = (pTemplate->m_strHPPFile != "");
-	bool bHasCPP  = (pTemplate->m_strCPPFile != "");
+	bool bHasHPP  = (pTemplate->m_strHPPFile != TXT(""));
+	bool bHasCPP  = (pTemplate->m_strCPPFile != TXT(""));
 
 	// Validate class name.
 	CString strClassName = m_ebClassName.Text();
 
 	if (bIsClass && strClassName.Empty())
 	{
-		AlertMsg("You must supply a name for the class.");
+		AlertMsg(TXT("You must supply a name for the class."));
 		m_ebClassName.Focus();
 		return;
 	}
@@ -309,7 +310,7 @@ void CAppDlg::OnGenerate()
 
 	if (!strFolder.Exists())
 	{
-		AlertMsg("The destination folder is invalid.");
+		AlertMsg(TXT("The destination folder is invalid."));
 		m_cbFolder.Focus();
 		return;
 	}
@@ -319,7 +320,7 @@ void CAppDlg::OnGenerate()
 
 	if (bHasHPP && strHPPFile.Empty())
 	{
-		AlertMsg("You must supply the HPP file name.");
+		AlertMsg(TXT("You must supply the HPP file name."));
 		m_ebHPPFile.Focus();
 		return;
 	}
@@ -329,40 +330,40 @@ void CAppDlg::OnGenerate()
 
 	if (bHasCPP && strCPPFile.Empty())
 	{
-		AlertMsg("You must supply the CPP file name.");
+		AlertMsg(TXT("You must supply the CPP file name."));
 		m_ebCPPFile.Focus();
 		return;
 	}
 
 	CParams oParams;
 
-	oParams.Set("CLASS",     strClassName);
-	oParams.Set("INCLUDE",   pComponent->m_strInclude);
-	oParams.Set("COMPONENT", pComponent->m_strComment);
-	oParams.Set("NAMESPACE", pComponent->m_strNamespace);
+	oParams.Set(TXT("CLASS"),     strClassName);
+	oParams.Set(TXT("INCLUDE"),   pComponent->m_strInclude);
+	oParams.Set(TXT("COMPONENT"), pComponent->m_strComment);
+	oParams.Set(TXT("NAMESPACE"), pComponent->m_strNamespace);
 
 	if (!pComponent->m_strNamespace.Empty())
-		oParams.Set("LIB_", CString(pComponent->m_strNamespace + "_").ToUpper());
+		oParams.Set(TXT("LIB_"), CString(pComponent->m_strNamespace + TXT("_")).ToUpper());
 
 	// Generate HPP file, if required.
-	if (pTemplate->m_strHPPFile != "")
+	if (pTemplate->m_strHPPFile != TXT(""))
 	{
 		CPath strTemplateFile = CPath(App.m_strTmplFolder, pTemplate->m_strHPPFile);
 
-		oParams.Set("File", strHPPFile.FileTitle());
-		oParams.Set("FILE", strHPPFile.FileTitle().ToUpper());
+		oParams.Set(TXT("File"), strHPPFile.FileTitle());
+		oParams.Set(TXT("FILE"), strHPPFile.FileTitle().ToUpper());
 
 		if (!GenerateFile(strTemplateFile, CPath(strFolder, strHPPFile), oParams))
 			return;
 	}
 
 	// Generate CPP file, if required.
-	if (pTemplate->m_strCPPFile != "")
+	if (pTemplate->m_strCPPFile != TXT(""))
 	{
 		CPath strTemplateFile = CPath(App.m_strTmplFolder, pTemplate->m_strCPPFile);
 
-		oParams.Set("File", strHPPFile.FileTitle());
-		oParams.Set("FILE", strCPPFile.FileTitle().ToUpper());
+		oParams.Set(TXT("File"), strHPPFile.FileTitle());
+		oParams.Set(TXT("FILE"), strCPPFile.FileTitle().ToUpper());
 
 		if (!GenerateFile(strTemplateFile, CPath(strFolder, strCPPFile), oParams))
 			return;
@@ -373,9 +374,9 @@ void CAppDlg::OnGenerate()
 		App.m_astrFolders.Add(strFolder);
 
 	if (!strClassName.Empty())
-		NotifyMsg("%s class generated.", strClassName);
+		NotifyMsg(TXT("%s class generated."), strClassName);
 	else
-		NotifyMsg("%s file generated.", strHPPFile);
+		NotifyMsg(TXT("%s file generated."), strHPPFile);
 }
 
 /******************************************************************************
@@ -397,28 +398,28 @@ bool CAppDlg::GenerateFile(const CPath& strTemplateFile, const CPath& strTargetF
 	// Check template file exists.
 	if (!strTemplateFile.Exists())
 	{
-		AlertMsg("The template file is missing:\n\n%s", strTemplateFile);
+		AlertMsg(TXT("The template file is missing:\n\n%s"), strTemplateFile);
 		return false;
 	}
 
 	// Check template file is writable.
 	if (strTemplateFile.ReadOnly())
 	{
-		AlertMsg("The template file is write-protected:\n\n%s", strTemplateFile);
+		AlertMsg(TXT("The template file is write-protected:\n\n%s"), strTemplateFile);
 		return false;
 	}
 
 	// Check target file doesn't exist.
 	if (strTargetFile.Exists())
 	{
-		if (QueryMsg("The target file already exists:\n\n%s\n\nDo you want to overwrite it?", strTargetFile) != IDYES)
+		if (QueryMsg(TXT("The target file already exists:\n\n%s\n\nDo you want to overwrite it?"), strTargetFile) != IDYES)
 			return false;
 	}
 
 	// Copy template to target file.
 	if (!CFile::Copy(strTemplateFile, strTargetFile, true))
 	{
-		AlertMsg("Failed to create target file:\n\n%s", strTargetFile);
+		AlertMsg(TXT("Failed to create target file:\n\n%s"), strTargetFile);
 		return false;
 	}
 
@@ -432,7 +433,7 @@ bool CAppDlg::GenerateFile(const CPath& strTemplateFile, const CPath& strTargetF
 		ulong lSize = oFile.Size();
 
 		// Allocate zero terminated code buffer.
-		char* pszCode = (char*) _alloca(lSize+1);
+		char* pszCode = static_cast<char*>(_alloca(lSize+1));
 
 		// Read file contents into tmp buffer.
 		oFile.Read(pszCode, lSize);
@@ -468,11 +469,11 @@ bool CAppDlg::GenerateFile(const CPath& strTemplateFile, const CPath& strTargetF
 				// Parameter to substitue?
 				if (pszParamEnd != NULL)
 				{
-					CString strParam(pszParam+1, pszParamEnd-pszParam-1);
-					CString strValue(oParams.Find(strParam));
+					std::string strParam(pszParam+1, pszParamEnd-pszParam-1);
+					std::string strValue(T2A(oParams.Find(A2T(strParam))));
 
-					// Write the rest of the file.
-					oFile.Write(strValue, strValue.Length());
+					// Write the substituted value.
+					oFile.Write(strValue.c_str(), strValue.length());
 
 					pszCode = pszParamEnd+1;
 				}
@@ -489,7 +490,7 @@ bool CAppDlg::GenerateFile(const CPath& strTemplateFile, const CPath& strTargetF
 	}
 	catch (CFileException& e)
 	{
-		AlertMsg("Failed to parse target file:\n\n%s\n\nReason: %s", strTargetFile, e.ErrorText());
+		AlertMsg(TXT("Failed to parse target file:\n\n%s\n\nReason: %s"), strTargetFile, e.ErrorText());
 		return false;
 	}
 

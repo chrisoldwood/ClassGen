@@ -29,11 +29,11 @@ CClassGenApp App;
 */
 
 #ifdef _DEBUG
-const char* CClassGenApp::VERSION      = "v1.2 [Debug]";
+const tchar* CClassGenApp::VERSION      = TXT("v1.2 [Debug]");
 #else
-const char* CClassGenApp::VERSION      = "v1.2";
+const tchar* CClassGenApp::VERSION      = TXT("v1.2");
 #endif
-const char* CClassGenApp::INI_FILE_VER = "1.2";
+const tchar* CClassGenApp::INI_FILE_VER = TXT("1.2");
 
 /******************************************************************************
 ** Method:		Constructor
@@ -49,7 +49,7 @@ const char* CClassGenApp::INI_FILE_VER = "1.2";
 
 CClassGenApp::CClassGenApp()
 	: CApp(m_AppWnd, m_AppCmds)
-	, m_strTmplFolder(".")
+	, m_strTmplFolder(TXT("."))
 {
 
 }
@@ -85,14 +85,11 @@ CClassGenApp::~CClassGenApp()
 bool CClassGenApp::OnOpen()
 {
 	// Set the app title.
-	m_strTitle = "Class Generator";
+	m_strTitle = TXT("Class Generator");
 
 	// Load settings.
 	LoadConfig();
 	
-	// Load the toolbar bitmap.
-	m_rCmdControl.CmdBitmap().LoadRsc(IDR_APPTOOLBAR);
-
 	// Create the main window.
 	if (!m_AppWnd.Create())
 		return false;
@@ -142,21 +139,21 @@ bool CClassGenApp::OnClose()
 void CClassGenApp::LoadConfig()
 {
 	// Read the file version.
-	CString strVer = m_oIniFile.ReadString("Version", "Version", INI_FILE_VER);
+	CString strVer = m_oIniFile.ReadString(TXT("Version"), TXT("Version"), INI_FILE_VER);
 
 	// Read the templates folder.
-	m_strTmplFolder = m_oIniFile.ReadString("Templates", "Path", m_strTmplFolder);
+	m_strTmplFolder = m_oIniFile.ReadString(TXT("Templates"), TXT("Path"), m_strTmplFolder);
 
 	// Read the template names.
-	int nTemplates = m_oIniFile.ReadInt("Templates", "Count", 0);
+	int nTemplates = m_oIniFile.ReadInt(TXT("Templates"), TXT("Count"), 0);
 
 	for (int i = 0; i < nTemplates; ++i)
 	{
 		CString strSection;
 
-		strSection.Format("Template[%d]", i);
+		strSection.Format(TXT("Template[%d]"), i);
 
-		CString strTemplate = m_oIniFile.ReadString("Templates", strSection, "");
+		CString strTemplate = m_oIniFile.ReadString(TXT("Templates"), strSection, TXT(""));
 
 		// Valid template name?
 		if (!strTemplate.Empty())
@@ -164,24 +161,24 @@ void CClassGenApp::LoadConfig()
 			CTemplatePtr pTemplate(new CTemplate);
 
 			pTemplate->m_strName     = strTemplate;
-			pTemplate->m_bNeedsClass = m_oIniFile.ReadBool  (strTemplate + " Template", "Class", true);
-			pTemplate->m_strHPPFile  = m_oIniFile.ReadString(strTemplate + " Template", "HPP",   "");
-			pTemplate->m_strCPPFile  = m_oIniFile.ReadString(strTemplate + " Template", "CPP",   "");
+			pTemplate->m_bNeedsClass = m_oIniFile.ReadBool  (strTemplate + TXT(" Template"), TXT("Class"), true);
+			pTemplate->m_strHPPFile  = m_oIniFile.ReadString(strTemplate + TXT(" Template"), TXT("HPP"),   TXT(""));
+			pTemplate->m_strCPPFile  = m_oIniFile.ReadString(strTemplate + TXT(" Template"), TXT("CPP"),   TXT(""));
 
 			m_aoTemplates.push_back(pTemplate);
 		}
 	}
 
 	// Read the component names.
-	int nComponents = m_oIniFile.ReadInt("Components", "Count", 0);
+	int nComponents = m_oIniFile.ReadInt(TXT("Components"), TXT("Count"), 0);
 
 	for (int i = 0; i < nComponents; ++i)
 	{
 		CString strSection;
 
-		strSection.Format("Component[%d]", i);
+		strSection.Format(TXT("Component[%d]"), i);
 
-		CString strComponent = m_oIniFile.ReadString("Components", strSection, "");
+		CString strComponent = m_oIniFile.ReadString(TXT("Components"), strSection, TXT(""));
 
 		// Valid component name?
 		if (!strComponent.Empty())
@@ -189,31 +186,31 @@ void CClassGenApp::LoadConfig()
 			CComponentPtr pComponent(new CComponent);
 
 			pComponent->m_strName      = strComponent;
-			pComponent->m_strInclude   = m_oIniFile.ReadString(strComponent + " Component", "Include",   "");
-			pComponent->m_strComment   = m_oIniFile.ReadString(strComponent + " Component", "Comment",   "");
-			pComponent->m_strNamespace = m_oIniFile.ReadString(strComponent + " Component", "Namespace", "");
+			pComponent->m_strInclude   = m_oIniFile.ReadString(strComponent + TXT(" Component"), TXT("Include"),   TXT(""));
+			pComponent->m_strComment   = m_oIniFile.ReadString(strComponent + TXT(" Component"), TXT("Comment"),   TXT(""));
+			pComponent->m_strNamespace = m_oIniFile.ReadString(strComponent + TXT(" Component"), TXT("Namespace"), TXT(""));
 
 			m_aoComponents.push_back(pComponent);
 		}
 	}
 
 	// Read the list of folders used.
-	int nFolders = m_oIniFile.ReadInt("Folders", "Count", 0);
+	int nFolders = m_oIniFile.ReadInt(TXT("Folders"), TXT("Count"), 0);
 
 	for (int i = 0; i < nFolders; ++i)
 	{
 		CString strSection;
 
-		strSection.Format("Folder[%d]", i);
+		strSection.Format(TXT("Folder[%d]"), i);
 
-		CString strFolder = m_oIniFile.ReadString("Folders", strSection, "");
+		CString strFolder = m_oIniFile.ReadString(TXT("Folders"), strSection, TXT(""));
 
 		if ( (!strFolder.Empty()) && (m_astrFolders.Find(strFolder, true) == -1) )
 			m_astrFolders.Add(strFolder);
 	}
 
 	// Read the last use settings.
-	m_strLastFolder = m_oIniFile.ReadString("Main", "LastFolder", "");
+	m_strLastFolder = m_oIniFile.ReadString(TXT("Main"), TXT("LastFolder"), TXT(""));
 }
 
 /******************************************************************************
@@ -231,20 +228,20 @@ void CClassGenApp::LoadConfig()
 void CClassGenApp::SaveConfig()
 {
 	// Write the file version.
-	m_oIniFile.WriteString("Version", "Version", INI_FILE_VER);
+	m_oIniFile.WriteString(TXT("Version"), TXT("Version"), INI_FILE_VER);
 
 	// Write the list of folders used.
-	m_oIniFile.WriteInt("Folders", "Count", m_astrFolders.Size());
+	m_oIniFile.WriteInt(TXT("Folders"), TXT("Count"), m_astrFolders.Size());
 
-	for (int i = 0; i < m_astrFolders.Size(); ++i)
+	for (size_t i = 0; i < m_astrFolders.Size(); ++i)
 	{
 		CString strSection;
 
-		strSection.Format("Folder[%d]", i);
+		strSection.Format(TXT("Folder[%d]"), i);
 
-		m_oIniFile.WriteString("Folders", strSection, m_astrFolders[i]);
+		m_oIniFile.WriteString(TXT("Folders"), strSection, m_astrFolders[i]);
 	}
 
 	// Write the last use settings.
-	m_oIniFile.WriteString("Main", "LastFolder", m_strLastFolder);
+	m_oIniFile.WriteString(TXT("Main"), TXT("LastFolder"), m_strLastFolder);
 }
