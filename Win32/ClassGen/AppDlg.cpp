@@ -93,8 +93,16 @@ void CAppDlg::OnInitDialog()
 	for (uint i = 0; i < App.m_aoComponents.size(); ++i)
 		m_cbComponent.Add(App.m_aoComponents[i]->m_strName, i);
 
-	// Select 1st component by default.
-	m_cbComponent.CurSel(m_cbComponent.FindExact(App.m_aoComponents[0]->m_strName));
+	// Make the last used component the default selection.
+	size_t nComponent = m_cbComponent.FindExact(App.m_strLastComponent);
+
+	// If none, pick the first component available.
+	if ( (nComponent == Core::npos) && (!App.m_aoComponents.empty()) )
+		nComponent = m_cbComponent.FindExact(App.m_aoComponents[0]->m_strName);
+
+	// Set selection, if possible.
+	if (nComponent != Core::npos)
+		m_cbComponent.CurSel(nComponent);
 
 	// Load last used folders combo.
 	for (size_t i = 0; i < App.m_astrFolders.Size(); ++i)
@@ -119,6 +127,7 @@ void CAppDlg::OnInitDialog()
 void CAppDlg::OnDestroy()
 {
 	// Use path as starting point for next selection.
+	App.m_strLastComponent = m_cbComponent.Text();
 	App.m_strLastFolder = m_cbFolder.Text();
 }
 

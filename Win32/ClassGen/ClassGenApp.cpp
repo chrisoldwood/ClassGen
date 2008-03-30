@@ -210,7 +210,8 @@ void CClassGenApp::LoadConfig()
 	}
 
 	// Read the last use settings.
-	m_strLastFolder = m_oIniFile.ReadString(TXT("Main"), TXT("LastFolder"), TXT(""));
+	m_strLastComponent = m_oIniFile.ReadString(TXT("Main"), TXT("LastComponent"), m_strLastComponent);
+	m_strLastFolder    = m_oIniFile.ReadString(TXT("Main"), TXT("LastFolder"), m_strLastFolder);
 }
 
 /******************************************************************************
@@ -243,5 +244,6 @@ void CClassGenApp::SaveConfig()
 	}
 
 	// Write the last use settings.
+	m_oIniFile.WriteString(TXT("Main"), TXT("LastComponent"), m_strLastComponent);
 	m_oIniFile.WriteString(TXT("Main"), TXT("LastFolder"), m_strLastFolder);
 }
