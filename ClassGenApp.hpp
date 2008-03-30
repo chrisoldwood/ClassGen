@@ -54,6 +54,7 @@ public:
 	CTemplates	m_aoTemplates;		// Templates collection.
 	CComponents m_aoComponents;		// Components collection.
 	CStrArray	m_astrFolders;		// List of folders used.
+	CString		m_strLastComponent;	// Last component used.
 	CPath		m_strLastFolder;	// Last folder used.
 
 	//
