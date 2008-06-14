@@ -499,7 +499,7 @@ bool CAppDlg::GenerateFile(const CPath& strTemplateFile, const CPath& strTargetF
 	}
 	catch (CFileException& e)
 	{
-		AlertMsg(TXT("Failed to parse target file:\n\n%s\n\nReason: %s"), strTargetFile, e.ErrorText());
+		AlertMsg(TXT("Failed to parse target file:\n\n%s\n\nReason: %s"), strTargetFile, e.What());
 		return false;
 	}
 
