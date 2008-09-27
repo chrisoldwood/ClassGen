@@ -56,6 +56,8 @@ public:
 	CStrArray	m_astrFolders;		// List of folders used.
 	CString		m_strLastComponent;	// Last component used.
 	CPath		m_strLastFolder;	// Last folder used.
+	CString		m_strHppExt;		//!< The default extension for header files.
+	CString		m_strCppExt;		//!< The default extension for source files.
 
 	//
 	// Constants.
