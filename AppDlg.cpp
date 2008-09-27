@@ -43,6 +43,7 @@ CAppDlg::CAppDlg()
 	END_CTRL_TABLE
 
 	DEFINE_CTRLMSG_TABLE
+		CMD_CTRLMSG(IDC_COMPONENT,	CBN_SELCHANGE,	&CAppDlg::OnSelectComponent)
 		CMD_CTRLMSG(IDC_TEMPLATE,	CBN_SELCHANGE,	&CAppDlg::OnSelectTemplate)
 		CMD_CTRLMSG(IDC_CLOSE,		BN_CLICKED,		&CAppDlg::OnClose)
 		CMD_CTRLMSG(IDC_BROWSE,		BN_CLICKED,		&CAppDlg::OnBrowse)
@@ -148,6 +149,22 @@ void CAppDlg::OnClose()
 	App.m_AppWnd.Close();
 }
 
+////////////////////////////////////////////////////////////////////////////////
+//! Handle the selection of a new component.
+
+void CAppDlg::OnSelectComponent()
+{
+	// Get the selected component.
+	int nSel  = m_cbComponent.CurSel();
+	int nItem = m_cbComponent.ItemData(nSel);
+
+	CComponentPtr pComponent = App.m_aoComponents[nItem];
+
+	// Update controls.
+	if (!pComponent->m_strFolder.Empty())
+		AddFolderName(pComponent->m_strFolder, true);
+}
+
 /******************************************************************************
 ** Method:		OnSelectTemplate()
 **
@@ -208,10 +225,10 @@ void CAppDlg::OnEditClassName()
 
 	// Set the filenames.
 	if (m_ebHPPFile.IsEnabled())
-		m_ebHPPFile.Text(strClassName + TXT(".hpp"));
+		m_ebHPPFile.Text(strClassName + App.m_strHppExt);
 
 	if (m_ebCPPFile.IsEnabled())
-		m_ebCPPFile.Text(strClassName + TXT(".cpp"));
+		m_ebCPPFile.Text(strClassName + App.m_strCppExt);
 }
 
 /******************************************************************************

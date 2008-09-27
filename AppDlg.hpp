@@ -61,6 +61,7 @@ protected:
 	virtual void OnDestroy();
 
 	void OnClose();
+	void OnSelectComponent();
 	void OnSelectTemplate();
 	void OnBrowse();
 	void OnEditClassName();
