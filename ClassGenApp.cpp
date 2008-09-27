@@ -50,6 +50,8 @@ const tchar* CClassGenApp::INI_FILE_VER = TXT("1.2");
 CClassGenApp::CClassGenApp()
 	: CApp(m_AppWnd, m_AppCmds)
 	, m_strTmplFolder(TXT("."))
+	, m_strHppExt(TXT(".hpp"))
+	, m_strCppExt(TXT(".cpp"))
 {
 
 }
@@ -141,8 +143,10 @@ void CClassGenApp::LoadConfig()
 	// Read the file version.
 	CString strVer = m_oIniFile.ReadString(TXT("Version"), TXT("Version"), INI_FILE_VER);
 
-	// Read the templates folder.
+	// Read the templates settings.
 	m_strTmplFolder = m_oIniFile.ReadString(TXT("Templates"), TXT("Path"), m_strTmplFolder);
+	m_strHppExt = m_oIniFile.ReadString(TXT("Templates"), TXT("HppExt"), m_strHppExt);
+	m_strCppExt = m_oIniFile.ReadString(TXT("Templates"), TXT("CppExt"), m_strCppExt);
 
 	// Read the template names.
 	int nTemplates = m_oIniFile.ReadInt(TXT("Templates"), TXT("Count"), 0);
@@ -189,6 +193,7 @@ void CClassGenApp::LoadConfig()
 			pComponent->m_strInclude   = m_oIniFile.ReadString(strComponent + TXT(" Component"), TXT("Include"),   TXT(""));
 			pComponent->m_strComment   = m_oIniFile.ReadString(strComponent + TXT(" Component"), TXT("Comment"),   TXT(""));
 			pComponent->m_strNamespace = m_oIniFile.ReadString(strComponent + TXT(" Component"), TXT("Namespace"), TXT(""));
+			pComponent->m_strFolder    = m_oIniFile.ReadString(strComponent + TXT(" Component"), TXT("Folder"),    TXT(""));
 
 			m_aoComponents.push_back(pComponent);
 		}
