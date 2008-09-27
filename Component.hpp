@@ -29,6 +29,7 @@ public:
 	CString	m_strInclude;		// Header file to #include for PCH.
 	CString	m_strComment;		// Comment for module banner.
 	CString	m_strNamespace;		// Namespace for class.
+	CString	m_strFolder;		//!< The compnents folder.
 };
 
 // Smart pointer type.
