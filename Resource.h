@@ -22,6 +22,7 @@
 #define IDC_TEMPLATE                    1093
 #define IDC_FOLDER                      1094
 #define IDC_COMPONENT                   1095
+#define IDC_COPYRIGHT                   1095
 #define IDC_ABOUT                       1096
 #define IDD_MAIN                        5000
 #define IDD_ABOUT                       5001
@@ -34,7 +35,7 @@
 #define _APS_NO_MFC                     1
 #define _APS_NEXT_RESOURCE_VALUE        131
 #define _APS_NEXT_COMMAND_VALUE         163
-#define _APS_NEXT_CONTROL_VALUE         1095
+#define _APS_NEXT_CONTROL_VALUE         1096
 #define _APS_NEXT_SYMED_VALUE           104
 #endif
 #endif
