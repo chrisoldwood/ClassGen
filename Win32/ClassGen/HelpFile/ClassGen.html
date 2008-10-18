@@ -1,0 +1,323 @@
+<!doctype html public "-//w3c//dtd xhtml 1.0 strict//en" "http://www.w3.org/tr/xhtml1/dtd/xhtml1-strict.dtd">
+<html>
+
+<head>
+<title>Class Generator Manual</title>
+<meta name="author" content="Chris Oldwood">
+<style>
+body	{ font-family: Verdana, Arial; font-size: 10pt }
+table	{ border-collapse: collapse }
+th		{ font-family: Verdana, Arial; font-size: 10pt; border: 1px solid black }
+td		{ font-family: Verdana, Arial; font-size: 10pt; border: 1px solid black; vertical-align: top; padding: 5px }
+</style>
+</head>
+
+<body>
+
+<h3 align="center">Class Generator v2.0</h3>
+
+<a name="Introduction"></a>
+<h5>Introduction</h5>
+
+<p>
+Class Generator is a tool for creating the skeleton of a new class. It does
+this by transforming template files into the real class files by performing
+text substitutions denoted by special strings, e.g. ${Class}. The tool comes
+with the templates that I use for generating C++ classes, although it is not
+C++ specific and there are templates for generating non-class based files.
+</p><p>
+There are two main concepts - Templates and Components. Templates are the
+files that are transformed to create the final skeleton.
+The tool also supports the concept of Components which are a collection of
+common settings that make it easier to generate a class for a specific library
+or application. The classes of a Component generally live in the same folder
+and are defined in the same namespace.
+</p><p>
+Configuration is done manually by editing the Templates.ini file. This file,
+which must reside in the same folder as the executable, tells Class Generator
+what templates and components are available and also some other common settings.
+</p>
+
+<a name="Using"></a>
+<h5>Using Class Generator</h5>
+
+<p>
+It is easy to use Class Generator, the difficulty lies in the configuration
+which is manual. However, once you have configured it, just fire up the tool
+and you'll see a dialog like the one below. Just select the component from the
+dropdown, which will default the folder and namespace, select the class type
+from the template and enter the class name. Then press "Generate" to create the
+source files.
+</p><p>
+<img src="Main.gif" align="top">
+</p>
+
+<a name="TemplateConfiguration"></a>
+<h5>Template Configuration</h5>
+
+<p>
+The Templates part defines the types of skeleton classes that can be
+generated. The actual [Templates] section lists the template names, while the
+template definitions are then provided separately afterwards, e.g.
+</p>
+<pre>
+[Templates]
+Path=.
+Count=2
+Template[0]=Generic
+Template[1]=Interface
+</pre>
+<p>
+The 'Path' entry determines where the actual template files live. By default they
+are installed alongside the executable, but you could place them on a network
+share and change the Path accordingly.
+</p><p>
+Each template definition lives in its own section, which is created by appending
+the word 'Template' to the name. The section has 4 entries, e.g.
+</p>
+<pre>
+[Generic Template]
+Description=Full header & source file class declaration
+Class=True
+HPP=Generic.hpp
+CPP=Generic.cpp
+</pre>
+<p>
+The 'Description' entry provides a useful hint and is displayed under the list
+of templates that are available. The 'Class' entry is a flag that signals if
+the definition is for a class or not. In reality this just disables the Class
+Name field on the dialog. The final two entries, 'HPP' and 'CPP', define the
+files which contain the outline. Either of these two entries can be left blank
+(e.g. see the Interface template) where you only need one or other file.
+</p>
+
+<a name="ComponentConfiguration"></a>
+<h5>Component Configuration</h5>
+
+<p>
+The Components section allows you to define common projects, such as libraries
+or applications, where you are likely to create many classes. This means that
+just by selecting the component in the UI you will automatically select the directory
+where the class will be created and apply the right namespace. The [Components]
+section uses the same format as the [Templates] one above, in that you specify a
+list of Component names and then provide the definitions in a separate section
+later, e.g.
+</p>
+<pre>
+[Components]
+Count=2
+Component[0]=Application
+Component[1]=Library
+</pre>
+<p>
+Each component definition lives in its own section, which is created by appending
+the word 'Component' to the name. The section has 5 entries, e.g.
+</p>
+<pre>
+[Library Component]
+Description=The library
+Include=StdAfx.h
+Comment=The Library
+Namespace=lib
+Folder=C:\Library
+</pre>
+<p>
+The 'Description' entry provides a useful hint and is displayed under the list
+of components that are available in the UI. The 'Folder' is the default location where
+new classes should be generated and can be overridden in the UI. The 'Include',
+'Comment' and 'Namespace' entries are parameters that can be applied to the
+template file and are explained in detail further down.
+</p>
+
+<a name="OtherOptions"></a>
+<h5>Other Configuration Options</h5>
+
+<p>
+There are a few other miscellaneous settings that can be configured, e.g.
+</p>
+<pre>
+HppExt=.hpp
+CppExt=.cpp
+Author=The Author
+</pre>
+<p>
+The 'HppExt' and 'CppExt' entries allow you to choose what the default file
+extension will be for the header and source filenames when they are
+generated in the UI - I use .hpp and .cpp, but you may prefer .h and .cxx.
+The 'Author' entry is mapped directly onto the ${Author} parameter explained
+below.
+</p>
+
+<a name="Placeholders"></a>
+<h5>Template File Placeholders</h5>
+
+<p>
+The template files consist of normal text with placeholders used to define
+where certain strings should be applied. These placeholders are denoted by a
+string enclosed inside a "${" and "}", where the string is the name of a
+parameter. Every parameter name can be specified in Mixed case, all UPPER case
+or all lower case to have the value applied in that same case. For example, if
+the 'Author' parameter was set to "Chris Oldwood", these would be the substitutions,
+</p>
+<pre>
+${Author}=Chris Oldwood
+${AUTHOR}=CHRIS OLDWOOD
+${author}=chris oldwood
+</pre>
+<p>
+The following table lists the full set of placeholders, their meaning and how
+they can be configured,
+</p><p>
+<table>
+<tr>
+<th>Placeholder</th>
+<th>Description</th>
+</tr>
+<tr>
+<td>${Author}</td>
+<td>The author of the class. This is configured in the [General] section. I use
+this with the "\author" Doxygen tag.</td>
+</tr>
+<tr>
+<td>${Class}</td>
+<td>The name of the class. This can be entered through the UI for any template
+that has 'Class=True' configured.</td>
+</tr>
+<tr>
+<td>${Comment}</td>
+<td>The comment for the component. This is configured in the [? Component]
+section. I used to use this in the file banner, but having both ${Namespace} and
+${Component} in the file now has made this use redundant.</td>
+</tr>
+<tr>
+<td>${Component}</td>
+<td>The name of the component. This is configured in the [Components] section
+and is how a component is chosen in the UI. I use the upper case version of this,
+${COMPONENT}, as the prefix for all #include guards to avoid conflicts where the
+same class/file name may be used in different libraries.</td>
+</tr>
+<tr>
+<td>${Ext}</td>
+<td>This gives you the extension of the file being created, without the leading
+period, e.g. for a source file it could be "cpp" and "hpp" for a header file.</td>
+</tr>
+<tr>
+<td>${File.Ext}</td>
+<td>This is the complete filename of the file being generated.</td>
+</tr>
+<tr>
+<td>${File}</td>
+<td>This is just the title of the file being generated, i.e. no extension. I
+use the upper case version of this, ${FILE} along with ${EXT} to create the
+#include guard.</td>
+</tr>
+<tr>
+<td>${HdrExt}</td>
+<td>The extension of the <i>header</i> file that was generated. I use this in
+the source file to #include the class header, which is assumed to have the same
+file title.</td>
+</tr>
+<tr>
+<td>${Include}</td>
+<td>The common #include file used with pre-compiled headers, e.g. StdAfx.h.
+This is specified in the [? Component] section.</td>
+</tr>
+<tr>
+<td>${Namespace}</td>
+<td>The namespace that the class should reside in. This can be defaulted in the
+[? Component] section of the configuration file and then overridden in the UI if
+required.</td>
+</tr>
+</table>
+</p>
+
+<a name="Example"></a>
+<h5>Example</h5>
+
+<p>
+The example below is taken from the 'Interface' template that is provided with
+Class Generator. The namespace used was 'Test' and the class name was 'ITest'.
+The tool generated a single file called Test.hpp. 
+</p><p>
+This is the template,
+</p>
+<pre>
+////////////////////////////////////////////////////////////////////////////////
+//! \file   ${File.Ext}
+//! \author ${Author}
+
+#ifndef ${COMPONENT}_${FILE}_${EXT}
+#define ${COMPONENT}_${FILE}_${EXT}
+
+namespace ${Namespace}
+{
+
+class ${Class}
+{
+protected:
+	virtual ~${Class}() = 0 {}; 
+};
+
+}
+
+#endif // ${COMPONENT}_${FILE}_${EXT}
+</pre>
+<p>
+And this is the code that was generated,
+</p>
+<pre>
+////////////////////////////////////////////////////////////////////////////////
+//! \file   ITest.hpp
+//! \author Chris Oldwood
+
+#ifndef APPLICATION_ITEST_HPP
+#define APPLICATION_ITEST_HPP
+
+namespace Test
+{
+
+class ITest
+{
+protected:
+	virtual ~ITest() = 0 {}; 
+};
+
+}
+
+#endif // APPLICATION_ITEST_HPP
+</pre>
+
+<hr>
+
+<a name="Warranty"></a>
+<h5>License & Warranty</h5>
+
+<p>
+This application is freeware - you get what you pay for, nothing more, nothing
+less.
+</p>
+
+<a name="SourceCode"></a>
+<h5>Source Code</h5>
+
+<p>
+The full source code (C++) is available from my web site listed below.
+</p>
+
+<a name="Contact"></a>
+<h5>Contact Details</h5>
+
+<p>
+The "About" dialog also contains my contact details. Please check the web site
+for updates.
+</p><p>
+Email: <a href="mailto://gort@cix.co.uk">gort@cix.co.uk</a><br>
+Web: <a href="http://www.cix.co.uk/~gort">www.cix.co.uk/~gort</a><br>
+</p><p>
+Chris Oldwood<br>
+17th October 2008<br>
+</p>
+
+</body>
+
+</html>
