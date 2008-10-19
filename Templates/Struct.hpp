@@ -1,40 +1,40 @@
 ////////////////////////////////////////////////////////////////////////////////
-//! \file   $File$.hpp
-//! \brief  The $CLASS$ structure declaration.
-//! \author Chris Oldwood
+//! \file   ${File.Ext}
+//! \brief  The ${Class} structure declaration.
+//! \author ${Author}
 
 // Check for previous inclusion
-#ifndef $LIB_$$FILE$_HPP
-#define $LIB_$$FILE$_HPP
+#ifndef ${COMPONENT}_${FILE}_${EXT}
+#define ${COMPONENT}_${FILE}_${EXT}
 
 #if _MSC_VER > 1000
 #pragma once
 #endif
 
-namespace $NAMESPACE$
+namespace ${Namespace}
 {
 
 ////////////////////////////////////////////////////////////////////////////////
 //!
 
-struct $CLASS$
+struct ${Class}
 {
 	//
 	// Members.
 	//
 
 	//! Default constructor.
-	$CLASS$();
+	${Class}();
 };
 
 ////////////////////////////////////////////////////////////////////////////////
 //! Default constructor.
 
-inline $CLASS$::$CLASS$()
+inline ${Class}::${Class}()
 {
 }
 
-//namespace $NAMESPACE$
+//namespace ${Namespace}
 }
 
-#endif // $LIB_$$FILE$_HPP
+#endif // ${COMPONENT}_${FILE}_${EXT}

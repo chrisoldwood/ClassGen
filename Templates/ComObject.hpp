@@ -1,11 +1,11 @@
 ////////////////////////////////////////////////////////////////////////////////
-//! \file   $File$.hpp
-//! \brief  The $CLASS$ class declaration.
-//! \author Chris Oldwood
+//! \file   ${File.Ext}
+//! \brief  The ${Class} class declaration.
+//! \author ${Author}
 
 // Check for previous inclusion
-#ifndef $LIB_$$FILE$_HPP
-#define $LIB_$$FILE$_HPP
+#ifndef ${COMPONENT}_${FILE}_${EXT}
+#define ${COMPONENT}_${FILE}_${EXT}
 
 #include <COM/IDispatchImpl.hpp>
 
@@ -16,14 +16,14 @@
 ////////////////////////////////////////////////////////////////////////////////
 //! .
 
-class $CLASS$ : public COM::ObjectBase<?>, COM::IDispatchImpl<?>
+class ${Class} : public COM::ObjectBase<?>, COM::IDispatchImpl<?>
 {
 public:
 	//! Default constructor.
-	$CLASS$();
+	${Class}();
 
 	//! Destructor.
-	virtual ~$CLASS$();
+	virtual ~${Class}();
 	
 	DEFINE_INTERFACE_TABLE(???)
 		IMPLEMENT_INTERFACE(IID_???, ???)
@@ -31,7 +31,7 @@ public:
 	END_INTERFACE_TABLE()
 
 	IMPLEMENT_IUNKNOWN()
-	IMPLEMENT_IDISPATCH($CLASS$)
+	IMPLEMENT_IDISPATCH(${Class})
 
 	//
 	// ??? methods.
@@ -43,4 +43,4 @@ private:
 	//
 };
 
-#endif // $LIB_$$FILE$_HPP
+#endif // ${COMPONENT}_${FILE}_${EXT}

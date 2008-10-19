@@ -1,24 +1,24 @@
 ////////////////////////////////////////////////////////////////////////////////
-//! \file   $File$.cpp
-//! \brief  The $CLASS$ class definition.
-//! \author Chris Oldwood
+//! \file   ${File.Ext}
+//! \brief  The ${Class} class definition.
+//! \author ${Author}
 
-#include "Common.hpp"
-#include "$File$.hpp"
+#include "${Include}"
+#include "${File}.${HdrExt}"
 
 //! The component object.
-$CLASS$ g_oDll;
+${Class} g_oDll;
 
 ////////////////////////////////////////////////////////////////////////////////
 //! Default constructor.
 
-$CLASS$::$CLASS$()
+${Class}::${Class}()
 {
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 //! Destructor.
 
-$CLASS$::~$CLASS$()
+${Class}::~${Class}()
 {
 }

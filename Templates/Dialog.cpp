@@ -1,16 +1,16 @@
 ////////////////////////////////////////////////////////////////////////////////
-//! \file   $File$.cpp
-//! \brief  The $CLASS$ class definition.
-//! \author Chris Oldwood
+//! \file   ${File.Ext}
+//! \brief  The ${Class} class definition.
+//! \author ${Author}
 
-#include "Common.hpp"
-#include "$File$.hpp"
+#include "${Include}"
+#include "${File}.${HdrExt}"
 #include "Resource.h"
 
 ////////////////////////////////////////////////////////////////////////////////
 //! Default constructor.
 
-$CLASS$::$CLASS$()
+${Class}::${Class}()
 	: CDialog(IDD_)
 {
 	DEFINE_CTRL_TABLE
@@ -23,14 +23,14 @@ $CLASS$::$CLASS$()
 ////////////////////////////////////////////////////////////////////////////////
 //! Dialog initialisation handler.
 
-void $CLASS$::OnInitDialog()
+void ${Class}::OnInitDialog()
 {
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 //! OK button handler.
 
-bool $CLASS$::OnOk()
+bool ${Class}::OnOk()
 {
 	return true;
 }

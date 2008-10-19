@@ -1,16 +1,16 @@
 ////////////////////////////////////////////////////////////////////////////////
-//! \file   $File$.cpp
+//! \file   ${File.Ext}
 //! \brief  .
-//! \author Chris Oldwood
+//! \author ${Author}
 
-#include "Common.hpp"
-#include "$File$.hpp"
+#include "${Include}"
+#include "${File}.${HdrExt}"
 
-namespace $NAMESPACE$
+namespace ${Namespace}
 {
 
 ////////////////////////////////////////////////////////////////////////////////
 //!
 
-//namespace $NAMESPACE$
+//namespace ${Namespace}
 }

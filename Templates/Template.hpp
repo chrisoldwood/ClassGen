@@ -1,31 +1,31 @@
 ////////////////////////////////////////////////////////////////////////////////
-//! \file   $File$.hpp
-//! \brief  The $CLASS$ class declaration.
-//! \author Chris Oldwood
+//! \file   ${File.Ext}
+//! \brief  The ${Class} class declaration.
+//! \author ${Author}
 
 // Check for previous inclusion
-#ifndef $LIB_$$FILE$_HPP
-#define $LIB_$$FILE$_HPP
+#ifndef ${COMPONENT}_${FILE}_${EXT}
+#define ${COMPONENT}_${FILE}_${EXT}
 
 #if _MSC_VER > 1000
 #pragma once
 #endif
 
-namespace $NAMESPACE$
+namespace ${Namespace}
 {
 
 ////////////////////////////////////////////////////////////////////////////////
 //!
 
 template <typename T>
-class $CLASS$
+class ${Class}
 {
 public:
 	//! Default constructor.
-	$CLASS$();
+	${Class}();
 
 	//! Destructor.
-	~$CLASS$();
+	~${Class}();
 	
 private:
 	//
@@ -37,7 +37,7 @@ private:
 //! Default constructor.
 
 template <typename T>
-inline $CLASS$<T>::$CLASS$()
+inline ${Class}<T>::${Class}()
 {
 }
 
@@ -45,11 +45,11 @@ inline $CLASS$<T>::$CLASS$()
 //! Destructor.
 
 template <typename T>
-inline $CLASS$<T>::~$CLASS$()
+inline ${Class}<T>::~${Class}()
 {
 }
 
-//namespace $NAMESPACE$
+//namespace ${Namespace}
 }
 
-#endif // $LIB_$$FILE$_HPP
+#endif // ${COMPONENT}_${FILE}_${EXT}

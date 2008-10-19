@@ -1,30 +1,30 @@
 ////////////////////////////////////////////////////////////////////////////////
-//! \file   $File$.hpp
-//! \brief  The $CLASS$ class declaration.
-//! \author Chris Oldwood
+//! \file   ${File.Ext}
+//! \brief  The ${Class} class declaration.
+//! \author ${Author}
 
 // Check for previous inclusion
-#ifndef $LIB_$$FILE$_HPP
-#define $LIB_$$FILE$_HPP
+#ifndef ${COMPONENT}_${FILE}_${EXT}
+#define ${COMPONENT}_${FILE}_${EXT}
 
 #if _MSC_VER > 1000
 #pragma once
 #endif
 
-namespace $NAMESPACE$
+namespace ${Namespace}
 {
 
 ////////////////////////////////////////////////////////////////////////////////
 //!
 
-class $CLASS$
+class ${Class}
 {
 public:
 	//! Default constructor.
-	$CLASS$();
+	${Class}();
 
 	//! Destructor.
-	~$CLASS$();
+	~${Class}();
 	
 private:
 	//
@@ -32,7 +32,7 @@ private:
 	//
 };
 
-//namespace $NAMESPACE$
+//namespace ${Namespace}
 }
 
-#endif // $LIB_$$FILE$_HPP
+#endif // ${COMPONENT}_${FILE}_${EXT}

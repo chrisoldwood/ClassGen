@@ -1,22 +1,22 @@
 ////////////////////////////////////////////////////////////////////////////////
-//! \file   $File$.cpp
-//! \brief  The $CLASS$ class definition.
-//! \author Chris Oldwood
+//! \file   ${File.Ext}
+//! \brief  The ${Class} class definition.
+//! \author ${Author}
 
-#include "Common.hpp"
-#include "$File$.hpp"
+#include "${Include}"
+#include "${File}.${HdrExt}"
 
 ////////////////////////////////////////////////////////////////////////////////
 //! Default constructor.
 
-$CLASS$::$CLASS$()
-	: COM::IDispatchImpl<$CLASS$>(IID_???)
+${Class}::${Class}()
+	: COM::IDispatchImpl<${Class}>(IID_???)
 {
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 //! Destructor.
 
-$CLASS$::~$CLASS$()
+${Class}::~${Class}()
 {
 }

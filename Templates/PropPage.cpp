@@ -1,15 +1,15 @@
 ////////////////////////////////////////////////////////////////////////////////
-//! \file   $File$.cpp
-//! \brief  The $CLASS$ class definition.
-//! \author Chris Oldwood
+//! \file   ${File.Ext}
+//! \brief  The ${Class} class definition.
+//! \author ${Author}
 
-#include "Common.hpp"
-#include "$File$.hpp"
+#include "${Include}"
+#include "${File}.${HdrExt}"
 
 ////////////////////////////////////////////////////////////////////////////////
 //! Default constructor.
 
-$CLASS$::$CLASS$()
+${Class}::${Class}()
 	: CPropertyPage(IDD_)
 {
 	DEFINE_CTRL_TABLE
@@ -22,14 +22,14 @@ $CLASS$::$CLASS$()
 ////////////////////////////////////////////////////////////////////////////////
 //! Page initialisation handler.
 
-void $CLASS$::OnInitDialog()
+void ${Class}::OnInitDialog()
 {
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 //! Page validation handler.
 
-bool $CLASS$::OnValidate()
+bool ${Class}::OnValidate()
 {
 	return true;
 }
