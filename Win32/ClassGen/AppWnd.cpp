@@ -1,69 +1,37 @@
-/******************************************************************************
-** (C) Chris Oldwood
-**
-** MODULE:		APPWND.CPP
-** COMPONENT:	The Application.
-** DESCRIPTION:	CAppWnd class definition.
-**
-*******************************************************************************
-*/
+////////////////////////////////////////////////////////////////////////////////
+//! \file   AppWnd.cpp
+//! \brief  The AppWnd class definition.
+//! \author Chris Oldwood
 
 #include "Common.hpp"
 #include "AppWnd.hpp"
 
-/******************************************************************************
-** Method:		Default constructor.
-**
-** Description:	.
-**
-** Parameters:	None.
-**
-** Returns:		Nothing.
-**
-*******************************************************************************
-*/
+////////////////////////////////////////////////////////////////////////////////
+//! Default constructor.
 
-CAppWnd::CAppWnd()
-	: CDlgFrame(IDR_APPICON, m_AppDlg, true)
+AppWnd::AppWnd()
+	: CDlgFrame(IDR_APPICON, m_appDlg, true)
 {
 }
 
-/******************************************************************************
-** Method:		Destructor.
-**
-** Description:	.
-**
-** Parameters:	None.
-**
-** Returns:		Nothing.
-**
-*******************************************************************************
-*/
+////////////////////////////////////////////////////////////////////////////////
+//! Destructor.
 
-CAppWnd::~CAppWnd()
+AppWnd::~AppWnd()
 {
 }
 
-/******************************************************************************
-** Method:		OnCreate()
-**
-** Description:	Creates the toolbar and status bars.
-**
-** Parameters:	rcClient	The client rectangle.
-**
-** Returns:		Nothing.
-**
-*******************************************************************************
-*/
+////////////////////////////////////////////////////////////////////////////////
+//! Handle window creation.
 
-void CAppWnd::OnCreate(const CRect& rcClient)
+void AppWnd::OnCreate(const CRect& clientRect)
 {
 	//
 	// Create and attach the components.
 	//
-	m_AppDlg.RunModeless(*this);
-	ActiveDlg(&m_AppDlg);
+	m_appDlg.RunModeless(*this);
+	ActiveDlg(&m_appDlg);
 
 	// Call base class.
-	CDlgFrame::OnCreate(rcClient);
+	CDlgFrame::OnCreate(clientRect);
 }

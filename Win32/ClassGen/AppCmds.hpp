@@ -1,54 +1,40 @@
-/******************************************************************************
-** (C) Chris Oldwood
-**
-** MODULE:		APPCMDS.HPP
-** COMPONENT:	The Application.
-** DESCRIPTION:	The CAppCmds class declaration.
-**
-*******************************************************************************
-*/
+////////////////////////////////////////////////////////////////////////////////
+//! \file   AppCmds.hpp
+//! \brief  The AppCmds class declaration.
+//! \author Chris Oldwood
 
 // Check for previous inclusion
 #ifndef APPCMDS_HPP
 #define APPCMDS_HPP
 
+#if _MSC_VER > 1000
+#pragma once
+#endif
+
 #include <WCL/CmdCtrl.hpp>
+#include <WCL/Path.hpp>
 
-/******************************************************************************
-** 
-** Application command controller.
-**
-*******************************************************************************
-*/
+// Forward declarations.
+class Params;
 
-class CAppCmds : public CCmdControl
+////////////////////////////////////////////////////////////////////////////////
+//! Application command controller.
+
+class AppCmds : public CCmdControl
 {
 public:
-	//
-	// Constructors/Destructor.
-	//
-	CAppCmds();
-	~CAppCmds();
+	//! Default constructor.
+	AppCmds();
+
+	//! Destructor.
+	virtual ~AppCmds();
 
 	//
-	// Commands.
+	// Methods.
 	//
 
-	//
-	// UI handlers.
-	//
-
-protected:
-	//
-	// Internal methods.
-	//
+	//! Generate the source file from the template.
+	bool generateFile(const CPath& templateFile, const CPath& targetFile, const Params& params);
 };
 
-/******************************************************************************
-**
-** Implementation of inline functions.
-**
-*******************************************************************************
-*/
-
-#endif //APPCMDS_HPP
+#endif // APPCMDS_HPP
