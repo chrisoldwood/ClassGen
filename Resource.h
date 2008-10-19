@@ -24,6 +24,10 @@
 #define IDC_COMPONENT                   1095
 #define IDC_COPYRIGHT                   1095
 #define IDC_ABOUT                       1096
+#define IDC_COMP_DESC                   1097
+#define IDC_TMPL_DESC                   1098
+#define IDC_CLASS_NAME2                 1099
+#define IDC_NAMESPACE                   1099
 #define IDD_MAIN                        5000
 #define IDD_ABOUT                       5001
 #define IDC_STATIC                      -1
@@ -35,7 +39,7 @@
 #define _APS_NO_MFC                     1
 #define _APS_NEXT_RESOURCE_VALUE        131
 #define _APS_NEXT_COMMAND_VALUE         163
-#define _APS_NEXT_CONTROL_VALUE         1096
+#define _APS_NEXT_CONTROL_VALUE         1098
 #define _APS_NEXT_SYMED_VALUE           104
 #endif
 #endif
