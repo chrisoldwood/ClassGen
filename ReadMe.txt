@@ -1,25 +1,36 @@
-Class Generator v1.2
+Class Generator v2.0
 ====================
 
-1) Installation.
 
-Copy the file ClassGen.exe, ClassGen.ini and *.?$$ to a folder.
+1: Installation
+---------------
+
+Run setup.exe.
+
+or
+
+Copy the files ClassGen.*, Templates.ini, *.hpp & *.cpp to a folder.
 
 
-2) Uninstallation.
+2: Uninstallation
+-----------------
 
-Delete all files.
+Delete the files listed above.
 
 
-3) Manual/Help/Contact Info etc.
+3: Help/Manual
+--------------
 
-There is no manual at present.
+There is a HelpFile - ClassGen.mht.
 
-EMail: gort@cix.co.uk
+
+4: Contact Details
+------------------
+
+Email: gort@cix.co.uk
 Web:   http://www.cix.co.uk/~gort
 
 
 Chris Oldwood 
-(gort@cix.co.uk)
 
-31st January 2006
+17th October 2008
