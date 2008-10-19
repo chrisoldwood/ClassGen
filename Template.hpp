@@ -1,44 +1,29 @@
-/******************************************************************************
-** (C) Chris Oldwood
-**
-** MODULE:		TEMPLATE.HPP
-** COMPONENT:	The Application.
-** DESCRIPTION:	The CTemplate class declaration.
-**
-*******************************************************************************
-*/
+////////////////////////////////////////////////////////////////////////////////
+//! \file   Template.hpp
+//! \brief  The Template struct declaration.
+//! \author Chris Oldwood
 
 // Check for previous inclusion
 #ifndef TEMPLATE_HPP
 #define TEMPLATE_HPP
 
-/******************************************************************************
-** 
-** Data class used to store the templates details.
-**
-*******************************************************************************
-*/
+#if _MSC_VER > 1000
+#pragma once
+#endif
 
-class CTemplate
+////////////////////////////////////////////////////////////////////////////////
+//! Data class used to store the templates details.
+
+struct Template
 {
-public:
-	//
-	// Members.
-	//
-	CString	m_strName;			// The template name.
-	bool	m_bNeedsClass;		// Is a class template?
-	CString	m_strHPPFile;		// The template .HPP file.
-	CString	m_strCPPFile;		// The template .CPP file.
+	tstring	m_name;			//!< The template name.
+	tstring	m_description;	//!< The template description.
+	bool	m_isClass;		//!< Is a class template?
+	tstring	m_headerFile;	//!< The template .HPP file.
+	tstring	m_sourceFile;	//!< The template .CPP file.
 };
 
-// Smart pointer type.
-typedef Core::SharedPtr<CTemplate> CTemplatePtr;
+//! The default Template smart-pointer type.
+typedef Core::SharedPtr<Template> TemplatePtr;
 
-/******************************************************************************
-**
-** Implementation of inline functions.
-**
-*******************************************************************************
-*/
-
-#endif //TEMPLATE_HPP
+#endif // TEMPLATE_HPP

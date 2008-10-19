@@ -1,45 +1,30 @@
-/******************************************************************************
-** (C) Chris Oldwood
-**
-** MODULE:		COMPONENT.HPP
-** COMPONENT:	The Application.
-** DESCRIPTION:	The CComponent class declaration.
-**
-*******************************************************************************
-*/
+////////////////////////////////////////////////////////////////////////////////
+//! \file   Component.hpp
+//! \brief  The Component struct declaration.
+//! \author Chris Oldwood
 
 // Check for previous inclusion
 #ifndef COMPONENT_HPP
 #define COMPONENT_HPP
 
-/******************************************************************************
-** 
-** Data class used to store the components details.
-**
-*******************************************************************************
-*/
+#if _MSC_VER > 1000
+#pragma once
+#endif
 
-class CComponent
+////////////////////////////////////////////////////////////////////////////////
+//! Data class used to store the components details.
+
+struct Component
 {
-public:
-	//
-	// Members.
-	//
-	CString	m_strName;			// Component name.
-	CString	m_strInclude;		// Header file to #include for PCH.
-	CString	m_strComment;		// Comment for module banner.
-	CString	m_strNamespace;		// Namespace for class.
-	CString	m_strFolder;		//!< The compnents folder.
+	tstring	m_name;			//!< The component name.
+	tstring	m_description;	//!< The component description.
+	tstring	m_include;		//!< Header file to #include for PCH.
+	tstring	m_comment;		//!< Comment for module banner.
+	tstring	m_namespace;	//!< Namespace for class.
+	tstring	m_folder;		//!< The compnents folder.
 };
 
-// Smart pointer type.
-typedef Core::SharedPtr<CComponent> CComponentPtr;
+//! The default Component smart-pointer type.
+typedef Core::SharedPtr<Component> ComponentPtr;
 
-/******************************************************************************
-**
-** Implementation of inline functions.
-**
-*******************************************************************************
-*/
-
-#endif //COMPONENT_HPP
+#endif // COMPONENT_HPP
