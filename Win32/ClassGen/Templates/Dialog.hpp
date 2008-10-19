@@ -1,11 +1,11 @@
 ////////////////////////////////////////////////////////////////////////////////
-//! \file   $File$.hpp
-//! \brief  The $CLASS$ class declaration.
-//! \author Chris Oldwood
+//! \file   ${File.Ext}
+//! \brief  The ${Class} class declaration.
+//! \author ${Author}
 
 // Check for previous inclusion
-#ifndef $FILE$_HPP
-#define $FILE$_HPP
+#ifndef ${FILE}_${EXT}
+#define ${FILE}_${EXT}
 
 #if _MSC_VER > 1000
 #pragma once
@@ -16,11 +16,11 @@
 ////////////////////////////////////////////////////////////////////////////////
 //!
 
-class $CLASS$ : public CDialog
+class ${Class} : public CDialog
 {
 public:
 	//! Default constructor.
-	$CLASS$();
+	${Class}();
 	
 	//
 	// Members.
@@ -46,4 +46,4 @@ private:
 	virtual bool OnOk();
 };
 
-#endif // $FILE$_HPP
+#endif // ${FILE}_${EXT}

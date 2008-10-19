@@ -1,32 +1,32 @@
 ////////////////////////////////////////////////////////////////////////////////
-//! \file   $File$.hpp
-//! \brief  The $CLASS$ interface declaration.
-//! \author Chris Oldwood
+//! \file   ${File.Ext}
+//! \brief  The ${Class} interface declaration.
+//! \author ${Author}
 
 // Check for previous inclusion
-#ifndef $LIB_$$FILE$_HPP
-#define $LIB_$$FILE$_HPP
+#ifndef ${COMPONENT}_${FILE}_${EXT}
+#define ${COMPONENT}_${FILE}_${EXT}
 
 #if _MSC_VER > 1000
 #pragma once
 #endif
 
-namespace $NAMESPACE$
+namespace ${Namespace}
 {
 
 ////////////////////////////////////////////////////////////////////////////////
 //!
 
-class $CLASS$
+class ${Class}
 {
 public:
 	
 protected:
 	//! Protected destructor.
-	virtual ~$CLASS$() = 0 {}; 
+	virtual ~${Class}() = 0 {}; 
 };
 
-//namespace $NAMESPACE$
+//namespace ${Namespace}
 }
 
-#endif // $LIB_$$FILE$_HPP
+#endif // ${COMPONENT}_${FILE}_${EXT}

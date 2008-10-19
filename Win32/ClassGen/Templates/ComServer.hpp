@@ -1,11 +1,11 @@
 ////////////////////////////////////////////////////////////////////////////////
-//! \file   $File$.hpp
-//! \brief  The $CLASS$ class declaration.
-//! \author Chris Oldwood
+//! \file   ${File.Ext}
+//! \brief  The ${Class} class declaration.
+//! \author ${Author}
 
 // Check for previous inclusion
-#ifndef $LIB_$$FILE$_HPP
-#define $LIB_$$FILE$_HPP
+#ifndef ${COMPONENT}_${FILE}_${EXT}
+#define ${COMPONENT}_${FILE}_${EXT}
 
 #include <COM/InprocServer.hpp>
 #include <COM/ServerRegInfo.hpp>
@@ -14,14 +14,14 @@
 ////////////////////////////////////////////////////////////////////////////////
 //! The COM server concrete class.
 
-class $CLASS$ : public COM::InprocServer
+class ${Class} : public COM::InprocServer
 {
 public:
 	//! Default constructor.
-	$CLASS$();
+	${Class}();
 
 	//! Destructor.
-	virtual ~$CLASS$();
+	virtual ~${Class}();
 	
 private:
 	DEFINE_REGISTRATION_TABLE("???", LIBID_???, 1, 0)
@@ -37,6 +37,6 @@ private:
 // Global variables.
 
 //! The component object.
-extern $CLASS$ g_oDll;
+extern ${Class} g_oDll;
 
-#endif // $LIB_$$FILE$_HPP
+#endif // ${COMPONENT}_${FILE}_${EXT}

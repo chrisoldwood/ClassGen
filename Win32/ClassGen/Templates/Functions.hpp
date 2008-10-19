@@ -1,23 +1,23 @@
 ////////////////////////////////////////////////////////////////////////////////
-//! \file   $File$.hpp
+//! \file   ${File.Ext}
 //! \brief  .
-//! \author Chris Oldwood
+//! \author ${Author}
 
 // Check for previous inclusion
-#ifndef $LIB_$$FILE$_HPP
-#define $LIB_$$FILE$_HPP
+#ifndef ${COMPONENT}_${FILE}_${EXT}
+#define ${COMPONENT}_${FILE}_${EXT}
 
 #if _MSC_VER > 1000
 #pragma once
 #endif
 
-namespace $NAMESPACE$
+namespace ${Namespace}
 {
 
 ////////////////////////////////////////////////////////////////////////////////
 //!
 
-//namespace $NAMESPACE$
+//namespace ${Namespace}
 }
 
-#endif // $LIB_$$FILE$_HPP
+#endif // ${COMPONENT}_${FILE}_${EXT}

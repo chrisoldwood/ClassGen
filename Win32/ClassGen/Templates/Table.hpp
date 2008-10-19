@@ -1,11 +1,11 @@
 ////////////////////////////////////////////////////////////////////////////////
-//! \file   $File$.hpp
-//! \brief  The $CLASS$ class declaration.
-//! \author Chris Oldwood
+//! \file   ${File.Ext}
+//! \brief  The ${Class} class declaration.
+//! \author ${Author}
 
 // Check for previous inclusion
-#ifndef $FILE$_HPP
-#define $FILE$_HPP
+#ifndef ${FILE}_${EXT}
+#define ${FILE}_${EXT}
 
 #if _MSC_VER > 1000
 #pragma once
@@ -14,14 +14,14 @@
 ////////////////////////////////////////////////////////////////////////////////
 //!
 
-class $CLASS$ : public CTable
+class ${Class} : public CTable
 {
 public:
 	//! Constructor for a specific database.
-	$CLASS$(CMDB& oDB);
+	${Class}(CMDB& oDB);
 
 	//! Destructor.
-	~$CLASS$();
+	~${Class}();
 	
 	//
 	// Column indices.
@@ -48,4 +48,4 @@ public:
 	virtual CRow& CreateRow();
 };
 
-#endif // $FILE$_HPP
+#endif // ${FILE}_${EXT}
