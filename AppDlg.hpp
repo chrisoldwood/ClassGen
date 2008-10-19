@@ -1,12 +1,7 @@
-/******************************************************************************
-** (C) Chris Oldwood
-**
-** MODULE:		APPDLG.HPP
-** COMPONENT:	The Application.
-** DESCRIPTION:	The CAppDlg class declaration.
-**
-*******************************************************************************
-*/
+////////////////////////////////////////////////////////////////////////////////
+//! \file   AppDlg.hpp
+//! \brief  The AppDlg class declaration.
+//! \author Chris Oldwood
 
 // Check for previous inclusion
 #ifndef APPDLG_HPP
@@ -19,30 +14,18 @@
 #include <WCL/MainDlg.hpp>
 #include <WCL/ComboBox.hpp>
 #include <WCL/EditBox.hpp>
+#include <WCL/Label.hpp>
 #include <WCL/Path.hpp>
 
-// Forward declarations.
-class CParams;
+////////////////////////////////////////////////////////////////////////////////
+//! The application main dialog.
 
-/******************************************************************************
-** 
-** This is the main application dialog.
-**
-*******************************************************************************
-*/
-
-class CAppDlg : public CMainDlg
+class AppDlg : public CMainDlg
 {
 public:
-	//
-	// Constructors/Destructor.
-	//
-	CAppDlg();
+	//! Default constructor.
+	AppDlg();
 	
-	//
-	// Methods.
-	//
-
 	//
 	// Members.
 	//
@@ -52,12 +35,19 @@ public:
 	CComboBox 	m_cbFolder;
 	CEditBox	m_ebCPPFile;
 	CEditBox	m_ebHPPFile;
+	CEditBox	m_namespaceEditor;
+	CLabel		m_componentLabel;
+	CLabel		m_templateLabel;
 
 protected:
 	//
 	// Message processors.
 	//
+
+	//! Handle dialog creation.
 	virtual void OnInitDialog();
+
+	//! Handle dialog destruction.
 	virtual void OnDestroy();
 
 	void OnClose();
@@ -71,15 +61,7 @@ protected:
 	//
 	// Internal methods.
 	//
-	void AddFolderName(const CString& strName, bool bSelect);
-	bool GenerateFile(const CPath& strTemplateFile, const CPath& strTargetFile, const CParams& oParams);
+	void AddFolderName(const tstring& name, bool select);
 };
 
-/******************************************************************************
-**
-** Implementation of inline functions.
-**
-*******************************************************************************
-*/
-
-#endif //APPDLG_HPP
+#endif // APPDLG_HPP
