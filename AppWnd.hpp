@@ -1,12 +1,7 @@
-/******************************************************************************
-** (C) Chris Oldwood
-**
-** MODULE:		APPWND.HPP
-** COMPONENT:	The Application.
-** DESCRIPTION:	The CAppWnd class declaration.
-**
-*******************************************************************************
-*/
+////////////////////////////////////////////////////////////////////////////////
+//! \file   AppWnd.hpp
+//! \brief  The AppWnd class declaration.
+//! \author Chris Oldwood
 
 // Check for previous inclusion
 #ifndef APPWND_HPP
@@ -19,39 +14,30 @@
 #include <WCL/DlgFrame.hpp>
 #include "AppDlg.hpp"
 
-/******************************************************************************
-**
-** This is the the applications main window.
-**
-*******************************************************************************
-*/
+////////////////////////////////////////////////////////////////////////////////
+//! The applications main window.
 
-class CAppWnd : public CDlgFrame
+class AppWnd : public CDlgFrame
 {
 public:
-	//
-	// Constructors/Destructor.
-	//
-	CAppWnd();
-	~CAppWnd();
+	//! Default constructor.
+	AppWnd();
+
+	//! Destructor.
+	virtual ~AppWnd();
 
 	//
 	// Members.
 	//
-	CAppDlg	m_AppDlg;
+	AppDlg	m_appDlg;
 
 protected:
 	//
 	// Message processors.
 	//
-	virtual void OnCreate(const CRect& rcClient);
+
+	//! Handle window creation.
+	virtual void OnCreate(const CRect& clientRect);
 };
 
-/******************************************************************************
-**
-** Implementation of inline functions.
-**
-*******************************************************************************
-*/
-
-#endif //APPWND_HPP
+#endif // APPWND_HPP
