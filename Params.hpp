@@ -1,60 +1,49 @@
-/******************************************************************************
-** (C) Chris Oldwood
-**
-** MODULE:		PARAMS.HPP
-** COMPONENT:	The Application.
-** DESCRIPTION:	The CParams class declaration.
-**
-*******************************************************************************
-*/
+////////////////////////////////////////////////////////////////////////////////
+//! \file   Params.hpp
+//! \brief  The Params class declaration.
+//! \author Chris Oldwood
 
 // Check for previous inclusion
 #ifndef PARAMS_HPP
 #define PARAMS_HPP
 
-#include <WCL/StrArray.hpp>
+#if _MSC_VER > 1000
+#pragma once
+#endif
 
-/******************************************************************************
-** 
-** Collection class used to hold the string substitution table.
-**
-*******************************************************************************
-*/
+////////////////////////////////////////////////////////////////////////////////
+//! Collection class used to hold the string substitutions.
 
-class CParams
+class Params
 {
 public:
-	//
-	// Constructors/Destructor.
-	//
-	CParams();
-	~CParams();
+	//! Default constructor
+	Params();
+
+	//! Destructor.
+	~Params();
 
 	//
 	// Methods.
 	//
-	void    Set(const tchar* pszKey, const tchar* pszValue);
 
-	CString Find(const tchar* pszKey) const;
+	//! Add a key value pair.
+	void add(const tstring& key, const tstring& value);
+
+	//! Check if a key exists.
+	bool exists(const tstring& key) const;
+
+	//! Find the value for key.
+	tstring find(const tstring& key) const;
 
 protected:
+	//! The underlying collection type.
+	typedef std::map<tstring, tstring> KeyValueMap;
+
 	//
 	// Members.
 	//
-	CStrArray	m_astrKeys;
-	CStrArray	m_astrValues;
-
-	//
-	// Internal methods.
-	//
-	int IndexOf(const tchar* pszKey) const;
+	KeyValueMap	m_params;	//! The underlying collection.
 };
 
-/******************************************************************************
-**
-** Implementation of inline functions.
-**
-*******************************************************************************
-*/
-
-#endif //PARAMS_HPP
+#endif // PARAMS_HPP

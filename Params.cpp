@@ -1,118 +1,56 @@
-/******************************************************************************
-** (C) Chris Oldwood
-**
-** MODULE:		PARAMS.CPP
-** COMPONENT:	The Application.
-** DESCRIPTION:	CParams class definition.
-**
-*******************************************************************************
-*/
+////////////////////////////////////////////////////////////////////////////////
+//! \file   Params.cpp
+//! \brief  The Params class definition.
+//! \author Chris Oldwood
 
 #include "Common.hpp"
 #include "Params.hpp"
+#include <Core/StringUtils.hpp>
 
-/******************************************************************************
-** Method:		Constructor.
-**
-** Description:	.
-**
-** Parameters:	None.
-**
-** Returns:		Nothing.
-**
-*******************************************************************************
-*/
+////////////////////////////////////////////////////////////////////////////////
+//! Default constructor
 
-CParams::CParams()
+Params::Params()
 {
 }
 
-/******************************************************************************
-** Method:		Destructor.
-**
-** Description:	.
-**
-** Parameters:	None.
-**
-** Returns:		Nothing.
-**
-*******************************************************************************
-*/
+////////////////////////////////////////////////////////////////////////////////
+//! Destructor.
 
-CParams::~CParams()
+Params::~Params()
 {
 }
 
-/******************************************************************************
-** Method:		Add()
-**
-** Description:	Adds a Key/Value pair to the collection.
-**
-** Parameters:	pszKey		The key name.
-**				pszValue	The value.
-**
-** Returns:		Nothing.
-**
-*******************************************************************************
-*/
+////////////////////////////////////////////////////////////////////////////////
+//! Add a key value pair. This also adds an all uppercase and all lowercase
+//! version as well.
 
-void CParams::Set(const tchar* pszKey, const tchar* pszValue)
+void Params::add(const tstring& key, const tstring& value)
 {
-	int i = IndexOf(pszKey);
-
-	// Replacing existing key/value?
-	if (i != -1)
-	{
-		m_astrKeys.Delete(i);
-		m_astrValues.Delete(i);
-	}
-
-	// Add new key/value.
-	m_astrKeys.Add(pszKey);
-	m_astrValues.Add(pszValue);
+	m_params[key] = value;
+	m_params[Core::createUpper(key)] = Core::createUpper(value);
+	m_params[Core::createLower(key)] = Core::createLower(value);
 }
 
-/******************************************************************************
-** Method:		Find()
-**
-** Description:	Finds the value for the given key.
-**
-** Parameters:	pszKey	The key name.
-**
-** Returns:		The value or "" if not found.
-**
-*******************************************************************************
-*/
+////////////////////////////////////////////////////////////////////////////////
+//! Check if a key exists.
 
-CString CParams::Find(const tchar* pszKey) const
+bool Params::exists(const tstring& key) const
 {
-	int i = IndexOf(pszKey);
-
-	return (i != -1) ? m_astrValues[i] : TXT("");
+	return (m_params.find(key) != m_params.end());
 }
 
-/******************************************************************************
-** Method:		IndexOf()
-**
-** Description:	Finds the index of the key.
-**
-** Parameters:	pszKey	The key name.
-**
-** Returns:		The index or -1 if not found.
-**
-*******************************************************************************
-*/
+////////////////////////////////////////////////////////////////////////////////
+//! Find the value for key.
 
-int CParams::IndexOf(const tchar* pszKey) const
+tstring Params::find(const tstring& key) const
 {
-	ASSERT(m_astrKeys.Size() == m_astrValues.Size());
+	tstring value;
 
-	// For all keys...
-	for (size_t i = 0; i < m_astrKeys.Size(); ++i)
-	{
-		if (m_astrKeys[i] == pszKey)
-			return i;
-	}
+	KeyValueMap::const_iterator it = m_params.find(key);
 
-	return -1;
+	if (it != m_params.end())
+		value = it->second;
+
+	return value;
 }
