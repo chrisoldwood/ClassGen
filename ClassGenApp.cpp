@@ -1,88 +1,48 @@
-/******************************************************************************
-** (C) Chris Oldwood
-**
-** MODULE:		CLASSGENAPP.CPP
-** COMPONENT:	The Application.
-** DESCRIPTION:	The CClassGenApp class definition.
-**
-*******************************************************************************
-*/
+////////////////////////////////////////////////////////////////////////////////
+//! \file   ClassGenApp.cpp
+//! \brief  The ClassGenApp class definition.
+//! \author Chris Oldwood
 
 #include "Common.hpp"
 #include "ClassGenApp.hpp"
+#include <WCL/FileException.hpp>
+#include <Core/StringUtils.hpp>
 
-/******************************************************************************
-**
-** Global variables.
-**
-*******************************************************************************
-*/
+////////////////////////////////////////////////////////////////////////////////
+// Global variables.
 
-// "The" application object.
-CClassGenApp App;
+//! The application object.
+CClassGenApp g_app;
 
-/******************************************************************************
-**
-** Class constants.
-**
-*******************************************************************************
-*/
+////////////////////////////////////////////////////////////////////////////////
+// Constants.
 
-#ifdef _DEBUG
-const tchar* CClassGenApp::VERSION      = TXT("v1.2 [Debug]");
-#else
-const tchar* CClassGenApp::VERSION      = TXT("v1.2");
-#endif
-const tchar* CClassGenApp::INI_FILE_VER = TXT("1.2");
+const tchar* TEMPLATES_FILE	    = TXT("Templates.ini");
+const tchar* TEMPLATES_FILE_VER = TXT("2.0");
+const tchar* SETTINGS_FILE_VER  = TXT("2.0");
 
-/******************************************************************************
-** Method:		Constructor
-**
-** Description:	Default constructor.
-**
-** Parameters:	None.
-**
-** Returns:		Nothing.
-**
-*******************************************************************************
-*/
+////////////////////////////////////////////////////////////////////////////////
+//! Default constructor
 
 CClassGenApp::CClassGenApp()
-	: CApp(m_AppWnd, m_AppCmds)
+	: CApp(m_appWnd, m_appCmds)
 	, m_strTmplFolder(TXT("."))
 	, m_strHppExt(TXT(".hpp"))
 	, m_strCppExt(TXT(".cpp"))
+	, m_author(TXT("The Author"))
 {
 
 }
 
-/******************************************************************************
-** Method:		Destructor
-**
-** Description:	Cleanup.
-**
-** Parameters:	None.
-**
-** Returns:		Nothing.
-**
-*******************************************************************************
-*/
+////////////////////////////////////////////////////////////////////////////////
+//! Destructor
 
 CClassGenApp::~CClassGenApp()
 {
 }
 
-/******************************************************************************
-** Method:		OnOpen()
-**
-** Description:	Initialises the application.
-**
-** Parameters:	None.
-**
-** Returns:		true or false.
-**
-*******************************************************************************
-*/
+////////////////////////////////////////////////////////////////////////////////
+//! Handle application startup.
 
 bool CClassGenApp::OnOpen()
 {
@@ -90,117 +50,111 @@ bool CClassGenApp::OnOpen()
 	m_strTitle = TXT("Class Generator");
 
 	// Load settings.
-	LoadConfig();
+	loadConfig();
 	
 	// Create the main window.
-	if (!m_AppWnd.Create())
+	if (!m_appWnd.Create())
 		return false;
 
 	// Show it.
-	m_AppWnd.Centre();
-	m_AppWnd.Show(m_iCmdShow);
+	m_appWnd.Centre();
+	m_appWnd.Show(m_iCmdShow);
 
 	// Update UI.
-	m_AppCmds.UpdateUI();
+	m_appCmds.UpdateUI();
 
 	return true;
 }
 
-/******************************************************************************
-** Method:		OnClose()
-**
-** Description:	Cleans up the application resources.
-**
-** Parameters:	None.
-**
-** Returns:		true or false.
-**
-*******************************************************************************
-*/
+////////////////////////////////////////////////////////////////////////////////
+//! Handle application shutdown.
 
 bool CClassGenApp::OnClose()
 {
 	// Save settings.
-	SaveConfig();
+	saveConfig();
 
 	return true;
 }
 
-/******************************************************************************
-** Method:		LoadConfig()
-**
-** Description:	Load the app configuration.
-**
-** Parameters:	None.
-**
-** Returns:		Nothing.
-**
-*******************************************************************************
-*/
+////////////////////////////////////////////////////////////////////////////////
+//! Load the application settings.
 
-void CClassGenApp::LoadConfig()
+void CClassGenApp::loadConfig()
 {
-	// Read the file version.
-	CString strVer = m_oIniFile.ReadString(TXT("Version"), TXT("Version"), INI_FILE_VER);
+	CIniFile templatesFile(CPath::ApplicationDir() / TEMPLATES_FILE);
+
+	// Read the templates file version.
+	CString templatesVer = templatesFile.ReadString(TXT("Version"), TXT("Version"), TEMPLATES_FILE_VER);
+
+	if (templatesVer != TEMPLATES_FILE_VER)
+		throw CFileException(CStreamException::E_VERSION_INVALID, templatesFile.m_strPath, NO_ERROR);
 
 	// Read the templates settings.
-	m_strTmplFolder = m_oIniFile.ReadString(TXT("Templates"), TXT("Path"), m_strTmplFolder);
-	m_strHppExt = m_oIniFile.ReadString(TXT("Templates"), TXT("HppExt"), m_strHppExt);
-	m_strCppExt = m_oIniFile.ReadString(TXT("Templates"), TXT("CppExt"), m_strCppExt);
+	m_strTmplFolder = templatesFile.ReadString(TXT("Templates"), TXT("Path"), m_strTmplFolder);
+	m_strHppExt = templatesFile.ReadString(TXT("Templates"), TXT("HppExt"), m_strHppExt);
+	m_strCppExt = templatesFile.ReadString(TXT("Templates"), TXT("CppExt"), m_strCppExt);
+	m_author = templatesFile.ReadString(TXT("Templates"), TXT("Author"), m_author);
 
 	// Read the template names.
-	int nTemplates = m_oIniFile.ReadInt(TXT("Templates"), TXT("Count"), 0);
+	size_t count = templatesFile.ReadInt(TXT("Templates"), TXT("Count"), 0);
 
-	for (int i = 0; i < nTemplates; ++i)
+	for (size_t i = 0; i < count; ++i)
 	{
-		CString strSection;
-
-		strSection.Format(TXT("Template[%d]"), i);
-
-		CString strTemplate = m_oIniFile.ReadString(TXT("Templates"), strSection, TXT(""));
+		tstring section = Core::Fmt(TXT("Template[%u]"), i);
+		tstring name    = templatesFile.ReadString(TXT("Templates"), section.c_str(), tstring());
 
 		// Valid template name?
-		if (!strTemplate.Empty())
+		if (!name.empty())
 		{
-			CTemplatePtr pTemplate(new CTemplate);
+			TemplatePtr item(new Template);
+			tstring     section = name + TXT(" Template");
 
-			pTemplate->m_strName     = strTemplate;
-			pTemplate->m_bNeedsClass = m_oIniFile.ReadBool  (strTemplate + TXT(" Template"), TXT("Class"), true);
-			pTemplate->m_strHPPFile  = m_oIniFile.ReadString(strTemplate + TXT(" Template"), TXT("HPP"),   TXT(""));
-			pTemplate->m_strCPPFile  = m_oIniFile.ReadString(strTemplate + TXT(" Template"), TXT("CPP"),   TXT(""));
+			item->m_name        = name;
+			item->m_description = templatesFile.ReadString(section, TXT("Description"), TXT(""));
+			item->m_isClass     = templatesFile.ReadBool  (section, TXT("Class"), true);
+			item->m_headerFile  = templatesFile.ReadString(section, TXT("HPP"), TXT(""));
+			item->m_sourceFile  = templatesFile.ReadString(section, TXT("CPP"), TXT(""));
 
-			m_aoTemplates.push_back(pTemplate);
+			m_templates.push_back(item);
 		}
 	}
 
 	// Read the component names.
-	int nComponents = m_oIniFile.ReadInt(TXT("Components"), TXT("Count"), 0);
+	count = templatesFile.ReadInt(TXT("Components"), TXT("Count"), 0);
 
-	for (int i = 0; i < nComponents; ++i)
+	for (size_t i = 0; i < count; ++i)
 	{
-		CString strSection;
-
-		strSection.Format(TXT("Component[%d]"), i);
-
-		CString strComponent = m_oIniFile.ReadString(TXT("Components"), strSection, TXT(""));
+		tstring section = Core::Fmt(TXT("Component[%d]"), i);
+		tstring name    = templatesFile.ReadString(TXT("Components"), section, tstring());
 
 		// Valid component name?
-		if (!strComponent.Empty())
+		if (!name.empty())
 		{
-			CComponentPtr pComponent(new CComponent);
+			ComponentPtr item(new Component);
+			tstring     section = name + TXT(" Component");
 
-			pComponent->m_strName      = strComponent;
-			pComponent->m_strInclude   = m_oIniFile.ReadString(strComponent + TXT(" Component"), TXT("Include"),   TXT(""));
-			pComponent->m_strComment   = m_oIniFile.ReadString(strComponent + TXT(" Component"), TXT("Comment"),   TXT(""));
-			pComponent->m_strNamespace = m_oIniFile.ReadString(strComponent + TXT(" Component"), TXT("Namespace"), TXT(""));
-			pComponent->m_strFolder    = m_oIniFile.ReadString(strComponent + TXT(" Component"), TXT("Folder"),    TXT(""));
+			item->m_name        = name;
+			item->m_description = templatesFile.ReadString(section, TXT("Description"), TXT(""));
+			item->m_include     = templatesFile.ReadString(section, TXT("Include"),   TXT(""));
+			item->m_comment     = templatesFile.ReadString(section, TXT("Comment"),   TXT(""));
+			item->m_namespace   = templatesFile.ReadString(section, TXT("Namespace"), TXT(""));
+			item->m_folder      = templatesFile.ReadString(section, TXT("Folder"),    TXT(""));
 
-			m_aoComponents.push_back(pComponent);
+			m_components.push_back(item);
 		}
 	}
 
+	CIniFile settingsFile;
+
+	// Read the templates file version.
+	CString settingsVer = settingsFile.ReadString(TXT("Version"), TXT("Version"), SETTINGS_FILE_VER);
+
+	if (settingsVer != SETTINGS_FILE_VER)
+		throw CFileException(CStreamException::E_VERSION_INVALID, settingsFile.m_strPath, NO_ERROR);
+
 	// Read the list of folders used.
-	int nFolders = m_oIniFile.ReadInt(TXT("Folders"), TXT("Count"), 0);
+	int nFolders = settingsFile.ReadInt(TXT("Folders"), TXT("Count"), 0);
 
 	for (int i = 0; i < nFolders; ++i)
 	{
@@ -208,36 +162,29 @@ void CClassGenApp::LoadConfig()
 
 		strSection.Format(TXT("Folder[%d]"), i);
 
-		CString strFolder = m_oIniFile.ReadString(TXT("Folders"), strSection, TXT(""));
+		CString strFolder = settingsFile.ReadString(TXT("Folders"), strSection, TXT(""));
 
 		if ( (!strFolder.Empty()) && (m_astrFolders.Find(strFolder, true) == -1) )
 			m_astrFolders.Add(strFolder);
 	}
 
 	// Read the last use settings.
-	m_strLastComponent = m_oIniFile.ReadString(TXT("Main"), TXT("LastComponent"), m_strLastComponent);
-	m_strLastFolder    = m_oIniFile.ReadString(TXT("Main"), TXT("LastFolder"), m_strLastFolder);
+	m_strLastComponent = settingsFile.ReadString(TXT("Main"), TXT("LastComponent"), m_strLastComponent);
+	m_strLastFolder    = settingsFile.ReadString(TXT("Main"), TXT("LastFolder"), m_strLastFolder);
 }
 
-/******************************************************************************
-** Method:		SaveConfig()
-**
-** Description:	Save the app configuration.
-**
-** Parameters:	None.
-**
-** Returns:		Nothing.
-**
-*******************************************************************************
-*/
+////////////////////////////////////////////////////////////////////////////////
+//! Save the application settings.
 
-void CClassGenApp::SaveConfig()
+void CClassGenApp::saveConfig()
 {
+	CIniFile settingsFile;
+
 	// Write the file version.
-	m_oIniFile.WriteString(TXT("Version"), TXT("Version"), INI_FILE_VER);
+	settingsFile.WriteString(TXT("Version"), TXT("Version"), SETTINGS_FILE_VER);
 
 	// Write the list of folders used.
-	m_oIniFile.WriteInt(TXT("Folders"), TXT("Count"), m_astrFolders.Size());
+	settingsFile.WriteInt(TXT("Folders"), TXT("Count"), m_astrFolders.Size());
 
 	for (size_t i = 0; i < m_astrFolders.Size(); ++i)
 	{
@@ -245,10 +192,10 @@ void CClassGenApp::SaveConfig()
 
 		strSection.Format(TXT("Folder[%d]"), i);
 
-		m_oIniFile.WriteString(TXT("Folders"), strSection, m_astrFolders[i]);
+		settingsFile.WriteString(TXT("Folders"), strSection, m_astrFolders[i]);
 	}
 
 	// Write the last use settings.
-	m_oIniFile.WriteString(TXT("Main"), TXT("LastComponent"), m_strLastComponent);
-	m_oIniFile.WriteString(TXT("Main"), TXT("LastFolder"), m_strLastFolder);
+	settingsFile.WriteString(TXT("Main"), TXT("LastComponent"), m_strLastComponent);
+	settingsFile.WriteString(TXT("Main"), TXT("LastFolder"), m_strLastFolder);
 }

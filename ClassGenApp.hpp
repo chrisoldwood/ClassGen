@@ -1,12 +1,7 @@
-/******************************************************************************
-** (C) Chris Oldwood
-**
-** MODULE:		CLASSGENAPP.HPP
-** COMPONENT:	The Application.
-** DESCRIPTION:	The CClassGenApp class declaration.
-**
-*******************************************************************************
-*/
+////////////////////////////////////////////////////////////////////////////////
+//! \file   ClassGenApp.hpp
+//! \brief  The ClassGenApp class declaration.
+//! \author Chris Oldwood
 
 // Check for previous inclusion
 #ifndef CLASSGENAPP_HPP
@@ -25,85 +20,63 @@
 #include "AppCmds.hpp"
 
 // Template shorthands.
-typedef std::vector<CTemplatePtr>  CTemplates;
-typedef std::vector<CComponentPtr> CComponents;
+typedef std::vector<TemplatePtr>  Templates;
+typedef std::vector<ComponentPtr> Components;
 
-/******************************************************************************
-** 
-** The application class.
-**
-*******************************************************************************
-*/
+////////////////////////////////////////////////////////////////////////////////
+//! The application class.
 
 class CClassGenApp : public CApp
 {
 public:
-	//
-	// Constructors/Destructor.
-	//
+	//! Default constructor
 	CClassGenApp();
+
+	//! Destructor
 	~CClassGenApp();
 
 	//
 	// Members
 	//
-	CAppWnd		m_AppWnd;			// Main window.
-	CAppCmds	m_AppCmds;			// Command handler.
+	AppWnd		m_appWnd;			//!< The main window.
+	AppCmds		m_appCmds;			//!< The command handler.
 
 	CPath		m_strTmplFolder;	// Templates folder.
-	CTemplates	m_aoTemplates;		// Templates collection.
-	CComponents m_aoComponents;		// Components collection.
+	Templates	m_templates;		//!< The templates collection.
+	Components  m_components;		//!< The components collection.
 	CStrArray	m_astrFolders;		// List of folders used.
 	CString		m_strLastComponent;	// Last component used.
 	CPath		m_strLastFolder;	// Last folder used.
 	CString		m_strHppExt;		//!< The default extension for header files.
 	CString		m_strCppExt;		//!< The default extension for source files.
-
-	//
-	// Constants.
-	//
-	static const tchar* VERSION;
+	tstring		m_author;			//!< The name of the class Author.
 
 protected:
 	//
-	// Startup and Shutdown template methods.
+	// CApp overriden methods.
 	//
-	virtual	bool OnOpen();
-	virtual	bool OnClose();
 
-	//
-	// Preferences.
-	//
-	CIniFile	m_oIniFile;		// .INI FIle
+	//! Handle application startup.
+	virtual	bool OnOpen();
+
+	//! Handle application shutdown.
+	virtual	bool OnClose();
 
 	//
 	// Internal methods.
 	//
-	void LoadConfig();
-	void SaveConfig();
 
-	//
-	// Constants.
-	//
-	static const tchar* INI_FILE_VER;
+	//! Load the application settings.
+	void loadConfig();
+
+	//! Save the application settings.
+	void saveConfig();
 };
 
-/******************************************************************************
-**
-** Global variables.
-**
-*******************************************************************************
-*/
+////////////////////////////////////////////////////////////////////////////////
+// Global variables.
 
-// The application object.
-extern CClassGenApp App;
+//! The application object.
+extern CClassGenApp g_app;
 
-/******************************************************************************
-**
-** Implementation of inline functions.
-**
-*******************************************************************************
-*/
-
-
-#endif //CLASSGENAPP_HPP
+#endif // CLASSGENAPP_HPP
