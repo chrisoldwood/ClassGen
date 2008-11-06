@@ -8,9 +8,11 @@
 #include "AboutDlg.hpp"
 #include "ClassGenApp.hpp"
 #include <WCL/File.hpp>
-#include <WCL/FileException.hpp>
 #include "Params.hpp"
 #include <Core/AnsiWide.hpp>
+#include <WCL/StrCvt.hpp>
+#include <Core/ParseException.hpp>
+#include <Core/StringUtils.hpp>
 
 ////////////////////////////////////////////////////////////////////////////////
 //! Default constructor.
@@ -29,19 +31,12 @@ AppCmds::~AppCmds()
 ////////////////////////////////////////////////////////////////////////////////
 //! Generate the source file from the template.
 
-bool AppCmds::generateFile(const CPath& templateFile, const CPath& targetFile, const Params& params)
+bool AppCmds::generateFile(const CPath& templateFile, CPath& targetFile, const Params& params)
 {
 	// Check template file exists.
 	if (!templateFile.Exists())
 	{
 		g_app.AlertMsg(TXT("The template file is missing:\n\n%s"), templateFile);
-		return false;
-	}
-
-	// Check template file is writable.
-	if (templateFile.ReadOnly())
-	{
-		g_app.AlertMsg(TXT("The template file is write-protected:\n\n%s"), templateFile);
 		return false;
 	}
 
@@ -55,12 +50,18 @@ bool AppCmds::generateFile(const CPath& templateFile, const CPath& targetFile, c
 	// Copy template to target file.
 	if (!CFile::Copy(templateFile, targetFile, true))
 	{
-		g_app.AlertMsg(TXT("Failed to create target file:\n\n%s"), targetFile);
+		g_app.AlertMsg(TXT("Failed to create target file:\n\n%s\n\n%s"), targetFile, CStrCvt::FormatError());
 		return false;
 	}
 
 	try
 	{
+		// Ensure target file is writable.
+		DWORD attributes = targetFile.Attributes();
+
+		if (attributes & FILE_ATTRIBUTE_READONLY)
+			targetFile.SetAttributes(attributes & (~FILE_ATTRIBUTE_READONLY));
+
 		CFile file;
 
 		file.Open(targetFile, GENERIC_READWRITE);
@@ -110,10 +111,7 @@ bool AppCmds::generateFile(const CPath& templateFile, const CPath& targetFile, c
 					std::string param(paramBegin, paramEnd-paramBegin);
 
 					if (!params.exists(A2T(param)))
-					{
-						g_app.AlertMsg(TXT("Invalid parameter string:\n\n%hs\n\nFound in template file:\n\n%s"), param.c_str(), templateFile);
-						return false;
-					}
+						throw Core::ParseException(Core::Fmt(TXT("Invalid parameter string found:\n\n${%hs}"), param.c_str()));
 
 					std::string value(T2A(params.find(A2T(param))));
 
@@ -133,9 +131,9 @@ bool AppCmds::generateFile(const CPath& templateFile, const CPath& targetFile, c
 		file.SetEOF();
 		file.Close();
 	}
-	catch (CFileException& e)
+	catch (const Core::Exception& e)
 	{
-		g_app.AlertMsg(TXT("Failed to parse target file:\n\n%s\n\nReason: %s"), targetFile, e.What());
+		g_app.AlertMsg(TXT("Failed to parse target file:\n\n%s\n\n%s"), targetFile, e.What());
 		return false;
 	}
 

@@ -34,7 +34,7 @@ public:
 	//
 
 	//! Generate the source file from the template.
-	bool generateFile(const CPath& templateFile, const CPath& targetFile, const Params& params);
+	bool generateFile(const CPath& templateFile, CPath& targetFile, const Params& params);
 };
 
 #endif // APPCMDS_HPP
