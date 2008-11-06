@@ -26,9 +26,9 @@ const tchar* SETTINGS_FILE_VER  = TXT("2.0");
 
 CClassGenApp::CClassGenApp()
 	: CApp(m_appWnd, m_appCmds)
-	, m_strTmplFolder(TXT("."))
-	, m_strHppExt(TXT(".hpp"))
-	, m_strCppExt(TXT(".cpp"))
+	, m_templatesFolder(TXT("."))
+	, m_headerExt(TXT(".hpp"))
+	, m_sourceExt(TXT(".cpp"))
 	, m_author(TXT("The Author"))
 {
 
@@ -90,13 +90,17 @@ void CClassGenApp::loadConfig()
 	if (templatesVer != TEMPLATES_FILE_VER)
 		throw CFileException(CStreamException::E_VERSION_INVALID, templatesFile.m_strPath, NO_ERROR);
 
-	// Read the templates settings.
-	m_strTmplFolder = templatesFile.ReadString(TXT("Templates"), TXT("Path"), m_strTmplFolder);
-	m_strHppExt = templatesFile.ReadString(TXT("Templates"), TXT("HppExt"), m_strHppExt);
-	m_strCppExt = templatesFile.ReadString(TXT("Templates"), TXT("CppExt"), m_strCppExt);
-	m_author = templatesFile.ReadString(TXT("Templates"), TXT("Author"), m_author);
+	// Read the general settings.
+	m_headerExt = templatesFile.ReadString(TXT("General"), TXT("HppExt"), m_headerExt);
+	m_sourceExt = templatesFile.ReadString(TXT("General"), TXT("CppExt"), m_sourceExt);
+	m_author = templatesFile.ReadString(TXT("General"), TXT("Author"), m_author);
 
-	// Read the template names.
+	// Read the templates settings.
+	m_templatesFolder = templatesFile.ReadString(TXT("Templates"), TXT("Path"), m_templatesFolder);
+
+	if (m_templatesFolder.Empty())
+		m_templatesFolder = CPath::ApplicationDir();
+
 	size_t count = templatesFile.ReadInt(TXT("Templates"), TXT("Count"), 0);
 
 	for (size_t i = 0; i < count; ++i)
@@ -132,7 +136,7 @@ void CClassGenApp::loadConfig()
 		if (!name.empty())
 		{
 			ComponentPtr item(new Component);
-			tstring     section = name + TXT(" Component");
+			tstring      section = name + TXT(" Component");
 
 			item->m_name        = name;
 			item->m_description = templatesFile.ReadString(section, TXT("Description"), TXT(""));
@@ -154,23 +158,20 @@ void CClassGenApp::loadConfig()
 		throw CFileException(CStreamException::E_VERSION_INVALID, settingsFile.m_strPath, NO_ERROR);
 
 	// Read the list of folders used.
-	int nFolders = settingsFile.ReadInt(TXT("Folders"), TXT("Count"), 0);
+	count = settingsFile.ReadInt(TXT("Folders"), TXT("Count"), 0);
 
-	for (int i = 0; i < nFolders; ++i)
+	for (size_t i = 0; i < count; ++i)
 	{
-		CString strSection;
+		tstring section = Core::Fmt(TXT("Folder[%d]"), i);
+		CString folder  = settingsFile.ReadString(TXT("Folders"), section.c_str(), TXT(""));
 
-		strSection.Format(TXT("Folder[%d]"), i);
-
-		CString strFolder = settingsFile.ReadString(TXT("Folders"), strSection, TXT(""));
-
-		if ( (!strFolder.Empty()) && (m_astrFolders.Find(strFolder, true) == -1) )
-			m_astrFolders.Add(strFolder);
+		if ( (!folder.Empty()) && (m_mruFolders.Find(folder, true) == -1) )
+			m_mruFolders.Add(folder);
 	}
 
 	// Read the last use settings.
-	m_strLastComponent = settingsFile.ReadString(TXT("Main"), TXT("LastComponent"), m_strLastComponent);
-	m_strLastFolder    = settingsFile.ReadString(TXT("Main"), TXT("LastFolder"), m_strLastFolder);
+	m_lastComponent = settingsFile.ReadString(TXT("Main"), TXT("LastComponent"), m_lastComponent);
+	m_lastFolder    = settingsFile.ReadString(TXT("Main"), TXT("LastFolder"), m_lastFolder);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -184,18 +185,16 @@ void CClassGenApp::saveConfig()
 	settingsFile.WriteString(TXT("Version"), TXT("Version"), SETTINGS_FILE_VER);
 
 	// Write the list of folders used.
-	settingsFile.WriteInt(TXT("Folders"), TXT("Count"), m_astrFolders.Size());
+	settingsFile.WriteInt(TXT("Folders"), TXT("Count"), m_mruFolders.Size());
 
-	for (size_t i = 0; i < m_astrFolders.Size(); ++i)
+	for (size_t i = 0; i < m_mruFolders.Size(); ++i)
 	{
-		CString strSection;
+		tstring section = Core::Fmt(TXT("Folder[%d]"), i);
 
-		strSection.Format(TXT("Folder[%d]"), i);
-
-		settingsFile.WriteString(TXT("Folders"), strSection, m_astrFolders[i]);
+		settingsFile.WriteString(TXT("Folders"), section.c_str(), m_mruFolders[i]);
 	}
 
 	// Write the last use settings.
-	settingsFile.WriteString(TXT("Main"), TXT("LastComponent"), m_strLastComponent);
-	settingsFile.WriteString(TXT("Main"), TXT("LastFolder"), m_strLastFolder);
+	settingsFile.WriteString(TXT("Main"), TXT("LastComponent"), m_lastComponent);
+	settingsFile.WriteString(TXT("Main"), TXT("LastFolder"), m_lastFolder);
 }

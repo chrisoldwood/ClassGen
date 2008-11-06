@@ -33,7 +33,7 @@ public:
 	CClassGenApp();
 
 	//! Destructor
-	~CClassGenApp();
+	virtual ~CClassGenApp();
 
 	//
 	// Members
@@ -41,14 +41,14 @@ public:
 	AppWnd		m_appWnd;			//!< The main window.
 	AppCmds		m_appCmds;			//!< The command handler.
 
-	CPath		m_strTmplFolder;	// Templates folder.
+	CPath		m_templatesFolder;	//!< Templates folder.
 	Templates	m_templates;		//!< The templates collection.
 	Components  m_components;		//!< The components collection.
-	CStrArray	m_astrFolders;		// List of folders used.
-	CString		m_strLastComponent;	// Last component used.
-	CPath		m_strLastFolder;	// Last folder used.
-	CString		m_strHppExt;		//!< The default extension for header files.
-	CString		m_strCppExt;		//!< The default extension for source files.
+	CStrArray	m_mruFolders;		//!< List of folders used.
+	CString		m_lastComponent;	//!< Last component used.
+	CPath		m_lastFolder;		//!< Last folder used.
+	CString		m_headerExt;		//!< The default extension for header files.
+	CString		m_sourceExt;		//!< The default extension for source files.
 	tstring		m_author;			//!< The name of the class Author.
 
 protected:
