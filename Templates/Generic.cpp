@@ -4,7 +4,7 @@
 //! \author ${Author}
 
 #include "${Include}"
-#include "${File}.${HdrExt}"
+#include "${Header}"
 
 namespace ${Namespace}
 {

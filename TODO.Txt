@@ -1,9 +1,6 @@
-- HelpFile
+
+- Focus moves back to component combo after generating instead of staying on the class name.
+
+- New screenshot before release.
 
 - Command line support.
-
-- Move Author etc out of [Templates] section.
-
-- Change HdrExt to Header
-
-- Fix Inine template
