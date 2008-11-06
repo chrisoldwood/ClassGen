@@ -26,20 +26,20 @@ public:
 	//! Default constructor.
 	AppDlg();
 	
+private:
 	//
 	// Members.
 	//
-	CComboBox	m_cbTemplate;
-	CComboBox	m_cbComponent;
-	CEditBox	m_ebClassName;
-	CComboBox 	m_cbFolder;
-	CEditBox	m_ebCPPFile;
-	CEditBox	m_ebHPPFile;
+	CComboBox	m_templateList;
+	CComboBox	m_componentList;
+	CEditBox	m_classNameEditor;
+	CComboBox 	m_folderList;
+	CEditBox	m_cppFileEditor;
+	CEditBox	m_hppFileEditor;
 	CEditBox	m_namespaceEditor;
 	CLabel		m_componentLabel;
 	CLabel		m_templateLabel;
 
-protected:
 	//
 	// Message processors.
 	//
@@ -50,18 +50,36 @@ protected:
 	//! Handle dialog destruction.
 	virtual void OnDestroy();
 
-	void OnClose();
-	void OnSelectComponent();
-	void OnSelectTemplate();
-	void OnBrowse();
-	void OnEditClassName();
-	void OnGenerate();
-	void OnAbout();
+	//! Handle the close button being pressed.
+	void onClose();
+
+	//! Handle the selection of a new component.
+	void onSelectComponent();
+
+	//! Handle the selection of a new template.
+	void onSelectTemplate();
+
+	//! Show the common dialog to select a folder.
+	void onBrowse();
+
+	//! Handle a change to the class name.
+	void onEditClassName();
+
+	//! Generate the new class.
+	void onGenerate();
+
+	//! Show the HelpFile.
+	void onHelp();
+
+	//! Show the application version.
+	void onAbout();
 
 	//
 	// Internal methods.
 	//
-	void AddFolderName(const tstring& name, bool select);
+
+	//! Add a folder to the folder MRU list.
+	void addFolderName(const tstring& name, bool select);
 };
 
 #endif // APPDLG_HPP
