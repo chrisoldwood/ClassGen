@@ -4,7 +4,7 @@
 //! \author ${Author}
 
 #include "${Include}"
-#include "${File}.${HdrExt}"
+#include "${Header}"
 
 //! The component object.
 ${Class} g_oDll;

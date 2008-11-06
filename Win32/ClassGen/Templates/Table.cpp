@@ -4,7 +4,7 @@
 //! \author ${Author}
 
 #include "${Include}"
-#include "${File}.${HdrExt}"
+#include "${Header}"
 
 ////////////////////////////////////////////////////////////////////////////////
 //! Constructor for a specific database. Create the table ready for inclusion
