@@ -1,8 +1,9 @@
 Version 2.0
 ===========
 
-- Moved Template & Component defintions to a separate configuration file.
-- Added support for author, full filename and file extension parameters.
+- Fixed a bug where it would fail if the template file was write protected.
+- Moved Template & Component definitions to a separate configuration file.
+- Added support for author, full filename, file extension & header filename parameters.
 - Made all parameters consistent by providing Mixed, UPPERCASE and lowercase versions.
 - Changed parameter style from $NAME$ to ${NAME} to reduce the chance of conflict.
 - Fixed a bug where the .cpp filename wasn't generated when changing templates.
@@ -14,7 +15,7 @@ Version 2.0
 - Removed the assumption that classes always begin with a 'C'.
 - Added support for libraries to apply a prefix in their #include guards.
 - Added config entry to allow the templates to be stored in another folder.
-- Added support for specifying a namespace for a component.
+- Added support for defaulting and editing the namespace based on the component.
 - Added support for non-class based files, e.g. a utility header.
 - Fixed a bug where it wouldn't allow overwriting of an existing file.
 - Ported to Visual C++ 7.1 and changed default build type to Unicode.
@@ -35,4 +36,4 @@ Version 1.0
 Chris Oldwood 
 (gort@cix.co.uk)
 
-17th October 2008
+21st October 2008
