@@ -4,8 +4,8 @@
 //! \author ${Author}
 
 // Check for previous inclusion
-#ifndef ${LIB}_${FILE}_${EXT}
-#define ${LIB}_${FILE}_${EXT}
+#ifndef ${COMPONENT}_${FILE}_${EXT}
+#define ${COMPONENT}_${FILE}_${EXT}
 
 #if _MSC_VER > 1000
 #pragma once
@@ -49,4 +49,4 @@ inline ${Class}::~${Class}()
 //namespace ${Namespace}
 }
 
-#endif // ${LIB}_${FILE}_${EXT}
+#endif // ${COMPONENT}_${FILE}_${EXT}
