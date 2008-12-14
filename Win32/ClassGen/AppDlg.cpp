@@ -46,12 +46,8 @@ AppDlg::AppDlg()
 
 void AppDlg::OnInitDialog()
 {
-	if (g_app.m_templates.empty())
-	{
-		AlertMsg(TXT("There are no templates defined."));
-		g_app.m_appWnd.Close();
-		return;
-	}
+	ASSERT(!g_app.m_templates.empty());
+	ASSERT(!g_app.m_components.empty());
 
 	if (g_app.m_components.empty())
 	{
@@ -84,7 +80,7 @@ void AppDlg::OnInitDialog()
 	}
 
 	// Make the last used component the default selection.
-	size_t component = m_componentList.Find(g_app.m_lastComponent);
+	size_t component = m_componentList.Find(g_app.m_lastComponent.c_str());
 
 	// If none, pick the first component available.
 	if ( (component == Core::npos) && (!g_app.m_components.empty()) )
@@ -217,7 +213,7 @@ void AppDlg::onBrowse()
 
 	// If folder name empty start from last path.
 	if (folder == TXT(""))
-		folder = g_app.m_lastFolder;
+		folder = g_app.m_lastFolder.c_str();
 
 	// Select the folder.
 	if (!folder.SelectDir(*this, TXT("Select The Destination Folder"), folder))
