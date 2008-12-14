@@ -1,6 +1,7 @@
 Version 2.0
 ===========
 
+- Switched to using the Registry by default for user settings. 
 - Fixed a bug where it would fail if the template file was write protected.
 - Moved Template & Component definitions to a separate configuration file.
 - Added support for author, full filename, file extension & header filename parameters.
@@ -36,4 +37,4 @@ Version 1.0
 Chris Oldwood 
 (gort@cix.co.uk)
 
-21st October 2008
+4th December 2008
