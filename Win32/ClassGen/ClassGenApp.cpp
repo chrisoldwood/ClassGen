@@ -5,8 +5,10 @@
 
 #include "Common.hpp"
 #include "ClassGenApp.hpp"
-#include <WCL/FileException.hpp>
+#include <Core/ConfigurationException.hpp>
 #include <Core/StringUtils.hpp>
+#include <WCL/AppConfig.hpp>
+#include <limits>
 
 ////////////////////////////////////////////////////////////////////////////////
 // Global variables.
@@ -17,9 +19,11 @@ CClassGenApp g_app;
 ////////////////////////////////////////////////////////////////////////////////
 // Constants.
 
-const tchar* TEMPLATES_FILE	    = TXT("Templates.ini");
-const tchar* TEMPLATES_FILE_VER = TXT("2.0");
-const tchar* SETTINGS_FILE_VER  = TXT("2.0");
+const tchar* TEMPLATES_FILE	   = TXT("Templates.ini");
+const tchar* TEMPLATES_VERSION = TXT("2.0");
+const tchar* SETTINGS_VERSION  = TXT("2.0");
+const tchar* PUBLISHER         = TXT("Chris Oldwood");
+const tchar* APPLICATION       = TXT("Class Generator");
 
 ////////////////////////////////////////////////////////////////////////////////
 //! Default constructor
@@ -47,10 +51,18 @@ CClassGenApp::~CClassGenApp()
 bool CClassGenApp::OnOpen()
 {
 	// Set the app title.
-	m_strTitle = TXT("Class Generator");
+	m_strTitle = APPLICATION;
 
-	// Load settings.
-	loadConfig();
+	try
+	{
+		// Load settings.
+		loadConfig();
+	}
+	catch (const Core::Exception& e)
+	{
+		FatalMsg(TXT("Failed to configure the application:-\n\n%s"), e.What());
+		return false;
+	}
 	
 	// Create the main window.
 	if (!m_appWnd.Create())
@@ -71,8 +83,16 @@ bool CClassGenApp::OnOpen()
 
 bool CClassGenApp::OnClose()
 {
-	// Save settings.
-	saveConfig();
+	try
+	{
+		// Save settings.
+		saveConfig();
+	}
+	catch (const Core::Exception& e)
+	{
+		FatalMsg(TXT("Failed to save the application configuration:-\n\n%s"), e.What());
+		return false;
+	}
 
 	return true;
 }
@@ -84,11 +104,14 @@ void CClassGenApp::loadConfig()
 {
 	CIniFile templatesFile(CPath::ApplicationDir() / TEMPLATES_FILE);
 
-	// Read the templates file version.
-	CString templatesVer = templatesFile.ReadString(TXT("Version"), TXT("Version"), TEMPLATES_FILE_VER);
+	if (!templatesFile.m_strPath.Exists())
+		throw Core::ConfigurationException(Core::Fmt(TXT("The configuration file is missing:-\n\n%s"), templatesFile.m_strPath));
 
-	if (templatesVer != TEMPLATES_FILE_VER)
-		throw CFileException(CStreamException::E_VERSION_INVALID, templatesFile.m_strPath, NO_ERROR);
+	// Read the templates file version.
+	CString templatesVer = templatesFile.ReadString(TXT("Version"), TXT("Version"), TEMPLATES_VERSION);
+
+	if (templatesVer != TEMPLATES_VERSION)
+		throw Core::ConfigurationException(Core::Fmt(TXT("The configuration file is incompatible:-\n\n%s"), templatesFile.m_strPath));
 
 	// Read the general settings.
 	m_headerExt = templatesFile.ReadString(TXT("General"), TXT("HppExt"), m_headerExt);
@@ -102,6 +125,9 @@ void CClassGenApp::loadConfig()
 		m_templatesFolder = CPath::ApplicationDir();
 
 	size_t count = templatesFile.ReadInt(TXT("Templates"), TXT("Count"), 0);
+
+	if (count == 0)
+		throw Core::ConfigurationException(TXT("No templates have been defined."));
 
 	for (size_t i = 0; i < count; ++i)
 	{
@@ -127,6 +153,9 @@ void CClassGenApp::loadConfig()
 	// Read the component names.
 	count = templatesFile.ReadInt(TXT("Components"), TXT("Count"), 0);
 
+	if (count == 0)
+		throw Core::ConfigurationException(TXT("No components have been defined."));
+
 	for (size_t i = 0; i < count; ++i)
 	{
 		tstring section = Core::Fmt(TXT("Component[%d]"), i);
@@ -149,29 +178,32 @@ void CClassGenApp::loadConfig()
 		}
 	}
 
-	CIniFile settingsFile;
+	WCL::AppConfig settings(PUBLISHER, APPLICATION);
 
 	// Read the templates file version.
-	CString settingsVer = settingsFile.ReadString(TXT("Version"), TXT("Version"), SETTINGS_FILE_VER);
+	tstring settingsVer = settings.readString(settings.DEFAULT_SECTION, TXT("Version"), SETTINGS_VERSION);
 
-	if (settingsVer != SETTINGS_FILE_VER)
-		throw CFileException(CStreamException::E_VERSION_INVALID, settingsFile.m_strPath, NO_ERROR);
+	if (settingsVer != SETTINGS_VERSION)
+		throw Core::ConfigurationException(Core::Fmt(TXT("The configuration data is incompatible - '%s'"), settingsVer.c_str()));
+
+	const size_t max = std::numeric_limits<size_t>::max();
 
 	// Read the list of folders used.
-	count = settingsFile.ReadInt(TXT("Folders"), TXT("Count"), 0);
-
-	for (size_t i = 0; i < count; ++i)
+	for (size_t i = 0; i != max; ++i)
 	{
-		tstring section = Core::Fmt(TXT("Folder[%d]"), i);
-		CString folder  = settingsFile.ReadString(TXT("Folders"), section.c_str(), TXT(""));
+		tstring entry  = Core::Fmt(TXT("%u"), i);
+		tstring folder = settings.readString(TXT("Folders"), entry, TXT(""));
 
-		if ( (!folder.Empty()) && (m_mruFolders.Find(folder, true) == -1) )
-			m_mruFolders.Add(folder);
+		if (folder.empty())
+			break;
+
+		if (m_mruFolders.Find(folder.c_str(), true) == Core::npos)
+			m_mruFolders.Add(folder.c_str());
 	}
 
 	// Read the last use settings.
-	m_lastComponent = settingsFile.ReadString(TXT("Main"), TXT("LastComponent"), m_lastComponent);
-	m_lastFolder    = settingsFile.ReadString(TXT("Main"), TXT("LastFolder"), m_lastFolder);
+	m_lastComponent = settings.readString(settings.DEFAULT_SECTION, TXT("LastComponent"), m_lastComponent);
+	m_lastFolder    = settings.readString(settings.DEFAULT_SECTION, TXT("LastFolder"), m_lastFolder);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -179,22 +211,22 @@ void CClassGenApp::loadConfig()
 
 void CClassGenApp::saveConfig()
 {
-	CIniFile settingsFile;
+	WCL::AppConfig settings(PUBLISHER, APPLICATION);
 
 	// Write the file version.
-	settingsFile.WriteString(TXT("Version"), TXT("Version"), SETTINGS_FILE_VER);
+	settings.writeString(settings.DEFAULT_SECTION, TXT("Version"), SETTINGS_VERSION);
 
 	// Write the list of folders used.
-	settingsFile.WriteInt(TXT("Folders"), TXT("Count"), m_mruFolders.Size());
+	settings.deleteSection(TXT("Folders"));
 
-	for (size_t i = 0; i < m_mruFolders.Size(); ++i)
+	for (size_t i = 0; i != m_mruFolders.Size(); ++i)
 	{
-		tstring section = Core::Fmt(TXT("Folder[%d]"), i);
+		tstring entry = Core::Fmt(TXT("%u"), i);
 
-		settingsFile.WriteString(TXT("Folders"), section.c_str(), m_mruFolders[i]);
+		settings.writeString(TXT("Folders"), entry, tstring(m_mruFolders[i]));
 	}
 
 	// Write the last use settings.
-	settingsFile.WriteString(TXT("Main"), TXT("LastComponent"), m_lastComponent);
-	settingsFile.WriteString(TXT("Main"), TXT("LastFolder"), m_lastFolder);
+	settings.writeString(settings.DEFAULT_SECTION, TXT("LastComponent"), m_lastComponent);
+	settings.writeString(settings.DEFAULT_SECTION, TXT("LastFolder"), m_lastFolder);
 }

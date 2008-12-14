@@ -45,8 +45,8 @@ public:
 	Templates	m_templates;		//!< The templates collection.
 	Components  m_components;		//!< The components collection.
 	CStrArray	m_mruFolders;		//!< List of folders used.
-	CString		m_lastComponent;	//!< Last component used.
-	CPath		m_lastFolder;		//!< Last folder used.
+	tstring		m_lastComponent;	//!< Last component used.
+	tstring		m_lastFolder;		//!< Last folder used.
 	CString		m_headerExt;		//!< The default extension for header files.
 	CString		m_sourceExt;		//!< The default extension for source files.
 	tstring		m_author;			//!< The name of the class Author.
@@ -67,7 +67,7 @@ protected:
 	//
 
 	//! Load the application settings.
-	void loadConfig();
+	void loadConfig(); // throw(Core::Exception)
 
 	//! Save the application settings.
 	void saveConfig();
