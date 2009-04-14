@@ -67,7 +67,7 @@ bool AppCmds::generateFile(const CPath& templateFile, CPath& targetFile, const P
 		file.Open(targetFile, GENERIC_READWRITE);
 
 		// Get the files size.
-		ulong size = file.Size();
+		size_t size = static_cast<size_t>(file.Size());
 
 		// Allocate zero terminated code buffer.
 		char* code = static_cast<char*>(_alloca(size+1));
@@ -77,7 +77,7 @@ bool AppCmds::generateFile(const CPath& templateFile, CPath& targetFile, const P
 		code[size] = '\0';
 
 		// Reset for writing.
-		file.Seek(0, FILE_BEGIN);
+		file.Seek(0, CFile::BEGIN);
 
 		char* end = code + size;
 
