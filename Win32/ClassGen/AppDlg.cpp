@@ -250,14 +250,14 @@ void AppDlg::addFolderName(const tstring& name, bool select)
 void AppDlg::onGenerate()
 {
 	// Get the selected template.
-	int templSel  = m_templateList.CurSel();
-	int templItem = m_templateList.ItemData(templSel);
+	size_t templSel  = m_templateList.CurSel();
+	size_t templItem = m_templateList.ItemData(templSel);
 
 	TemplatePtr templt = g_app.m_templates[templItem];
 
 	// Get the selected template.
-	int comptSel  = m_componentList.CurSel();
-	int comptItem = m_componentList.ItemData(comptSel);
+	size_t comptSel  = m_componentList.CurSel();
+	size_t comptItem = m_componentList.ItemData(comptSel);
 
 	ComponentPtr component = g_app.m_components[comptItem];
 
