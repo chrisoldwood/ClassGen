@@ -11,6 +11,8 @@
 #pragma once
 #endif
 
+#include <map>
+
 ////////////////////////////////////////////////////////////////////////////////
 //! Collection class used to hold the string substitutions.
 
