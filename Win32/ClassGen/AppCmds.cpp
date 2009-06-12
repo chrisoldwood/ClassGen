@@ -13,6 +13,7 @@
 #include <WCL/StrCvt.hpp>
 #include <Core/ParseException.hpp>
 #include <Core/StringUtils.hpp>
+#include <malloc.h>
 
 ////////////////////////////////////////////////////////////////////////////////
 //! Default constructor.
