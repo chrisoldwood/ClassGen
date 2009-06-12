@@ -533,6 +533,9 @@
 			<File
 				RelativePath=".\HelpFile\ClassGen.html">
 			</File>
+			<File
+				RelativePath=".\HelpFile\Main.gif">
+			</File>
 		</Filter>
 		<File
 			RelativePath=".\MyTemplates.ini">
