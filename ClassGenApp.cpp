@@ -60,7 +60,7 @@ bool CClassGenApp::OnOpen()
 	}
 	catch (const Core::Exception& e)
 	{
-		FatalMsg(TXT("Failed to configure the application:-\n\n%s"), e.What());
+		FatalMsg(TXT("Failed to configure the application:-\n\n%s"), e.twhat());
 		return false;
 	}
 	
@@ -90,7 +90,7 @@ bool CClassGenApp::OnClose()
 	}
 	catch (const Core::Exception& e)
 	{
-		FatalMsg(TXT("Failed to save the application configuration:-\n\n%s"), e.What());
+		FatalMsg(TXT("Failed to save the application configuration:-\n\n%s"), e.twhat());
 		return false;
 	}
 
@@ -105,13 +105,13 @@ void CClassGenApp::loadConfig()
 	CIniFile templatesFile(CPath::ApplicationDir() / TEMPLATES_FILE);
 
 	if (!templatesFile.m_strPath.Exists())
-		throw Core::ConfigurationException(Core::Fmt(TXT("The configuration file is missing:-\n\n%s"), templatesFile.m_strPath));
+		throw Core::ConfigurationException(Core::fmt(TXT("The configuration file is missing:-\n\n%s"), templatesFile.m_strPath));
 
 	// Read the templates file version.
 	CString templatesVer = templatesFile.ReadString(TXT("Version"), TXT("Version"), TEMPLATES_VERSION);
 
 	if (templatesVer != TEMPLATES_VERSION)
-		throw Core::ConfigurationException(Core::Fmt(TXT("The configuration file is incompatible:-\n\n%s"), templatesFile.m_strPath));
+		throw Core::ConfigurationException(Core::fmt(TXT("The configuration file is incompatible:-\n\n%s"), templatesFile.m_strPath));
 
 	// Read the general settings.
 	m_headerExt = templatesFile.ReadString(TXT("General"), TXT("HppExt"), m_headerExt);
@@ -131,7 +131,7 @@ void CClassGenApp::loadConfig()
 
 	for (size_t i = 0; i < count; ++i)
 	{
-		tstring section = Core::Fmt(TXT("Template[%u]"), i);
+		tstring section = Core::fmt(TXT("Template[%u]"), i);
 		tstring name    = templatesFile.ReadString(TXT("Templates"), section.c_str(), tstring());
 
 		// Valid template name?
@@ -158,7 +158,7 @@ void CClassGenApp::loadConfig()
 
 	for (size_t i = 0; i < count; ++i)
 	{
-		tstring section = Core::Fmt(TXT("Component[%d]"), i);
+		tstring section = Core::fmt(TXT("Component[%d]"), i);
 		tstring name    = templatesFile.ReadString(TXT("Components"), section, tstring());
 
 		// Valid component name?
@@ -184,14 +184,14 @@ void CClassGenApp::loadConfig()
 	tstring settingsVer = settings.readString(settings.DEFAULT_SECTION, TXT("Version"), SETTINGS_VERSION);
 
 	if (settingsVer != SETTINGS_VERSION)
-		throw Core::ConfigurationException(Core::Fmt(TXT("The configuration data is incompatible - '%s'"), settingsVer.c_str()));
+		throw Core::ConfigurationException(Core::fmt(TXT("The configuration data is incompatible - '%s'"), settingsVer.c_str()));
 
 	const size_t max = std::numeric_limits<size_t>::max();
 
 	// Read the list of folders used.
 	for (size_t i = 0; i != max; ++i)
 	{
-		tstring entry  = Core::Fmt(TXT("%u"), i);
+		tstring entry  = Core::fmt(TXT("%u"), i);
 		tstring folder = settings.readString(TXT("Folders"), entry, TXT(""));
 
 		if (folder.empty())
@@ -221,7 +221,7 @@ void CClassGenApp::saveConfig()
 
 	for (size_t i = 0; i != m_mruFolders.Size(); ++i)
 	{
-		tstring entry = Core::Fmt(TXT("%u"), i);
+		tstring entry = Core::fmt(TXT("%u"), i);
 
 		settings.writeString(TXT("Folders"), entry, tstring(m_mruFolders[i]));
 	}

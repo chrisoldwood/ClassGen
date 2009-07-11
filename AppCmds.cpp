@@ -112,7 +112,7 @@ bool AppCmds::generateFile(const CPath& templateFile, CPath& targetFile, const P
 					std::string param(paramBegin, paramEnd-paramBegin);
 
 					if (!params.exists(A2T(param)))
-						throw Core::ParseException(Core::Fmt(TXT("Invalid parameter string found:\n\n${%hs}"), param.c_str()));
+						throw Core::ParseException(Core::fmt(TXT("Invalid parameter string found:\n\n${%hs}"), param.c_str()));
 
 					std::string value(T2A(params.find(A2T(param))));
 
@@ -134,7 +134,7 @@ bool AppCmds::generateFile(const CPath& templateFile, CPath& targetFile, const P
 	}
 	catch (const Core::Exception& e)
 	{
-		g_app.AlertMsg(TXT("Failed to parse target file:\n\n%s\n\n%s"), targetFile, e.What());
+		g_app.AlertMsg(TXT("Failed to parse target file:\n\n%s\n\n%s"), targetFile, e.twhat());
 		return false;
 	}
 
