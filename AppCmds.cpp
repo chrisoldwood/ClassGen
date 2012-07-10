@@ -37,21 +37,21 @@ bool AppCmds::generateFile(const CPath& templateFile, CPath& targetFile, const P
 	// Check template file exists.
 	if (!templateFile.Exists())
 	{
-		g_app.AlertMsg(TXT("The template file is missing:\n\n%s"), templateFile);
+		g_app.AlertMsg(TXT("The template file is missing:\n\n%s"), templateFile.c_str());
 		return false;
 	}
 
 	// Check target file doesn't exist.
 	if (targetFile.Exists())
 	{
-		if (g_app.QueryMsg(TXT("The target file already exists:\n\n%s\n\nDo you want to overwrite it?"), targetFile) != IDYES)
+		if (g_app.QueryMsg(TXT("The target file already exists:\n\n%s\n\nDo you want to overwrite it?"), targetFile.c_str()) != IDYES)
 			return false;
 	}
 
 	// Copy template to target file.
 	if (!CFile::Copy(templateFile, targetFile, true))
 	{
-		g_app.AlertMsg(TXT("Failed to create target file:\n\n%s\n\n%s"), targetFile, CStrCvt::FormatError());
+		g_app.AlertMsg(TXT("Failed to create target file:\n\n%s\n\n%s"), targetFile.c_str(), CStrCvt::FormatError().c_str());
 		return false;
 	}
 
@@ -134,7 +134,7 @@ bool AppCmds::generateFile(const CPath& templateFile, CPath& targetFile, const P
 	}
 	catch (const Core::Exception& e)
 	{
-		g_app.AlertMsg(TXT("Failed to parse target file:\n\n%s\n\n%s"), targetFile, e.twhat());
+		g_app.AlertMsg(TXT("Failed to parse target file:\n\n%s\n\n%s"), targetFile.c_str(), e.twhat());
 		return false;
 	}
 

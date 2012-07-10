@@ -39,7 +39,7 @@ AboutDlg::~AboutDlg()
 void AboutDlg::OnInitDialog()
 {
 	// Extract details from the resources.
-	tstring filename  = CPath::Application();
+	tstring filename  = CPath::Application().c_str();
 	tstring version   = WCL::VerInfoReader::GetStringValue(filename, WCL::VerInfoReader::PRODUCT_VERSION);
 	tstring copyright = WCL::VerInfoReader::GetStringValue(filename, WCL::VerInfoReader::LEGAL_COPYRIGHT);
 

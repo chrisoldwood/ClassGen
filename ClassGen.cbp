@@ -6,21 +6,6 @@
 		<Option pch_mode="2" />
 		<Option compiler="gcc" />
 		<Build>
-			<Target title="Release Win32">
-				<Option output="Release\ClassGen" prefix_auto="1" extension_auto="1" />
-				<Option object_output="Release" />
-				<Option type="0" />
-				<Option compiler="gcc" />
-				<Option projectLinkerOptionsRelation="2" />
-				<Compiler>
-					<Add option="-O" />
-					<Add option="-DNDEBUG" />
-				</Compiler>
-				<Linker>
-					<Add library="..\Lib\WCL\Release\libWCL.a" />
-					<Add library="..\Lib\Core\Release\libCore.a" />
-				</Linker>
-			</Target>
 			<Target title="Debug Win32">
 				<Option output="Debug\ClassGen" prefix_auto="1" extension_auto="1" />
 				<Option object_output="Debug" />
@@ -34,6 +19,21 @@
 				<Linker>
 					<Add library="..\Lib\WCL\Debug\libWCL.a" />
 					<Add library="..\Lib\Core\Debug\libCore.a" />
+				</Linker>
+			</Target>
+			<Target title="Release Win32">
+				<Option output="Release\ClassGen" prefix_auto="1" extension_auto="1" />
+				<Option object_output="Release" />
+				<Option type="0" />
+				<Option compiler="gcc" />
+				<Option projectLinkerOptionsRelation="2" />
+				<Compiler>
+					<Add option="-O" />
+					<Add option="-DNDEBUG" />
+				</Compiler>
+				<Linker>
+					<Add library="..\Lib\WCL\Release\libWCL.a" />
+					<Add library="..\Lib\Core\Release\libCore.a" />
 				</Linker>
 			</Target>
 		</Build>
@@ -66,56 +66,39 @@
 			<Add library="advapi32" />
 			<Add library="shlwapi" />
 		</Linker>
-		<Unit filename="MyTemplates.ini" />
-		<Unit filename="ReadMe.txt" />
-		<Unit filename="RelNotes.txt" />
-		<Unit filename="Setup.ini" />
-		<Unit filename="Templates.ini" />
-		<Unit filename="TODO.Txt" />
 		<Unit filename="AboutDlg.cpp" />
-		<Unit filename="AppCmds.cpp" />
-		<Unit filename="AppDlg.cpp" />
-		<Unit filename="AppWnd.cpp" />
-		<Unit filename="ClassGenApp.cpp" />
-		<Unit filename="Params.cpp" />
-		<Unit filename="pch.cpp" />
 		<Unit filename="AboutDlg.hpp" />
-		<Unit filename="AppCmds.hpp" />
-		<Unit filename="AppDlg.hpp" />
-		<Unit filename="AppWnd.hpp" />
-		<Unit filename="ClassGenApp.hpp" />
-		<Unit filename="Common.hpp" />
-		<Unit filename="Component.hpp" />
-		<Unit filename="Params.hpp" />
-		<Unit filename="Template.hpp" />
 		<Unit filename="App.ico" />
 		<Unit filename="App.rcv" />
+		<Unit filename="AppCmds.cpp" />
+		<Unit filename="AppCmds.hpp" />
+		<Unit filename="AppDlg.cpp" />
+		<Unit filename="AppDlg.hpp" />
+		<Unit filename="AppWnd.cpp" />
+		<Unit filename="AppWnd.hpp" />
 		<Unit filename="ClassGen.rc">
 			<Option compilerVar="WINDRES" />
 		</Unit>
+		<Unit filename="ClassGenApp.cpp" />
+		<Unit filename="ClassGenApp.hpp" />
+		<Unit filename="Common.hpp" />
+		<Unit filename="Component.hpp" />
+		<Unit filename="HelpFile\ClassGen.html" />
+		<Unit filename="HelpFile\Main.gif" />
+		<Unit filename="MyTemplates.ini" />
+		<Unit filename="Params.cpp" />
+		<Unit filename="Params.hpp" />
+		<Unit filename="ReadMe.txt" />
+		<Unit filename="RelNotes.txt" />
 		<Unit filename="Resource.h" />
-		<Unit filename="templates\ComObject.cpp">
-			<Option target="&lt;{~None~}&gt;" />
-		</Unit>
-		<Unit filename="templates\ComObject.hpp">
-			<Option target="&lt;{~None~}&gt;" />
-		</Unit>
-		<Unit filename="templates\ComServer.cpp">
-			<Option target="&lt;{~None~}&gt;" />
-		</Unit>
-		<Unit filename="templates\ComServer.hpp">
-			<Option target="&lt;{~None~}&gt;" />
-		</Unit>
+		<Unit filename="Setup.ini" />
+		<Unit filename="TODO.Txt" />
+		<Unit filename="Template.hpp" />
+		<Unit filename="Templates.ini" />
 		<Unit filename="Templates\Dialog.cpp">
 			<Option target="&lt;{~None~}&gt;" />
 		</Unit>
 		<Unit filename="Templates\Dialog.hpp">
-			<Option target="&lt;{~None~}&gt;" />
-		</Unit>
-		<Unit filename="templates\Functions.cpp">
-			<Option target="&lt;{~None~}&gt;" />
-		</Unit>
-		<Unit filename="templates\Functions.hpp">
 			<Option target="&lt;{~None~}&gt;" />
 		</Unit>
 		<Unit filename="Templates\Generic.cpp">
@@ -142,21 +125,38 @@
 		<Unit filename="Templates\PropSheet.hpp">
 			<Option target="&lt;{~None~}&gt;" />
 		</Unit>
-		<Unit filename="templates\Struct.hpp" />
 		<Unit filename="Templates\Table.cpp">
 			<Option target="&lt;{~None~}&gt;" />
 		</Unit>
 		<Unit filename="Templates\Table.hpp">
 			<Option target="&lt;{~None~}&gt;" />
 		</Unit>
-		<Unit filename="templates\Template.hpp">
-			<Option target="&lt;{~None~}&gt;" />
-		</Unit>
 		<Unit filename="Templates\Utility.hpp">
 			<Option target="&lt;{~None~}&gt;" />
 		</Unit>
-		<Unit filename="HelpFile\ClassGen.html" />
-		<Unit filename="HelpFile\Main.gif" />
+		<Unit filename="pch.cpp" />
+		<Unit filename="templates\ComObject.cpp">
+			<Option target="&lt;{~None~}&gt;" />
+		</Unit>
+		<Unit filename="templates\ComObject.hpp">
+			<Option target="&lt;{~None~}&gt;" />
+		</Unit>
+		<Unit filename="templates\ComServer.cpp">
+			<Option target="&lt;{~None~}&gt;" />
+		</Unit>
+		<Unit filename="templates\ComServer.hpp">
+			<Option target="&lt;{~None~}&gt;" />
+		</Unit>
+		<Unit filename="templates\Functions.cpp">
+			<Option target="&lt;{~None~}&gt;" />
+		</Unit>
+		<Unit filename="templates\Functions.hpp">
+			<Option target="&lt;{~None~}&gt;" />
+		</Unit>
+		<Unit filename="templates\Struct.hpp" />
+		<Unit filename="templates\Template.hpp">
+			<Option target="&lt;{~None~}&gt;" />
+		</Unit>
 		<Extensions>
 			<code_completion />
 			<debugger />

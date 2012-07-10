@@ -359,13 +359,13 @@ void AppDlg::onGenerate()
 	}
 
 	// Add folder to MRU list.
-	if (g_app.m_mruFolders.Find(folder, true) == -1)
+	if (g_app.m_mruFolders.Find(folder, true) == Core::npos)
 		g_app.m_mruFolders.Add(folder);
 
 	if (!className.Empty())
-		NotifyMsg(TXT("%s class generated."), className);
+		NotifyMsg(TXT("%s class generated."), className.c_str());
 	else
-		NotifyMsg(TXT("%s file generated."), hppFile);
+		NotifyMsg(TXT("%s file generated."), hppFile.c_str());
 }
 
 ////////////////////////////////////////////////////////////////////////////////

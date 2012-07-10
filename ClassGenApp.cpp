@@ -10,6 +10,23 @@
 #include <WCL/AppConfig.hpp>
 #include <limits>
 
+#ifdef __GNUG__
+
+#include <WCL/WinMain.hpp>
+
+////////////////////////////////////////////////////////////////////////////////
+//! This is the real (C SDK) entry point for a Windows application.
+
+extern "C" int WINAPI WinMain(HINSTANCE hInstance,
+							  HINSTANCE /*hPrevInstance*/,
+							  LPSTR     lpszCmdLine,
+							  int       nCmdShow)
+{
+	return WCL::winMain(hInstance, lpszCmdLine, nCmdShow);
+}
+
+#endif //__GNUG__
+
 ////////////////////////////////////////////////////////////////////////////////
 // Global variables.
 
@@ -63,7 +80,7 @@ bool CClassGenApp::OnOpen()
 		FatalMsg(TXT("Failed to configure the application:-\n\n%s"), e.twhat());
 		return false;
 	}
-	
+
 	// Create the main window.
 	if (!m_appWnd.Create())
 		return false;
@@ -105,13 +122,13 @@ void CClassGenApp::loadConfig()
 	CIniFile templatesFile(CPath::ApplicationDir() / TEMPLATES_FILE);
 
 	if (!templatesFile.m_strPath.Exists())
-		throw Core::ConfigurationException(Core::fmt(TXT("The configuration file is missing:-\n\n%s"), templatesFile.m_strPath));
+		throw Core::ConfigurationException(Core::fmt(TXT("The configuration file is missing:-\n\n%s"), templatesFile.m_strPath.c_str()));
 
 	// Read the templates file version.
 	CString templatesVer = templatesFile.ReadString(TXT("Version"), TXT("Version"), TEMPLATES_VERSION);
 
 	if (templatesVer != TEMPLATES_VERSION)
-		throw Core::ConfigurationException(Core::fmt(TXT("The configuration file is incompatible:-\n\n%s"), templatesFile.m_strPath));
+		throw Core::ConfigurationException(Core::fmt(TXT("The configuration file is incompatible:-\n\n%s"), templatesFile.m_strPath.c_str()));
 
 	// Read the general settings.
 	m_headerExt = templatesFile.ReadString(TXT("General"), TXT("HppExt"), m_headerExt);
@@ -131,8 +148,8 @@ void CClassGenApp::loadConfig()
 
 	for (size_t i = 0; i < count; ++i)
 	{
-		tstring section = Core::fmt(TXT("Template[%u]"), i);
-		tstring name    = templatesFile.ReadString(TXT("Templates"), section.c_str(), tstring());
+		tstring entry = Core::fmt(TXT("Template[%u]"), i);
+		tstring name  = templatesFile.ReadString(TXT("Templates"), entry, tstring());
 
 		// Valid template name?
 		if (!name.empty())
@@ -158,8 +175,8 @@ void CClassGenApp::loadConfig()
 
 	for (size_t i = 0; i < count; ++i)
 	{
-		tstring section = Core::fmt(TXT("Component[%d]"), i);
-		tstring name    = templatesFile.ReadString(TXT("Components"), section, tstring());
+		tstring entry = Core::fmt(TXT("Component[%d]"), i);
+		tstring name  = templatesFile.ReadString(TXT("Components"), entry, tstring());
 
 		// Valid component name?
 		if (!name.empty())
