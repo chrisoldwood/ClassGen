@@ -90,7 +90,7 @@ bool CClassGenApp::OnOpen()
 	m_appWnd.Show(m_iCmdShow);
 
 	// Update UI.
-	m_appCmds.UpdateUI();
+	m_appCmds.InitialiseUI();
 
 	return true;
 }
