@@ -47,6 +47,8 @@ const tchar* APPLICATION       = TXT("Class Generator");
 
 CClassGenApp::CClassGenApp()
 	: CApp(m_appWnd, m_appCmds)
+	, m_appWnd()
+	, m_appCmds(/*m_appWnd*/)
 	, m_templatesFolder(TXT("."))
 	, m_headerExt(TXT(".hpp"))
 	, m_sourceExt(TXT(".cpp"))
@@ -88,9 +90,6 @@ bool CClassGenApp::OnOpen()
 	// Show it.
 	m_appWnd.Centre();
 	m_appWnd.Show(m_iCmdShow);
-
-	// Update UI.
-	m_appCmds.InitialiseUI();
 
 	return true;
 }

@@ -11,7 +11,7 @@
 #pragma once
 #endif
 
-#include <WCL/CmdCtrl.hpp>
+#include <WCL/NullCmdController.hpp>
 #include <WCL/Path.hpp>
 
 // Forward declarations.
@@ -20,7 +20,7 @@ class Params;
 ////////////////////////////////////////////////////////////////////////////////
 //! Application command controller.
 
-class AppCmds : public CCmdControl
+class AppCmds : public WCL::NullCmdController
 {
 public:
 	//! Default constructor.

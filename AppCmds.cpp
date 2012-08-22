@@ -19,6 +19,7 @@
 //! Default constructor.
 
 AppCmds::AppCmds()
+	: WCL::NullCmdController()
 {
 }
 
