@@ -4,3 +4,5 @@
 - New screenshot before release.
 
 - Command line support.
+
+- File prefix and/or suffix, e.g. Class{Tests}.cpp
