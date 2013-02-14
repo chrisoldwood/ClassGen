@@ -5,7 +5,6 @@
 
 #include "${Include}"
 #include <Core/UnitTest.hpp>
-#include "${Header}"
 
 TEST_SET(${Class})
 {
