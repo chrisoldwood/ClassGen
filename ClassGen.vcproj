@@ -4,10 +4,7 @@
 	Version="7.10"
 	Name="ClassGen"
 	ProjectGUID="{4B691B40-25C4-46F3-BA0C-8954D2FBF9A9}"
-	SccProjectName="SAK"
-	SccAuxPath="SAK"
-	SccLocalPath="SAK"
-	SccProvider="SAK">
+	Keyword="Win32Proj">
 	<Platforms>
 		<Platform
 			Name="Win32"/>
