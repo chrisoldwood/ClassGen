@@ -9,10 +9,19 @@ my source files from various templates. The templates are based around
 generating a class or file for a specific purpose relating to one of my class
 libraries, such as a unit test fixture or UI based command class.
 
+Releases
+--------
+
+Stable releases are formally packaged and made available from my Win32 tools page:
+http://www.chrisoldwood.com/win32.htm
+
+The latest code is available from my GitHub repo:
+https://github.com/chrisoldwood/ClassGen
+
 Documentation
 -------------
 
-There is a local manual - ClassGen.mht.
+There is a local HTML based manual - ClassGen.mht.
 
 (http://www.chrisoldwood.com/win32/classgen/manual/classgen.html)
 
