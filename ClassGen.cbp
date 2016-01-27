@@ -48,6 +48,7 @@
 			<Add option="-Wswitch-default" />
 			<Add option="-Wextra" />
 			<Add option="-Wall" />
+			<Add option='-include &quot;Common.hpp&quot;' />
 			<Add option="-DWIN32" />
 			<Add option="-D_WINDOWS" />
 			<Add directory="../Lib" />
@@ -81,7 +82,10 @@
 		</Unit>
 		<Unit filename="ClassGenApp.cpp" />
 		<Unit filename="ClassGenApp.hpp" />
-		<Unit filename="Common.hpp" />
+		<Unit filename="Common.hpp">
+			<Option compile="1" />
+			<Option weight="0" />
+		</Unit>
 		<Unit filename="Component.hpp" />
 		<Unit filename="HelpFile/ClassGen.html" />
 		<Unit filename="HelpFile/Main.gif" />
