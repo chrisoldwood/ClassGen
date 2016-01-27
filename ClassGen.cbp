@@ -7,7 +7,7 @@
 		<Option compiler="gcc" />
 		<Build>
 			<Target title="Debug Win32">
-				<Option output="Debug\ClassGen" prefix_auto="1" extension_auto="1" />
+				<Option output="Debug/ClassGen" prefix_auto="1" extension_auto="1" />
 				<Option object_output="Debug" />
 				<Option type="0" />
 				<Option compiler="gcc" />
@@ -22,7 +22,7 @@
 				</Linker>
 			</Target>
 			<Target title="Release Win32">
-				<Option output="Release\ClassGen" prefix_auto="1" extension_auto="1" />
+				<Option output="Release/ClassGen" prefix_auto="1" extension_auto="1" />
 				<Option object_output="Release" />
 				<Option type="0" />
 				<Option compiler="gcc" />
@@ -50,10 +50,10 @@
 			<Add option="-Wall" />
 			<Add option="-DWIN32" />
 			<Add option="-D_WINDOWS" />
-			<Add directory="..\Lib" />
+			<Add directory="../Lib" />
 		</Compiler>
 		<ResourceCompiler>
-			<Add directory="..\Lib" />
+			<Add directory="../Lib" />
 		</ResourceCompiler>
 		<Linker>
 			<Add library="ole32" />
@@ -83,8 +83,8 @@
 		<Unit filename="ClassGenApp.hpp" />
 		<Unit filename="Common.hpp" />
 		<Unit filename="Component.hpp" />
-		<Unit filename="HelpFile\ClassGen.html" />
-		<Unit filename="HelpFile\Main.gif" />
+		<Unit filename="HelpFile/ClassGen.html" />
+		<Unit filename="HelpFile/Main.gif" />
 		<Unit filename="MyTemplates.ini" />
 		<Unit filename="Params.cpp" />
 		<Unit filename="Params.hpp" />
@@ -95,71 +95,72 @@
 		<Unit filename="TODO.Txt" />
 		<Unit filename="Template.hpp" />
 		<Unit filename="Templates.ini" />
-		<Unit filename="Templates\Dialog.cpp">
+		<Unit filename="Templates/Dialog.cpp">
 			<Option target="&lt;{~None~}&gt;" />
 		</Unit>
-		<Unit filename="Templates\Dialog.hpp">
+		<Unit filename="Templates/Dialog.hpp">
 			<Option target="&lt;{~None~}&gt;" />
 		</Unit>
-		<Unit filename="Templates\Generic.cpp">
+		<Unit filename="Templates/Generic.cpp">
 			<Option target="&lt;{~None~}&gt;" />
 		</Unit>
-		<Unit filename="Templates\Generic.hpp">
+		<Unit filename="Templates/Generic.hpp">
 			<Option target="&lt;{~None~}&gt;" />
 		</Unit>
-		<Unit filename="Templates\Inline.hpp">
+		<Unit filename="Templates/Inline.hpp">
 			<Option target="&lt;{~None~}&gt;" />
 		</Unit>
-		<Unit filename="Templates\Interface.hpp">
+		<Unit filename="Templates/Interface.hpp">
 			<Option target="&lt;{~None~}&gt;" />
 		</Unit>
-		<Unit filename="Templates\PropPage.cpp">
+		<Unit filename="Templates/PropPage.cpp">
 			<Option target="&lt;{~None~}&gt;" />
 		</Unit>
-		<Unit filename="Templates\PropPage.hpp">
+		<Unit filename="Templates/PropPage.hpp">
 			<Option target="&lt;{~None~}&gt;" />
 		</Unit>
-		<Unit filename="Templates\PropSheet.cpp">
+		<Unit filename="Templates/PropSheet.cpp">
 			<Option target="&lt;{~None~}&gt;" />
 		</Unit>
-		<Unit filename="Templates\PropSheet.hpp">
+		<Unit filename="Templates/PropSheet.hpp">
 			<Option target="&lt;{~None~}&gt;" />
 		</Unit>
-		<Unit filename="Templates\Table.cpp">
+		<Unit filename="Templates/Table.cpp">
 			<Option target="&lt;{~None~}&gt;" />
 		</Unit>
-		<Unit filename="Templates\Table.hpp">
+		<Unit filename="Templates/Table.hpp">
 			<Option target="&lt;{~None~}&gt;" />
 		</Unit>
-		<Unit filename="Templates\Utility.hpp">
+		<Unit filename="Templates/Utility.hpp">
 			<Option target="&lt;{~None~}&gt;" />
 		</Unit>
 		<Unit filename="pch.cpp" />
-		<Unit filename="templates\ComObject.cpp">
+		<Unit filename="templates/ComObject.cpp">
 			<Option target="&lt;{~None~}&gt;" />
 		</Unit>
-		<Unit filename="templates\ComObject.hpp">
+		<Unit filename="templates/ComObject.hpp">
 			<Option target="&lt;{~None~}&gt;" />
 		</Unit>
-		<Unit filename="templates\ComServer.cpp">
+		<Unit filename="templates/ComServer.cpp">
 			<Option target="&lt;{~None~}&gt;" />
 		</Unit>
-		<Unit filename="templates\ComServer.hpp">
+		<Unit filename="templates/ComServer.hpp">
 			<Option target="&lt;{~None~}&gt;" />
 		</Unit>
-		<Unit filename="templates\Functions.cpp">
+		<Unit filename="templates/Functions.cpp">
 			<Option target="&lt;{~None~}&gt;" />
 		</Unit>
-		<Unit filename="templates\Functions.hpp">
+		<Unit filename="templates/Functions.hpp">
 			<Option target="&lt;{~None~}&gt;" />
 		</Unit>
-		<Unit filename="templates\Struct.hpp" />
-		<Unit filename="templates\Template.hpp">
+		<Unit filename="templates/Struct.hpp" />
+		<Unit filename="templates/Template.hpp">
 			<Option target="&lt;{~None~}&gt;" />
 		</Unit>
 		<Extensions>
 			<code_completion />
 			<debugger />
+			<envvars />
 		</Extensions>
 	</Project>
 </CodeBlocks_project_file>
