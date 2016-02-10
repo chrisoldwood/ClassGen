@@ -90,14 +90,14 @@ bool AppCmds::generateFile(const CPath& templateFile, CPath& targetFile, const P
 			char* paramBegin = strstr(code, "${");
 
 			// No more parameters to handle?
-			if (paramBegin == NULL)
+			if (paramBegin == nullptr)
 			{
 				// Write the rest of the file.
 				file.Write(code, end - code);
 
 				code = end;
 			}
-			else // (param != NULL)
+			else // (param != nullptr)
 			{
 				// Write the code up to the parameter.
 				file.Write(code, paramBegin - code);
@@ -108,7 +108,7 @@ bool AppCmds::generateFile(const CPath& templateFile, CPath& targetFile, const P
 				char* paramEnd = strstr(paramBegin, "}");
 
 				// Parameter to substitue?
-				if (paramEnd != NULL)
+				if (paramEnd != nullptr)
 				{
 					std::string param(paramBegin, paramEnd-paramBegin);
 
@@ -122,7 +122,7 @@ bool AppCmds::generateFile(const CPath& templateFile, CPath& targetFile, const P
 
 					code = paramEnd+1;
 				}
-				else // (paramEnd == NULL)
+				else // (paramEnd == nullptr)
 				{
 					// Invalid parameter, skip passed token.
 					code++;

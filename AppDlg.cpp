@@ -375,7 +375,7 @@ void AppDlg::onHelp()
 {
 	CBusyCursor busyCursor;
 
-	::ShellExecute(NULL, NULL, CPath::ApplicationDir() / TXT("ClassGen.mht"), NULL, NULL, SW_SHOW);
+	::ShellExecute(NULL, nullptr, CPath::ApplicationDir() / TXT("ClassGen.mht"), nullptr, nullptr, SW_SHOW);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
